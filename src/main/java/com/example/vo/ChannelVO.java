@@ -13,6 +13,87 @@ public class ChannelVO {
     private int insta;
     private int upload;
     private String img;
+    private int adcount;
+    private int adMaxView;
+    private int adMinView;
+    private int adAvgView;
+    private int adSumView;
+    private int adMaxComment;
+    private int adMinComment;
+    private int adAvgComment;
+    private int adSumComment;
+
+    public int getAdcount() {
+        return this.adcount;
+    }
+
+    public void setAdcount(int adcount) {
+        this.adcount = adcount;
+    }
+
+    public int getAdMaxView() {
+        return this.adMaxView;
+    }
+
+    public void setAdMaxView(int adMaxView) {
+        this.adMaxView = adMaxView;
+    }
+
+    public int getAdMinView() {
+        return this.adMinView;
+    }
+
+    public void setAdMinView(int adMinView) {
+        this.adMinView = adMinView;
+    }
+
+    public int getAdAvgView() {
+        return this.adAvgView;
+    }
+
+    public void setAdAvgView(int adAvgView) {
+        this.adAvgView = adAvgView;
+    }
+
+    public int getAdSumView() {
+        return this.adSumView;
+    }
+
+    public void setAdSumView(int adSumView) {
+        this.adSumView = adSumView;
+    }
+
+    public int getAdMaxComment() {
+        return this.adMaxComment;
+    }
+
+    public void setAdMaxComment(int adMaxComment) {
+        this.adMaxComment = adMaxComment;
+    }
+
+    public int getAdMinComment() {
+        return this.adMinComment;
+    }
+
+    public void setAdMinComment(int adMinComment) {
+        this.adMinComment = adMinComment;
+    }
+
+    public int getAdAvgComment() {
+        return this.adAvgComment;
+    }
+
+    public void setAdAvgComment(int adAvgComment) {
+        this.adAvgComment = adAvgComment;
+    }
+
+    public int getAdSumComment() {
+        return this.adSumComment;
+    }
+
+    public void setAdSumComment(int adSumComment) {
+        this.adSumComment = adSumComment;
+    }
 
     public String getCh_url() {
         return this.ch_url;

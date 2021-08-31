@@ -3,11 +3,16 @@ package com.example.controller;
 import com.example.service.UserService;
 import com.example.vo.UserVo;
 import com.example.vo.ChannelVO;
+import com.example.vo.Criteria;
+import com.example.vo.PageMaker;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -53,11 +58,22 @@ public class UserController {
     @RequestMapping(value = "/get_channel_list")
     public String getAll(Model model) throws Exception{
         List<ChannelVO> channelList = userService.getChannelList(); 
-
-         
-
         model.addAttribute("channelList", channelList);
         return "channelList";
     }
+
+    @RequestMapping(value = "/listPage", method = RequestMethod.GET)
+	public String listPage(@ModelAttribute("cri") Criteria cri, Model model,@ModelAttribute ChannelVO ch) throws Exception {
+		
+		
+		model.addAttribute("list", userService.listCriteria(cri));  // 게시판의 글 리스트
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(userService.listCountCriteria(ch));
+		
+		model.addAttribute("pageMaker", pageMaker);  // 게시판 하단의 페이징 관련, 이전페이지, 페이지 링크 , 다음 페이지
+		
+		return "listPage";
+	}
 
 }

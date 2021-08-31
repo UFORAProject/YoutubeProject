@@ -3,42 +3,19 @@
 <head>
     <meta charset="UTF-8" />
 </head>
-    <table>
-        <thead>
-            <tr>
-                <th> 채널 url </th>
-                <th> 월 누적 조회수 </th>
-                <th> 채널 이름 </th>
-                <th> 구독자 수 </th>
-                <th> 가입 일자 </th>
-                <th> 총 누적 조회수 </th>
-                <th> 카테고리 </th>
-                <th> 연락처 </th>
-                <th> 팬카페 </th>
-                <th> 인스타 </th>
-                <th> 업로드 </th>
-                <th> 프사 링크 </th>
-            </tr>
-        </thead>
-        <tbody> 
-            <tr th:if="${channelList.empty}">
-                <td colspan="2"> No userlist Available </td>
-            </tr>
-            <tr th:each="channel : ${channelList}">
-                <td><span th:text="${channel.ch_url}"> 채널 url </span></td>
-                <td><span th:text="${channel.monthView}"> 월 누적 조회수 </span></td>
-                <td><span th:text="${channel.ch_name}"> 채널 이름 </span></td>
-                <td><span th:text="${channel.sub}"> 구독자 수 </span></td>
-                <td><span th:text="${channel.regdate}"> 가입 일자 </span></td>
-                <td><span th:text="${channel.totView}"> 총 누적 조회수 </span></td>
-                <td><span th:text="${channel.category}"> 카테고리 </span></td>
-                <td><span th:text="${channel.contact}"> 연락처 </span></td>
-                <td><span th:text="${channel.fan}"> 팬카페 </span></td>
-                <td><span th:text="${channel.insta}"> 인스타 </span></td>
-                <td><span th:text="${channel.upload}"> 업로드 </span></td>
-                <td><span th:text="${channel.img}"> 프사 링크 </span></td>
-            </tr>
-        </tbody>
+    <table border="1">
+        <tr>
+            <th> 채널 url </th>
+            <th> 채널 이름 </th>
+            <th> 구독자 수 </th>
+            <th> 카테고리 </th>
+        </tr>
+        <tr th:each="channel : ${channelList}">
+            <td><span th:text="${channel.ch_url}"> 채널 url </span></td>
+            <td><span th:text="${channel.ch_name}"> 채널 이름 </span></td>
+            <td><span th:text="${channel.sub}"> 구독자 수 </span></td>
+            <td><span th:text="${channel.category}"> 카테고리 </span></td>
+        </tr>
     </table>
 </body>
 </html>

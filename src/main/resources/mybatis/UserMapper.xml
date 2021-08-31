@@ -28,7 +28,20 @@
     </select>
 
     <select id="getChannelList" resultType="com.example.vo.ChannelVO">
-        select * from channel;
+        select ch_url, ch_name, sub, category from channel;
+    </select>
+
+    <select id="listCountCriteria" resultType="int">
+        
+            select
+                count(*)
+            from
+                channel
+        
+    </select>
+
+    <select id="listCriteria" resultType="com.example.vo.ChannelVO">
+        select ch_url, ch_name, sub, category from channel order by sub desc limit #{pageStart}, #{perPageNum}
     </select>
 
 </mapper>

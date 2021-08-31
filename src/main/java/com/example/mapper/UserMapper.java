@@ -2,6 +2,7 @@ package com.example.mapper;
 import java.util.List;
 
 import com.example.vo.ChannelVO;
+import com.example.vo.Criteria;
 import com.example.vo.UserVo;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -18,5 +19,8 @@ public interface UserMapper {
 
     List<ChannelVO> getChannelList();
     ChannelVO getAll(ChannelVO ch);
+    
+    List<ChannelVO> listCriteria(Criteria cri);
+    int listCountCriteria(ChannelVO ch);
 }
 
