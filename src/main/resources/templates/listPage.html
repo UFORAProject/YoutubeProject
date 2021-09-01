@@ -34,22 +34,30 @@ $(function () {
     <a href="index.html"> Home</a>
     </section>
 
-    <label for="addr">위치</label><br>
-        <select class="form-control" id="dist">
-            <option value="category">음악</option>
-            <option value="category">노하우/스타일</option>
-            <option value="category">게임</option>
-            <option value="category">뉴스/정치</option>
-            <option value="category">코미디</option>
-            <option value="category">자동차</option>
-            <option value="category">인물/블로그</option>
-            <option value="category">스포츠</option>
-            <option value="category">엔터테이먼트</option>
-            <option value="category">동물</option>
-            <option value="category">여행/이벤트</option>
-            <option value="category">교육</option>
-            <option value="category">영화/애니메이션</option>
-        </select>
+    <form action="/" method="post">
+      <select class="form-control" id="cate">
+          <option value="category">음악</option>
+          <option value="category">노하우/스타일</option>
+          <option value="category">게임</option>
+          <option value="category">뉴스/정치</option>
+          <option value="category">코미디</option>
+          <option value="category">자동차</option>
+          <option value="category">인물/블로그</option>
+          <option value="category">스포츠</option>
+          <option value="category">엔터테이먼트</option>
+          <option value="category">동물</option>
+          <option value="category">여행/이벤트</option>
+          <option value="category">교육</option>
+          <option value="category">영화/애니메이션</option>
+      </select>
+      <select class="form-control" id="sub">
+        <option value="subscribe">10만 이하</option>
+        <option value="subscribe">10만 ~ 100만</option>
+        <option value="subscribe">100만 ~ 1000만</option>
+        <option value="subscribe">1000만 이상</option>
+      </select>
+      <input type="submit" value="GO!" />
+    </form>
     <!-- Main content -->
     <section class="content">
       <div class="row">
@@ -78,17 +86,17 @@ $(function () {
             <div class="box-footer clearfix">
               <ul class="pagination pagination-sm no-margin pull-right">
               
-              <li th:if="${pageMaker.prev} == true">
-              	<a th:href="@{/listPage(page=${pageMaker.startPage}-1,perPageNum=${pageMaker.cri.perPageNum})}">&laquo;</a>
-              </li>
-              
-              <li th:each="idx,iterStat : ${#numbers.sequence(pageMaker.startPage,pageMaker.endPage)}"  th:classappend="${pageMaker.cri.page} == ${idx} ? active : null">
-                <a th:href="@{/listPage(page=${idx},perPageNum=${pageMaker.cri.perPageNum})}" th:text="${idx}"></a>
-              </li>
+                <li th:if="${pageMaker.prev} == true">
+                  <a th:href="@{/listPage(page=${pageMaker.startPage}-1,perPageNum=${pageMaker.cri.perPageNum})}">&laquo;</a>
+                </li>
                 
-              <li th:if="${pageMaker.next} == true and ${pageMaker.endPage > 0}">
-              	<a th:href="@{/listPage(page=${pageMaker.endPage}+1,perPageNum=${pageMaker.cri.perPageNum})}">&raquo;</a>
-              </li>
+                <li th:each="idx,iterStat : ${#numbers.sequence(pageMaker.startPage,pageMaker.endPage)}"  th:classappend="${pageMaker.cri.page} == ${idx} ? active : null">
+                  <a th:href="@{/listPage(page=${idx},perPageNum=${pageMaker.cri.perPageNum})}" th:text="${idx}"></a>
+                </li>
+                  
+                <li th:if="${pageMaker.next} == true and ${pageMaker.endPage > 0}">
+                  <a th:href="@{/listPage(page=${pageMaker.endPage}+1,perPageNum=${pageMaker.cri.perPageNum})}">&raquo;</a>
+                </li>
               
               </ul>
               
