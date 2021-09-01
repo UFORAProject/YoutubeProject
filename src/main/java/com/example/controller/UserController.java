@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -65,11 +66,43 @@ public class UserController {
     @RequestMapping(value = "/listPage", method = RequestMethod.GET)
 	public String listPage(@ModelAttribute("cri") Criteria cri, Model model,@ModelAttribute ChannelVO ch) throws Exception {
 		
-		
 		model.addAttribute("list", userService.listCriteria(cri));  // 게시판의 글 리스트
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(userService.listCountCriteria(ch));
+		
+		model.addAttribute("pageMaker", pageMaker);  // 게시판 하단의 페이징 관련, 이전페이지, 페이지 링크 , 다음 페이지
+		
+		return "listPage";
+	}
+
+    @RequestMapping(value = "/listPage2", method = RequestMethod.GET)
+	public String listPage2(Model model,
+                            @ModelAttribute ChannelVO ch,
+                            @RequestParam("category") String category,
+                            @RequestParam("sub") int sub,
+                            @ModelAttribute("cri") Criteria cri ) throws Exception {
+        
+		System.out.println("받은 카 테고리 값 : "+category);
+        System.out.println("받은 구독자 값 : "+sub);
+        PageMaker pageMaker = new PageMaker();
+        pageMaker.setCri(cri);
+        if(ch.getSub() == 1){
+            model.addAttribute("list", userService.listCriteria2(category,sub,cri));
+            pageMaker.setTotalCount(userService.listCountCriteria2(ch));
+        }
+        else if(ch.getSub() == 2){
+            model.addAttribute("list", userService.listCriteria2(category,sub,cri));
+            pageMaker.setTotalCount(userService.listCountCriteria2(ch));
+        }
+        else if(ch.getSub() == 3){
+            model.addAttribute("list", userService.listCriteria2(category,sub,cri));
+            pageMaker.setTotalCount(userService.listCountCriteria2(ch));
+        }
+        else{
+            model.addAttribute("list", userService.listCriteria2(category,sub,cri));
+            pageMaker.setTotalCount(userService.listCountCriteria2(ch));
+        }
 		
 		model.addAttribute("pageMaker", pageMaker);  // 게시판 하단의 페이징 관련, 이전페이지, 페이지 링크 , 다음 페이지
 		

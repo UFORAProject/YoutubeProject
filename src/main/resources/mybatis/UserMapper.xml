@@ -44,4 +44,30 @@
         select ch_url, ch_name, sub, category from channel order by sub desc limit #{pageStart}, #{perPageNum}
     </select>
 
+    <select id="listCriteria2" resultType="com.example.vo.ChannelVO">
+        <![CDATA[
+            select ch_url, ch_name, sub, category 
+            from channel
+            where 
+            category = #{a}
+            and
+            sub < #{b}
+            order by sub desc 
+            limit #{pageStart}, #{perPageNum}
+        ]]>
+    </select>
+
+    <select id="listCountCriteria2" resultType="int">
+        <![CDATA[
+            select
+                count(*)
+            from
+                channel
+            where 
+            category = #{a}
+            and
+            sub < #{b}
+        ]]>
+    </select>
+
 </mapper>

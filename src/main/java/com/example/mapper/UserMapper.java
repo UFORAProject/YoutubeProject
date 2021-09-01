@@ -22,5 +22,8 @@ public interface UserMapper {
     
     List<ChannelVO> listCriteria(Criteria cri);
     int listCountCriteria(ChannelVO ch);
+
+    int listCountCriteria2(String category, int sub, ChannelVO ch);
+    List<ChannelVO> listCriteria2(String category, int sub, Criteria cri);
 }
 
