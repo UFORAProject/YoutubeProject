@@ -44,30 +44,36 @@
         select ch_url, ch_name, sub, category from channel order by sub desc limit #{pageStart}, #{perPageNum}
     </select>
 
-    <select id="listCriteria2" resultType="com.example.vo.ChannelVO">
-        <![CDATA[
-            select ch_url, ch_name, sub, category 
-            from channel
-            where 
-            category = #{a}
-            and
-            sub < #{b}
-            order by sub desc 
-            limit #{pageStart}, #{perPageNum}
-        ]]>
+    <select id="filterPage" resultType="com.example.vo.ChannelVO">
+      
+        select ch_url, ch_name, sub, category 
+        from channel
+        where 
+        category = #{category}
+        <choose>
+            <when test = "sub == 100000">and sub between 0 and 100000</when>
+            <when test = "sub == 1000000">and sub between 100000 and 1000000</when>
+            <when test = "sub == 10000000">and sub between 1000000 and 10000000</when>
+            <when test = "sub == 100000000">and sub between 10000000 and 1000000000</when>
+        </choose>
+        limit #{pageStart}, #{perPageNum}
+      
     </select>
 
-    <select id="listCountCriteria2" resultType="int">
-        <![CDATA[
-            select
-                count(*)
-            from
-                channel
-            where 
-            category = #{a}
-            and
-            sub < #{b}
-        ]]>
+    <select id="filterPageCount" resultType="int">
+        
+        select
+            count(*)
+        from
+            channel
+        where 
+        category = #{category}
+        <choose>
+            <when test = "sub == 100000">and sub between 0 and 100000</when>
+            <when test = "sub == 1000000">and sub between 100000 and 1000000</when>
+            <when test = "sub == 10000000">and sub between 1000000 and 10000000</when>
+            <when test = "sub == 100000000">and sub between 10000000 and 1000000000</when>
+        </choose>
     </select>
 
 </mapper>

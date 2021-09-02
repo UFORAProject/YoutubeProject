@@ -35,15 +35,15 @@ public class UserService {
     }
 
     public int listCountCriteria(ChannelVO ch){
-        return mapper.listCountCriteria(ch);
+        return mapper.listCountCriteria(null);
     }
 
-    public List<ChannelVO> listCriteria2(String category, int sub, Criteria cri){
-        return mapper.listCriteria2(category,sub,cri);
+    public List<ChannelVO> filterPage(ChannelVO ch){
+        return mapper.filterPage(ch);
     }
 
-    public int listCountCriteria2(ChannelVO ch){
-        return mapper.listCountCriteria2(ch.getCategory(),ch.getSub(),ch);
+    public int filterPageCount(ChannelVO ch){
+        return mapper.filterPageCount(ch);
     }
 
 }

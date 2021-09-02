@@ -34,7 +34,7 @@ $(function () {
     <a href="index.html"> Home</a>
     </section>
 
-    <form action="/listPage2">
+    <form action="/filterPage">
       <select name="category">
         <option value=음악>음악</option>
         <option value="노하우/스타일">노하우/스타일</option>
@@ -51,10 +51,10 @@ $(function () {
         <option value="영화/애니메이션">영화/애니메이션</option>
       </select>
       <select name="sub">
-        <option value=1>10만 이하</option>
-        <option value=2>10만 ~ 100만</option>
-        <option value=3>100만 ~ 1000만</option>
-        <option value=4>1000만 이상</option>
+        <option value=100000>10만 이하</option>
+        <option value=1000000>10만 ~ 100만</option>
+        <option value=10000000>100만 ~ 1000만</option>
+        <option value=100000000>1000만 이상</option>
       </select>
         <input type="submit" value="GO!" />
     </form>
@@ -101,6 +101,8 @@ $(function () {
               </ul>
               
             </div>
+
+            
           </div>
           <!-- /.box -->
         </div>
