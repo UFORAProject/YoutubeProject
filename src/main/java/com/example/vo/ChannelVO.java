@@ -191,6 +191,9 @@ public class ChannelVO {
         this.img = img;
     }
 
+    /*
+        여기서부터는 크리테리아 부분 붙여놓음
+    */
     private int page;  	
 	private int perPageNum; 
 	
@@ -233,8 +236,10 @@ public class ChannelVO {
 
 	
 	public String toString() {
-		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + "]";
+		return "ChannelVO [page=" + page + ", perPageNum=" + perPageNum + "]";
 	}
+
+    
 
 
 }

@@ -4,6 +4,7 @@ import com.example.service.UserService;
 import com.example.vo.UserVo;
 import com.example.vo.ChannelVO;
 import com.example.vo.Criteria;
+import com.example.vo.FilterMaker;
 import com.example.vo.PageMaker;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/listPage", method = RequestMethod.GET)
-	public String listPage(@ModelAttribute("cri") Criteria cri, Model model,@ModelAttribute ChannelVO ch) throws Exception {
+	public String listPage(@ModelAttribute("cri") Criteria cri, Model model,ChannelVO ch) throws Exception {
 		
 		model.addAttribute("list", userService.listCriteria(cri));  // 게시판의 글 리스트
 		PageMaker pageMaker = new PageMaker();
@@ -76,20 +77,21 @@ public class UserController {
 	}
 
     @RequestMapping(value = "/filterPage", method = RequestMethod.GET)
-	public String listPage2(Model model,
+	public String filterPage(Model model,
                             @ModelAttribute ChannelVO ch,
-                            @ModelAttribute("cri") Criteria cri ) throws Exception {
+                            @ModelAttribute("cvo") ChannelVO cvo) throws Exception {
 		System.out.println("받은 카 테고리 값 : "+ch.getCategory());
         System.out.println("받은 구독자 값 : "+ ch.getSub());
         model.addAttribute("list", userService.filterPage(ch));
-        PageMaker pageMaker = new PageMaker();
-        pageMaker.setCri(cri);
-        pageMaker.setTotalCount(userService.filterPageCount(ch));
-        
+        FilterMaker FilterMaker = new FilterMaker();
+        FilterMaker.setCri(cvo);
+        FilterMaker.setTotalCount(userService.filterPageCount(ch));
+        System.out.println(FilterMaker.getCri());
+        System.out.println(FilterMaker.getTotalCount());
 		
-		model.addAttribute("pageMaker", pageMaker);  // 게시판 하단의 페이징 관련, 이전페이지, 페이지 링크 , 다음 페이지
+		model.addAttribute("FilterMaker", FilterMaker);  // 게시판 하단의 페이징 관련, 이전페이지, 페이지 링크 , 다음 페이지
 		
-		return "listPage";
+		return "filterPage";
 	}
 
 }
