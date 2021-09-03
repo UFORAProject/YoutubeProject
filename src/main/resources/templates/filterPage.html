@@ -32,6 +32,7 @@ $(function () {
         게시판 페이징 적용
       </h1>
     <a href="index.html"> Home</a>
+    <a href="/listPage"> 초기화</a>
     </section>
 
     <form action="/filterPage">
@@ -90,10 +91,11 @@ $(function () {
                   <a th:href="@{/filterPage(page=${FilterMaker.startPage}-1,perPageNum=${FilterMaker.cvo.perPageNum})}">&laquo;</a>
                 </li>
                 
+                
                 <li th:each="idx,iterStat : ${#numbers.sequence(FilterMaker.startPage,FilterMaker.endPage)}"  th:classappend="${FilterMaker.cvo.page} == ${idx} ? active : null">
                   <a th:href="@{/filterPage(page=${idx},perPageNum=${FilterMaker.cvo.perPageNum})}" th:text="${idx}"></a>
                 </li>
-                  
+                
                 <li th:if="${FilterMaker.next} == true and ${FilterMaker.endPage > 0}">
                   <a th:href="@{/filterPage(page=${FilterMaker.endPage}+1,perPageNum=${FilterMaker.cvo.perPageNum})}">&raquo;</a>
                 </li>

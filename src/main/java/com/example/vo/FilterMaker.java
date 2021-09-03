@@ -77,11 +77,11 @@ public class FilterMaker {
 		this.displayPageNum = displayPageNum;
 	}
 
-	public ChannelVO getCri() {
+	public ChannelVO getCvo() {
 		return cvo;
 	}
 
-	public void setCri(ChannelVO cvo) {
+	public void setCvo(ChannelVO cvo) {
 		this.cvo = cvo;
 	}
 

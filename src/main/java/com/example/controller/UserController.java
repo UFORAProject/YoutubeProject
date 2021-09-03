@@ -64,12 +64,17 @@ public class UserController {
     }
 
     @RequestMapping(value = "/listPage", method = RequestMethod.GET)
-	public String listPage(@ModelAttribute("cri") Criteria cri, Model model,ChannelVO ch) throws Exception {
+	public String listPage(@ModelAttribute("cri") Criteria cri, 
+                            Model model,
+                            ChannelVO ch) throws Exception {
 		
 		model.addAttribute("list", userService.listCriteria(cri));  // 게시판의 글 리스트
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(userService.listCountCriteria(ch));
+
+        System.out.println("받은 값 : "+pageMaker.getCri());
+        System.out.println("총 결과 수 : " +pageMaker.getTotalCount());
 		
 		model.addAttribute("pageMaker", pageMaker);  // 게시판 하단의 페이징 관련, 이전페이지, 페이지 링크 , 다음 페이지
 		
@@ -77,21 +82,38 @@ public class UserController {
 	}
 
     @RequestMapping(value = "/filterPage", method = RequestMethod.GET)
-	public String filterPage(Model model,
-                            @ModelAttribute ChannelVO ch,
-                            @ModelAttribute("cvo") ChannelVO cvo) throws Exception {
-		System.out.println("받은 카 테고리 값 : "+ch.getCategory());
-        System.out.println("받은 구독자 값 : "+ ch.getSub());
-        model.addAttribute("list", userService.filterPage(ch));
+	public String filterPage(@ModelAttribute("cvo") ChannelVO cvo,
+                            Model model, HttpSession session) throws Exception {
+
+        if (cvo.getCategory()== null && session.getAttribute("cvo")!=null) { 
+
+            cvo.setCategory( ((ChannelVO)session.getAttribute("cvo")).getCategory() );  
+            cvo.setSub( ((ChannelVO)session.getAttribute("cvo")).getSub() );  
+
+        }
+        
+
+		System.out.println("받은 카테고리 값 : "+cvo.getCategory());
+        System.out.println("받은 구독자 값 : "+ cvo.getSub());
+
+        model.addAttribute("list", userService.filterPage(cvo));
+        model.addAttribute("cvo", cvo );
+
+        session.setAttribute("cvo", cvo);  
+
         FilterMaker FilterMaker = new FilterMaker();
-        FilterMaker.setCri(cvo);
-        FilterMaker.setTotalCount(userService.filterPageCount(ch));
-        System.out.println(FilterMaker.getCri());
-        System.out.println(FilterMaker.getTotalCount());
+        FilterMaker.setCvo(cvo);
+        FilterMaker.setTotalCount(userService.filterPageCount(cvo));
+
+        System.out.println("받은 값 : " + FilterMaker.getCvo());
+        System.out.println("총 결과 수 : " + FilterMaker.getTotalCount());
+        
 		
 		model.addAttribute("FilterMaker", FilterMaker);  // 게시판 하단의 페이징 관련, 이전페이지, 페이지 링크 , 다음 페이지
 		
 		return "filterPage";
 	}
+
+    
 
 }
