@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+       background-image: url('https://i.ibb.co/3v8JG3H/2-login-1280-720.jpg');
+       background-repeat: no-repeat;
+       background-position: center top;
+       font-family: sans-serif;
+       color: white;
+    }
+
+    table, FORM
+    {
+     border-spacing:15px;	  
+    }
+   
+
+ </style>
+<body bgcolor="#000000" style="overflow: hidden;">
+
+    <p align=right><a href="index.html"><img src="https://i.ibb.co/ZSHBFyT/home.png" onmouseover="this.src='https://i.ibb.co/BtvN0ff/home2.png'" onmouseout="this.src='https://i.ibb.co/ZSHBFyT/home.png'"></a></p>
+
+
+
+	<div style="width:100vw; height: 100vh; display: flex; align-items: center; margin: 0 auto; text-align:center; ">
+		<div style="text-align:center; vertical-align: middle; margin: 0 auto;">
+			  <center><img src="https://i.ibb.co/19pkQ0X/login-title.png"></center>
+			  <table align=center >
+				 <FORM>
+						<tr>
+							<td align=center valign=bottom>ID :</td>
+							<td align=center valign=bottom><input type = "text" placeholder="아이디"/></td>
+							<td rowspan="2"><a href="/listPage"><img src="https://i.ibb.co/4Rc2ZWx/login-box2.jpg" class="button2" alt="login_button"><a></td>
+						</tr>
+						<tr>
+							<td align=center valign=top>PW :</td>
+							<td align=center valign=top><input type = "password" placeholder="비밀번호"/></td>
+						</tr>
+
+
+				 </FORM>
+			  </table>
+			  <a href ="/signPage">Sign in</a> | Find Account( <a href="#">ID</a> / <a href="#">PW</a> )
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+    <h1> hi! it's school page! </h1>
+    <form action="/get_user" method="post">
+        <input type="text" name="id" />
+        <input type="submit" value="사용자 조회" />
+    </form>
+    
+    <br>
+    <br>
+        
+
+    <form action="/login_success" method="post">
+        <input type="text" name="id" />
+        <input type="text" name="password" />
+        <input type="submit" value="로그인!" />
+    </form>
+
+    <br>
+    <br>
+
+    <a href="/get_user_list">전체 사용자 조회</a>
+
+
+    <br>
+    <br>
+    <a href="/get_channel_list">전체 채널 조회</a>
+
+    <br>
+    <br>
+    <a href="/listPage">ㄱㄱ</a>
+</body>
+</html>

@@ -23,6 +23,17 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @RequestMapping(value="/login_page")
+    public String getLoginPage(Model model) throws Exception{
+        return "loginPage";
+    }
+
+    @RequestMapping(value="/signPage")
+    public String getSignPage(Model model) throws Exception{
+        return "SignPage";
+    }
+
+
     @RequestMapping(value = "/get_user_list")
     public String getUserList(Model model) throws Exception{
         List<UserVo> userlist = userService.getUserList();
