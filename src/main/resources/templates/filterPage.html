@@ -6,19 +6,6 @@
 	
 <head>
 <title>게시판예제-페이징</title>
-<script th:inline="javascript">
-
-$(function () {
-	
-	var result =/*[[${msg}]]*/ 'default';
-	
-	if(result == 'success'){
-		alert("처리가 완료되었습니다. result:" + result);
-	}
-	
-  });
-
-</script>
 </head>
 
 
@@ -74,10 +61,11 @@ $(function () {
                 </tr>
                 <tr th:each="channel : ${list}">
                     <td><span th:text="${channel.ch_url}"> 채널 url </span></td>
-                    <td><span th:text="${channel.ch_name}"> 채널 이름 </span></td>
+                    <td><a th:href="@{/detailPage(${channel.ch_url})}"><span th:text="${channel.ch_name}">채널 이름 </span></a></td>
                     <td><span th:text="${channel.sub}"> 구독자 수 </span></td>
                     <td><span th:text="${channel.category}"> 카테고리 </span></td>
                 </tr>
+              
                
               </table>
             </div>

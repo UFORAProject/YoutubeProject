@@ -125,6 +125,14 @@ public class UserController {
 		return "filterPage";
 	}
 
+    @RequestMapping(value="/detailPage", method = RequestMethod.GET)
+    public String detailPage(HttpSession session){
+        String order = (String) session.getAttribute("channel.ch_url");
+        System.out.println("제발 맞기를 : "+order);
+        session.setAttribute("channel.ch_url", order);
+        return "detailPage";
+    }
+
     
 
 }
