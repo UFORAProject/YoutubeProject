@@ -1,13 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	data-layout-decorate="~{samples/layout/sampleLayout}">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Detail Page</title>
 </head>
 <body>
-    <h1>꺼져!</h1>
-    <div></div>
+    <h1>상세 페이지</h1>
+    <div class="box-body">
+        
+        연락처 : <td th:text="${contact}"></td>
+
+        <h3> 광고 목록 </h3>
+        <table class="table table-bordered">
+          <tr>
+              <th> 광고 url </th>
+              <th> 채널 이름 </th>
+              <th> 좋아요 수 </th>
+          </tr>
+          <tr th:if="${list.empty}">
+            <td colspan="2"> 이 채널은 광고를 하지 않았어요 ㅎㅎ </td>
+          </tr>
+          <tr th:each="ad : ${list}">
+              <td><span th:text="${ad.ad_url}"> 광고 url </span></td>
+              <td><span th:text="${ad.name}"> 채널 이름 </span></td>
+              <td><span th:text="${ad.likecnt}"> 좋아요 수 </span></td>
+          </tr>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/147Rqx-OJdI" 
+            title="YouTube video player" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+        </iframe>
+        
+         
+        </table>
+      </div>
 </body>
 </html>

@@ -76,4 +76,14 @@
         </choose>
     </select>
 
+    <select id="detailPage" parameterType="String" resultType="com.example.vo.adVO">
+        select ad_url,name,likecnt
+        from advideo
+        where ch_url=#{url}
+    </select>
+
+    <select id="detailChannel" parameterType="String" resultType="String">
+        select contact from channel where ch_url=#{url}
+    </select>
+
 </mapper>

@@ -4,6 +4,7 @@ import java.util.List;
 import com.example.vo.ChannelVO;
 import com.example.vo.Criteria;
 import com.example.vo.UserVo;
+import com.example.vo.adVO;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -25,5 +26,10 @@ public interface UserMapper {
 
     List<ChannelVO> filterPage(ChannelVO ch);
     int filterPageCount(ChannelVO ch);
+
+    List<adVO> detailPage(String url,adVO av);
+    int detailCount(adVO av);
+
+    String detailChannel(String url);
 }
 

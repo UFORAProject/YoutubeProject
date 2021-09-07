@@ -4,6 +4,7 @@ import com.example.mapper.UserMapper;
 import com.example.vo.UserVo;
 import com.example.vo.ChannelVO;
 import com.example.vo.Criteria;
+import com.example.vo.adVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,18 @@ public class UserService {
 
     public int filterPageCount(ChannelVO ch){
         return mapper.filterPageCount(ch);
+    }
+
+    public List<adVO> detailPage(String url,adVO av){
+        return mapper.detailPage(url,av);
+    }
+
+    public int detailCount(adVO av){
+        return mapper.detailCount(av);
+    }
+
+    public String detailChannel(String url){
+        return mapper.detailChannel(url);
     }
 
 }

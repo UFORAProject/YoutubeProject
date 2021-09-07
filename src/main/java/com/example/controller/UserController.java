@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.service.UserService;
 import com.example.vo.UserVo;
+import com.example.vo.adVO;
 import com.example.vo.ChannelVO;
 import com.example.vo.Criteria;
 import com.example.vo.FilterMaker;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List; 
 
@@ -126,10 +128,11 @@ public class UserController {
 	}
 
     @RequestMapping(value="/detailPage", method = RequestMethod.GET)
-    public String detailPage(HttpSession session){
-        String order = (String) session.getAttribute("channel.ch_url");
-        System.out.println("제발 맞기를 : "+order);
-        session.setAttribute("channel.ch_url", order);
+    public String detailPage(@RequestParam("url") String url,Model model) throws Exception{
+        System.out.println("url 제대로 넘어오는지 체크 :  "+url);
+        adVO av = new adVO();
+        model.addAttribute("contact", userService.detailChannel(url));
+        model.addAttribute("list", userService.detailPage(url, av));
         return "detailPage";
     }
 
