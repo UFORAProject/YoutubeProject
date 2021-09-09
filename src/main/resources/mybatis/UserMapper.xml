@@ -46,7 +46,7 @@
 
     <select id="filterPage" resultType="com.example.vo.ChannelVO">
       
-        select ch_url, ch_name, sub, category
+        select ch_url, ch_name, sub, category, img
         from channel
         where 
         category = #{category}

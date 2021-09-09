@@ -9,6 +9,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Page</title>
 </head>
+<script th:inline="javascript">
+  /*<![CDATA[*/
+      let header = 'https://www.youtube.com/embed/';
+      let ad = /*[[${list}]]*/ 'default';
+      for(i=0; i < ad.length; i++){
+        console.log(ad[i].ad_url);
+      }
+      function thumb_info(url) {
+            var ad_src;
+            ad_src = header+url;
+            console.log(ad_src);
+            return ad_src;
+        }
+  /*]]>*/
+</script>
 <body>
     <h1>상세 페이지</h1>
     <div class="box-body">
@@ -21,6 +36,7 @@
               <th> 광고 url </th>
               <th> 채널 이름 </th>
               <th> 좋아요 수 </th>
+              <th> 광고 영상 </th>
           </tr>
           <tr th:if="${list.empty}">
             <td colspan="2"> 이 채널은 광고를 하지 않았어요 ㅎㅎ </td>
@@ -29,11 +45,14 @@
               <td><span th:text="${ad.ad_url}"> 광고 url </span></td>
               <td><span th:text="${ad.name}"> 채널 이름 </span></td>
               <td><span th:text="${ad.likecnt}"> 좋아요 수 </span></td>
+              <td>
+              <iframe id = "thumb" width="560" height="315" src="" 
+                title="YouTube video player" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                </iframe>
+                <script>document.getElementById("thumb").src=thumb_info("${ad.ad_url}")</script>
+                </td>
           </tr>
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/147Rqx-OJdI" 
-            title="YouTube video player" frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-        </iframe>
         
          
         </table>

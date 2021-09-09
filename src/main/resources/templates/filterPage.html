@@ -7,102 +7,105 @@
 <head>
 <title>게시판예제-페이징</title>
 </head>
+<script th:inline="javascript">
+    
+</script>
+<body>
+  <div layout:fragment="content">
 
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+          게시판 페이징 적용
+        </h1>
+      <a href="index.html"> Home</a>
+      <a href="/listPage"> 초기화</a>
+      </section>
 
-<div layout:fragment="content">
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        게시판 페이징 적용
-      </h1>
-    <a href="index.html"> Home</a>
-    <a href="/listPage"> 초기화</a>
-    </section>
-
-    <form action="/filterPage">
-      <select name="category">
-        <option value=음악>음악</option>
-        <option value="노하우/스타일">노하우/스타일</option>
-        <option value="게임">게임</option>
-        <option value="뉴스/정치">뉴스/정치</option>
-        <option value="코미디">코미디</option>
-        <option value="자동차">자동차</option>
-        <option value="인물/블로그">인물/블로그</option>
-        <option value="스포츠">스포츠</option>
-        <option value="엔터테이먼트">엔터테이먼트</option>
-        <option value="동물">동물</option>
-        <option value="여행/이벤트">여행/이벤트</option>
-        <option value="교육">교육</option>
-        <option value="영화/애니메이션">영화/애니메이션</option>
-      </select>
-      <select name="sub">
-        <option value=100000>10만 이하</option>
-        <option value=1000000>10만 ~ 100만</option>
-        <option value=10000000>100만 ~ 1000만</option>
-        <option value=100000000>1000만 이상</option>
-      </select>
-        <input type="submit" value="GO!" />
-    </form>
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <div class="col-xs-12">
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table class="table table-bordered">
-                <tr>
-                    <th> 채널 url </th>
-                    <th> 채널 이름 </th>
-                    <th> 구독자 수 </th>
-                    <th> 카테고리 </th>
-                </tr>
-                <tr th:each="channel : ${list}">
-                    <td><span th:text="${channel.ch_url}"> 채널 url </span></td>
-                    <td><a th:href="@{/detailPage(url=${channel.ch_url})}"><span th:text="${channel.ch_name}">채널 이름 </span></a></td>
-                    <td><span th:text="${channel.sub}"> 구독자 수 </span></td>
-                    <td><span th:text="${channel.category}"> 카테고리 </span></td>
-                </tr>
+      <form action="/filterPage">
+        <select name="category">
+          <option value=음악>음악</option>
+          <option value="노하우/스타일">노하우/스타일</option>
+          <option value="게임">게임</option>
+          <option value="뉴스/정치">뉴스/정치</option>
+          <option value="코미디">코미디</option>
+          <option value="자동차">자동차</option>
+          <option value="인물/블로그">인물/블로그</option>
+          <option value="스포츠">스포츠</option>
+          <option value="엔터테이먼트">엔터테이먼트</option>
+          <option value="동물">동물</option>
+          <option value="여행/이벤트">여행/이벤트</option>
+          <option value="교육">교육</option>
+          <option value="영화/애니메이션">영화/애니메이션</option>
+        </select>
+        <select name="sub">
+          <option value=100000>10만 이하</option>
+          <option value=1000000>10만 ~ 100만</option>
+          <option value=10000000>100만 ~ 1000만</option>
+          <option value=100000000>1000만 이상</option>
+        </select>
+          <input type="submit" value="GO!" />
+      </form>
+      <!-- Main content -->
+      <section class="content">
+        <div class="row">
+          <div class="col-xs-12">
+              <!-- /.box-header -->
+              <div class="box-body">
+                <table class="table table-bordered">
+                  <tr>
+                      <th> 채널 url </th>
+                      <th> 채널 이름 </th>
+                      <th> 구독자 수 </th>
+                      <th> 카테고리 </th>
+                  </tr>
+                  <tr th:each="channel : ${list}">
+                      <td><span th:text="${channel.ch_url}"> 채널 url </span></td>
+                      <td><a th:href="@{/detailPage(url=${channel.ch_url})}"><span th:text="${channel.ch_name}">채널 이름 </span></a></td>
+                      <td><span th:text="${channel.sub}"> 구독자 수 </span></td>
+                      <td><span th:text="${channel.category}"> 카테고리 </span></td>
+                  </tr>
+                
+                
+                </table>
+              </div>
+              <!-- /.box-body -->
               
-               
-              </table>
+              <!-- 게시판 하단의 페이징 버튼 -->
+              <div class="box-footer clearfix">
+                <ul class="pagination pagination-sm no-margin pull-right">
+                
+                  <li th:if="${FilterMaker.prev} == true">
+                    <a th:href="@{/filterPage(page=${FilterMaker.startPage}-1,perPageNum=${FilterMaker.cvo.perPageNum})}">&laquo;</a>
+                  </li>
+                  
+                  
+                  <li th:each="idx,iterStat : ${#numbers.sequence(FilterMaker.startPage,FilterMaker.endPage)}"  th:classappend="${FilterMaker.cvo.page} == ${idx} ? active : null">
+                    <a th:href="@{/filterPage(page=${idx},perPageNum=${FilterMaker.cvo.perPageNum})}" th:text="${idx}"></a>
+                  </li>
+                  
+                  <li th:if="${FilterMaker.next} == true and ${FilterMaker.endPage > 0}">
+                    <a th:href="@{/filterPage(page=${FilterMaker.endPage}+1,perPageNum=${FilterMaker.cvo.perPageNum})}">&raquo;</a>
+                  </li>
+                
+                </ul>
+                
+              </div>
+
+              
             </div>
-            <!-- /.box-body -->
-            
-            <!-- 게시판 하단의 페이징 버튼 -->
-            <div class="box-footer clearfix">
-              <ul class="pagination pagination-sm no-margin pull-right">
-              
-                <li th:if="${FilterMaker.prev} == true">
-                  <a th:href="@{/filterPage(page=${FilterMaker.startPage}-1,perPageNum=${FilterMaker.cvo.perPageNum})}">&laquo;</a>
-                </li>
-                
-                
-                <li th:each="idx,iterStat : ${#numbers.sequence(FilterMaker.startPage,FilterMaker.endPage)}"  th:classappend="${FilterMaker.cvo.page} == ${idx} ? active : null">
-                  <a th:href="@{/filterPage(page=${idx},perPageNum=${FilterMaker.cvo.perPageNum})}" th:text="${idx}"></a>
-                </li>
-                
-                <li th:if="${FilterMaker.next} == true and ${FilterMaker.endPage > 0}">
-                  <a th:href="@{/filterPage(page=${FilterMaker.endPage}+1,perPageNum=${FilterMaker.cvo.perPageNum})}">&raquo;</a>
-                </li>
-              
-              </ul>
-              
-            </div>
-
-            
+            <!-- /.box -->
           </div>
-          <!-- /.box -->
+          <!-- /.col -->
         </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+        <!-- /.row -->
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
 
-</div>
+  </div>
+</body>
 </html>
