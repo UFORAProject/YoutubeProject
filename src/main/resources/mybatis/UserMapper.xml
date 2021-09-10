@@ -41,7 +41,7 @@
     </select>
 
     <select id="listCriteria" resultType="com.example.vo.ChannelVO">
-        select ch_url, ch_name, sub, category from channel order by sub desc limit #{pageStart}, #{perPageNum}
+        select img, ch_name, sub, category from channel order by sub desc limit #{pageStart}, #{perPageNum}
     </select>
 
     <select id="filterPage" resultType="com.example.vo.ChannelVO">

@@ -9,20 +9,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Page</title>
 </head>
-<script th:inline="javascript">
-  /*<![CDATA[*/
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script th:inline = "javascript">
+  /*
+    <![CDATA[*/
       let header = 'https://www.youtube.com/embed/';
       let ad = /*[[${list}]]*/ 'default';
-      for(i=0; i < ad.length; i++){
-        console.log(ad[i].ad_url);
-      }
-      function thumb_info(url) {
-            var ad_src;
-            ad_src = header+url;
-            console.log(ad_src);
-            return ad_src;
-        }
-  /*]]>*/
+      let url;
+      let id;
+      let i = 0;
+    /*]]>
+  */
 </script>
 <body>
     <h1>상세 페이지</h1>
@@ -33,7 +31,6 @@
         <h3> 광고 목록 </h3>
         <table class="table table-bordered">
           <tr>
-              <th> 광고 url </th>
               <th> 채널 이름 </th>
               <th> 좋아요 수 </th>
               <th> 광고 영상 </th>
@@ -41,17 +38,22 @@
           <tr th:if="${list.empty}">
             <td colspan="2"> 이 채널은 광고를 하지 않았어요 ㅎㅎ </td>
           </tr>
-          <tr th:each="ad : ${list}">
-              <td><span th:text="${ad.ad_url}"> 광고 url </span></td>
+          <tr th:each="ad,i : ${list}">
               <td><span th:text="${ad.name}"> 채널 이름 </span></td>
               <td><span th:text="${ad.likecnt}"> 좋아요 수 </span></td>
               <td>
-              <iframe id = "thumb" width="560" height="315" src="" 
-                title="YouTube video player" frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                <iframe th:id="${i.index}" width="560" height="315" src="" 
+                  title="YouTube video player" frameborder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                 </iframe>
-                <script>document.getElementById("thumb").src=thumb_info("${ad.ad_url}")</script>
-                </td>
+                <script>
+                  id = '#';
+                  id = id + i;
+                  url = header + ad[i].ad_url;
+                  $(id).attr('src',url);
+                  i = i+1;
+                </script>
+              </td>
           </tr>
         
          
