@@ -17,51 +17,128 @@
     /*]]>
   */
 </script>
+<style>
+  *{
+    padding: 0px;
+    margin: 0px;
+  }
+  #header{
+    text-align: center; 
+    background-color: #535353;
+  }
+  #headertext{
+      margin: 7px;
+      display: inline-block;
+      color:  white;
+			vertical-align: middle;
+  }
+  #table{
+    margin: auto;
+  }
+  #footer {
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	padding: 100px 0;
+	text-align: center;
+	color: black;
+	background: #f5f5f7;
+	}
+</style>
 </head>
 <body>
+
+<!-- header -->
+<table id = "header" border="0" cellpadding="0" cellspacing="0" style="height:60px; width:100%" align=center>
+  <tr>
+    <td align=right>
+      mypage
+    </td>
+  </tr>
+</table>
+<!-- header -->
+
+
+<table id = "table" border="0" cellpadding="1" cellspacing="1" style="height:600px; width:1024px" align=center>
+	<tbody>
+		<tr>
+			<td style="width:255px" valign=top bgcolor="lightgray">&nbsp;
+						<!---- 여기에 필터 ---->
+			<br>
+			<p align=Center size=9><b>Filter</b></p>
+			<form action="/filterPage">
+        <!--카테고리 선택-->
+        <div>
+          <br>
+          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="음악" onclick='checkOnlyOne(this)'>음악
+          <br>
+          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="노하우/스타일" onclick='checkOnlyOne(this)'>노하우/스타일
+          <br>
+          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="뉴스/정치" onclick='checkOnlyOne(this)'>뉴스/정치
+          <br>
+          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="코미디" onclick='checkOnlyOne(this)'>코미디
+          <br>
+          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="자동차" onclick='checkOnlyOne(this)'>자동차
+          <br>
+          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="인물/블로그" onclick='checkOnlyOne(this)'>인물/블로그
+          <br>
+          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="스포츠" onclick='checkOnlyOne(this)'>스포츠
+          <br>
+          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="엔터테이먼트" onclick='checkOnlyOne(this)'>엔터테이먼트
+          <br>
+          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="동물" onclick='checkOnlyOne(this)'>동물
+          <br>
+          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="여행/이벤트" onclick='checkOnlyOne(this)'>여행/이벤트
+          <br>
+          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="교육" onclick='checkOnlyOne(this)'>교육
+          <br>
+          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="영화/애니메이션" onclick='checkOnlyOne(this)'>영화/애니메이션
+          <br>
+          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="게임" onclick='checkOnlyOne(this)'>게임
+          <br>
+          </div>
+          <!--카테고리 선택-->
+  
+          <!-- 구독자 수 선택-->
+          <div>
+          <br>
+          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="sub" value="100000" onclick='checkOnlyOne1(this)'>10만 이하
+          <br>
+          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="sub" value="1000000" onclick='checkOnlyOne1(this)'>10만 ~ 100만
+          <br>
+          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="sub" value="10000000" onclick='checkOnlyOne1(this)'>100만 ~ 1000만
+          <br>
+          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="sub" value="100000000" onclick='checkOnlyOne1(this)'>1000만 이상
+          </div>
+          <!-- 구독자 수 선택 -->
+        <br>
+        &nbsp;&nbsp;&nbsp;<input type="submit" value="GO!" />
+      </form>
+			&nbsp;&nbsp;&nbsp;<a href="index.html"> Home (개발자 모드)</a>
+      <br>
+      &nbsp;&nbsp;&nbsp;<a href="/listPage"> 초기화 (개발자 모드)</a>
+			
+			
+			<!---- 여기에 필터 ---->
+			</td>
+			<td style="width:755px" align=center valign=top>
+
   <div layout:fragment="content">
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>
-          게시판 페이징 적용
-        </h1>
-      <a href="index.html"> Home</a>
-      <a href="/listPage"> 초기화</a>
+      
       </section>
 
-      <form action="/filterPage">
-        <select name="category">
-          <option value=음악>음악</option>
-          <option value="노하우/스타일">노하우/스타일</option>
-          <option value="게임">게임</option>
-          <option value="뉴스/정치">뉴스/정치</option>
-          <option value="코미디">코미디</option>
-          <option value="자동차">자동차</option>
-          <option value="인물/블로그">인물/블로그</option>
-          <option value="스포츠">스포츠</option>
-          <option value="엔터테이먼트">엔터테이먼트</option>
-          <option value="동물">동물</option>
-          <option value="여행/이벤트">여행/이벤트</option>
-          <option value="교육">교육</option>
-          <option value="영화/애니메이션">영화/애니메이션</option>
-        </select>
-        <select name="sub">
-          <option value=100000>10만 이하</option>
-          <option value=1000000>10만 ~ 100만</option>
-          <option value=10000000>100만 ~ 1000만</option>
-          <option value=100000000>1000만 이상</option>
-        </select>
-          <input type="submit" value="GO!" />
-      </form>
       <!-- Main content -->
       <section class="content">
         <div class="row">
           <div class="col-xs-12">
               <!-- /.box-header -->
               <div class="box-body">
+                <br>
                 <table class="table table-bordered">
                   <tr>
                       <th> 채널 url </th>
@@ -91,23 +168,21 @@
               <div class="box-footer clearfix">
                 <ul class="pagination pagination-sm no-margin pull-right">
                 
-                  <li th:if="${FilterMaker.prev} == true">
+                  <b th:if="${FilterMaker.prev} == true">
                     <a th:href="@{/filterPage(page=${FilterMaker.startPage}-1,perPageNum=${FilterMaker.cvo.perPageNum})}">&laquo;</a>
-                  </li>
+                  </b>
                   
-                  
-                  <li th:each="idx,iterStat : ${#numbers.sequence(FilterMaker.startPage,FilterMaker.endPage)}"  th:classappend="${FilterMaker.cvo.page} == ${idx} ? active : null">
+                  <b th:each="idx,iterStat : ${#numbers.sequence(FilterMaker.startPage,FilterMaker.endPage)}"  th:classappend="${FilterMaker.cvo.page} == ${idx} ? active : null">
                     <a th:href="@{/filterPage(page=${idx},perPageNum=${FilterMaker.cvo.perPageNum})}" th:text="${idx}"></a>
-                  </li>
+                  </b>
                   
-                  <li th:if="${FilterMaker.next} == true and ${FilterMaker.endPage > 0}">
+                  <b th:if="${FilterMaker.next} == true and ${FilterMaker.endPage > 0}">
                     <a th:href="@{/filterPage(page=${FilterMaker.endPage}+1,perPageNum=${FilterMaker.cvo.perPageNum})}">&raquo;</a>
-                  </li>
+                  </b>
                 
                 </ul>
-                
               </div>
-
+              <!-- 게시판 하단의 페이징 버튼 -->
               
             </div>
             <!-- /.box -->
@@ -121,5 +196,22 @@
     <!-- /.content-wrapper -->
 
   </div>
+
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+<!--footer-->
+<table cellpadding="1" width = "100%" height = "50" bgcolor="white" align="center">
+  <tr>
+    <td align="center">
+      @copyright: 갈라티코스
+    </td>
+  </tr>
+</table>
+<!--footer-->
 </body>
 </html>

@@ -105,7 +105,6 @@ public class UserController {
 
         }
         
-
 		System.out.println("받은 카테고리 값 : "+cvo.getCategory());
         System.out.println("받은 구독자 값 : "+ cvo.getSub());
 

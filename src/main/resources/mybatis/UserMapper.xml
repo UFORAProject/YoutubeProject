@@ -41,7 +41,7 @@
     </select>
 
     <select id="listCriteria" resultType="com.example.vo.ChannelVO">
-        select img, ch_name, sub, category from channel order by sub desc limit #{pageStart}, #{perPageNum}
+        select ch_url, img, ch_name, sub, category from channel order by sub desc limit #{pageStart}, #{perPageNum}
     </select>
 
     <select id="filterPage" resultType="com.example.vo.ChannelVO">
@@ -77,7 +77,7 @@
     </select>
 
     <select id="detailPage" parameterType="String" resultType="com.example.vo.adVO">
-        select ad_url,name,likecnt
+        select upday,name,likecnt,ad_url
         from advideo
         where ch_url=#{url}
     </select>
