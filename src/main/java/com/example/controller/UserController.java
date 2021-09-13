@@ -5,6 +5,7 @@ import com.example.vo.UserVo;
 import com.example.vo.adVO;
 import com.example.vo.ChannelVO;
 import com.example.vo.Criteria;
+import com.example.vo.CustomerVO;
 import com.example.vo.FilterMaker;
 import com.example.vo.PageMaker;
 
@@ -133,6 +134,19 @@ public class UserController {
         model.addAttribute("contact", userService.detailChannel(url));
         model.addAttribute("list", userService.detailPage(url, av));
         return "detailPage";
+    }
+
+    @RequestMapping(value="/sign", method = RequestMethod.POST)
+    public String sign(@ModelAttribute CustomerVO cus){
+        System.out.println("아이디 : " + cus.getId());
+        System.out.println("비밀번호 : " + cus.getPw());
+        System.out.println("이메일 : " + cus.getEmail());
+        System.out.println("느그 서장 이름 : " + cus.getCeo());
+        System.out.println("느그 일 하는 주소 : " + cus.getAddress());
+        System.out.println("느그 연락처 : " + cus.getPhone());
+        System.out.println("느그 사업자등록 번호 : " + cus.getRegnum());
+
+        return "";
     }
 
     

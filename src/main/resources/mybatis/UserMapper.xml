@@ -86,4 +86,8 @@
         select contact from channel where ch_url=#{url}
     </select>
 
+    <insert id="createCustomer">
+        insert into customer values(#{id},#{pw},#{ceo},#{email},#{phone},#{regnum},#{address})
+    </insert>
+
 </mapper>

@@ -80,96 +80,91 @@
   <!-- main -->
   <table id = "table" border="0" cellpadding="1" cellspacing="1" style="height:600px; width:1024px" align=center>
     <tbody>
-      <!---- 여기에 필터 ---->
-      <tr>
+      <!---- 필터 ---->
 			<td style="width:255px" valign=top bgcolor="lightgray">&nbsp;
-			<br>
-			<p align=Center size=9><b>Filter</b></p>
-      
-			<form action="/filterPage">
-        <!--카테고리 선택-->
-        <div>
-          <br>
-          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="음악" onclick='checkOnlyOne(this)'>음악
-          <br>
-          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="노하우/스타일" onclick='checkOnlyOne(this)'>노하우/스타일
-          <br>
-          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="뉴스/정치" onclick='checkOnlyOne(this)'>뉴스/정치
-          <br>
-          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="코미디" onclick='checkOnlyOne(this)'>코미디
-          <br>
-          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="자동차" onclick='checkOnlyOne(this)'>자동차
-          <br>
-          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="인물/블로그" onclick='checkOnlyOne(this)'>인물/블로그
-          <br>
-          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="스포츠" onclick='checkOnlyOne(this)'>스포츠
-          <br>
-          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="엔터테이먼트" onclick='checkOnlyOne(this)'>엔터테이먼트
-          <br>
-          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="동물" onclick='checkOnlyOne(this)'>동물
-          <br>
-          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="여행/이벤트" onclick='checkOnlyOne(this)'>여행/이벤트
-          <br>
-          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="교육" onclick='checkOnlyOne(this)'>교육
-          <br>
-          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="영화/애니메이션" onclick='checkOnlyOne(this)'>영화/애니메이션
-          <br>
-          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="게임" onclick='checkOnlyOne(this)'>게임
-          <br>
-        </div>
-        <!--카테고리 선택-->
+			  <br>
+        <p align=Center size=9><b>Filter</b></p>
+        
+        <form action="/filterPage">
+          <!--카테고리 선택-->
+          <div>
+            <br>
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="음악" onclick='checkOnlyOne(this)'>음악
+            <br>
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="노하우/스타일" onclick='checkOnlyOne(this)'>노하우/스타일
+            <br>
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="뉴스/정치" onclick='checkOnlyOne(this)'>뉴스/정치
+            <br>
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="코미디" onclick='checkOnlyOne(this)'>코미디
+            <br>
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="자동차" onclick='checkOnlyOne(this)'>자동차
+            <br>
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="인물/블로그" onclick='checkOnlyOne(this)'>인물/블로그
+            <br>
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="스포츠" onclick='checkOnlyOne(this)'>스포츠
+            <br>
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="엔터테이먼트" onclick='checkOnlyOne(this)'>엔터테이먼트
+            <br>
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="동물" onclick='checkOnlyOne(this)'>동물
+            <br>
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="여행/이벤트" onclick='checkOnlyOne(this)'>여행/이벤트
+            <br>
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="교육" onclick='checkOnlyOne(this)'>교육
+            <br>
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="영화/애니메이션" onclick='checkOnlyOne(this)'>영화/애니메이션
+            <br>
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="게임" onclick='checkOnlyOne(this)'>게임
+            <br>
+          </div>
+          <!--카테고리 선택-->
 
-        <!-- 구독자 수 선택-->
-        <div>
-        <br>
-          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="sub" value="100000" onclick='checkOnlyOne1(this)'>10만 이하
+          <!-- 구독자 수 선택-->
+          <div>
           <br>
-          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="sub" value="1000000" onclick='checkOnlyOne1(this)'>10만 ~ 100만
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="sub" value="100000" onclick='checkOnlyOne1(this)'>10만 이하
+            <br>
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="sub" value="1000000" onclick='checkOnlyOne1(this)'>10만 ~ 100만
+            <br>
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="sub" value="10000000" onclick='checkOnlyOne1(this)'>100만 ~ 1000만
+            <br>
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="sub" value="100000000" onclick='checkOnlyOne1(this)'>1000만 이상
+          </div>
+          <!-- 구독자 수 선택 -->
           <br>
-          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="sub" value="10000000" onclick='checkOnlyOne1(this)'>100만 ~ 1000만
-          <br>
-          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="sub" value="100000000" onclick='checkOnlyOne1(this)'>1000만 이상
-        </div>
-        <!-- 구독자 수 선택 -->
+          &nbsp;&nbsp;&nbsp;<input type="submit" value="검색" />
+        </form>
 
-
-        <br>
-        &nbsp;&nbsp;&nbsp;<input type="submit" value="검색" />
-      </form>
-
-			&nbsp;&nbsp;&nbsp;<a href="index.html"> Home (개발자 모드)</a>
-      <br>
-      &nbsp;&nbsp;&nbsp;<a href="/listPage"> 초기화 (개발자 모드)</a>
-			
-			
-			<!---- 여기에 필터 ---->
+                  &nbsp;&nbsp;&nbsp;<a href="index.html"> Home (개발자 모드)</a>
+                  <br>
+                  &nbsp;&nbsp;&nbsp;<a href="/listPage"> 초기화 (개발자 모드)</a>
 			</td>
+      <!---- 필터 ---->
+
+      <!---- 내용 ---->
 			<td style="width:755px" align=center valign=top>
 
-
-    
+              <!-- 출력 내용 -->
               <table class="table table-bordered">
                 <tr>
-                    <th> 썸네일 </th>
-                    <th> 채널 이름 </th>
-                    <th> 구독자 수 </th>
-                    <th> 카테고리 </th>
+                  <th> 썸네일 </th>
+                  <th> 채널 이름 </th>
+                  <th> 구독자 수 </th>
+                  <th> 카테고리 </th>
                 </tr>
                 <tr th:each="channel,i : ${list}">
-                    <td><img th:id = "${i.index}" src='' alt="" width="125" height="125"></td>  <!-- 채널 프로필 사진 이미지 태그-->
-                    <td><a th:href="@{/detailPage(url=${channel.ch_url})}"><span th:text="${channel.ch_name}"> 채널 이름 </span></a></td>
-                    <td><span th:text="${channel.sub}"> 구독자 수 </span></td>
-                    <td><span th:text="${channel.category}"> 카테고리 </span></td>
-                    <script>
-                      id = '#';
-                      id = id + i;
-                      $(id).attr('src',channel[i].img);
-                      i = i + 1;
-                    </script>
+                  <td><img th:id = "${i.index}" src='' alt="" width="125" height="125"></td>  <!-- 채널 프로필 사진 이미지 태그-->
+                  <td><a th:href="@{/detailPage(url=${channel.ch_url})}"><span th:text="${channel.ch_name}"> 채널 이름 </span></a></td>
+                  <td><span th:text="${channel.sub}"> 구독자 수 </span></td>
+                  <td><span th:text="${channel.category}"> 카테고리 </span></td>
+                  <script>
+                    id = '#';
+                    id = id + i;
+                    $(id).attr('src',channel[i].img);
+                    i = i + 1;
+                  </script>
                 </tr>
-               
               </table>
-            <!-- /.box-body -->
+            <!-- 출력 내용 -->
             
             <!-- 게시판 하단의 페이징 버튼 -->
             <div class="box-footer clearfix">
@@ -190,20 +185,22 @@
               </ul>
               
             </div>
-
+            <!-- 게시판 하단의 페이징 버튼 -->
 
       </td>
+      <!---- 내용 ---->
     </tbody>
   </table>
+  <!---- 메인  ---->
 
-<!--footer-->
-<table cellpadding="1" width = "100%" height = "50" bgcolor="white" align="center">
-  <tr>
-    <td align="center">
-      @copyright: 갈라티코스
-    </td>
-  </tr>
-</table>
-<!--footer-->
+  <!--footer-->
+  <table cellpadding="1" width = "100%" height = "50" bgcolor="white" align="center">
+    <tr>
+      <td align="center">
+        @copyright: 갈라티코스
+      </td>
+    </tr>
+  </table>
+  <!--footer-->
 </body>
 </html>

@@ -3,6 +3,7 @@ import java.util.List;
 
 import com.example.vo.ChannelVO;
 import com.example.vo.Criteria;
+import com.example.vo.CustomerVO;
 import com.example.vo.UserVo;
 import com.example.vo.adVO;
 
@@ -31,5 +32,7 @@ public interface UserMapper {
     int detailCount(adVO av);
 
     String detailChannel(String url);
+
+    int createCustomer(CustomerVO cus);
 }
 

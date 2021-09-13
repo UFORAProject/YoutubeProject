@@ -28,14 +28,11 @@
         border-spacing:15px;
     }
 </style>
+<script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-
     function myFunction(input) {
-      document.getElementById("email").value = input;
+        document.getElementById("email").value = input;
     }
-    
-</script>
- <script>
 
    function numberMaxLength(e){
        if(e.value.length > e.maxLength){
@@ -74,10 +71,7 @@
            }
        }
    }
-</script>
-<script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-    function sample6_execDaumPostcode() {
+   function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -129,51 +123,51 @@
     <center>
         <h1> 회원가입</h1>
         <table boder = "" cellspacing = "1" >
-        <FORM>
-         <tr>
+        <FORM action = "/sign" method="post">
+            <tr>
        
-          <td> 아이디 </td>
-          <td>
-          <input type = "text" placeholder="아이디"/>
-          <input type = "button" value = "중복확인"/>
-          </td>
-         </tr>
-       
-       
-       
-         <tr>
-          <td> 비밀번호 </td>
-          <td> <input type = "password" placeholder="비밀번호" name="userPW" id="pw" onchange="check_pw()"/> </td>
-         </tr>
+                <td> 아이디 </td>
+                <td>
+                <input type = "text" name = "id" placeholder="아이디"/>
+                <input type = "button" value = "중복확인"/>
+                </td>
+            </tr>
        
        
-         <tr>
-          <td> 비밀번호 확인 </td>
-          <td> <input type = "password" placeholder="비밀번호 확인" name="userPW2" id="pw2" onchange="check_pw()"/>&nbsp; <span id="check"> </span></td>
-         </tr>
        
-         <tr>
-          <td> 대표자명 </td>
-          <td> <input type = "text" placeholder="대표자명"/> </td>
-         </tr>
+            <tr>
+                <td> 비밀번호 </td>
+                <td> <input type = "password" placeholder="비밀번호" name="userPW" id="pw" onchange="check_pw()"/> </td>
+            </tr>
+       
+       
+            <tr>
+                <td> 비밀번호 확인 </td>
+                <td> <input type = "password" placeholder="비밀번호 확인" name="pw" id="pw2" onchange="check_pw()"/>&nbsp; <span id="check"> </span></td>
+            </tr>
+        
+            <tr>
+                <td> 대표자명 </td>
+                <td> <input type = "text" name = "ceo" placeholder="대표자명"/> </td>
+            </tr>
        
        
        
          <tr>
             <td>본인 확인 이메일</td>
             <td>
-              <input type = "text"/> @ <input type = "text" name="email" id="email"/> &nbsp;
+              <input type = "text"/> @ <input type = "text" id="email" name="email"/> &nbsp;
               <select id="select" onchange="myFunction(this.value)"> 
-              <option value="" selected="selected"> 직접입력 </option>
-              <option value="daum.net">daum.net</option> 
-              <option value="gmail.com">gmail.com</option>
-              <option value="hotmail.com">hotmail.com</option>
-              <option value="korea.com">korea.com</option>
-              <option value="nate.com">nate.com</option> 
-              <option value="naver.com">naver.com</option> 
+                <option value="" selected="selected"> 직접입력 </option>
+                <option value="daum.net">daum.net</option> 
+                <option value="gmail.com">gmail.com</option>
+                <option value="hotmail.com">hotmail.com</option>
+                <option value="korea.com">korea.com</option>
+                <option value="nate.com">nate.com</option> 
+                <option value="naver.com">naver.com</option> 
               </select>
             </td>
-            </tr>
+        </tr>
        
        
        
@@ -193,7 +187,7 @@
             <option> 018 </option>
             <option> 019 </option>
            </select>
-           - <input type = "text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="4" maxlength="4" oninput="numberMaxLength(this);"/> - <input type = "text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="4" maxlength="4" oninput="numberMaxLength(this);"/>
+           <input type = "text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="4" maxlength="4" oninput="numberMaxLength(this);"/> - <input type = "text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="4" maxlength="4" oninput="numberMaxLength(this);"/>
           </td>
          </tr>
        
@@ -201,7 +195,7 @@
          <tr>
           <td>사업자 등록번호 </td>
           <td>
-          <input type = "text" placeholder="사업자 등록번호"/>
+          <input type = "text" name = "regnum" placeholder="사업자 등록번호"/>
           <input type = "button" value = "중복확인"/>
           </td>
          </tr>
@@ -216,29 +210,25 @@
              <input type="text" id="sample6_postcode" placeholder="우편번호">
              <input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기"><br>
             </td>
-           </tr>
-           <tr>
+        </tr>
+        <tr>
             <td> 상세주소 </td>
             <td>
-             <input type="text" id="sample6_address" placeholder="주소" style="width:270px">
-             <input type="text" id="sample6_extraAddress" placeholder="참고항목" style="width:270px"><br>
-             <input type="text" id="sample6_detailAddress" placeholder="상세주소" style="width:270px">
+                <input type="text" id="sample6_address" placeholder="주소" style="width:270px">
+                <input type="text" id="sample6_extraAddress" placeholder="참고항목" style="width:270px"><br>
+                <input type="text" id="sample6_detailAddress" placeholder="상세주소" style="width:270px">
             </td>
-           </tr>
+        </tr>
        
        
-       
+        <input type = "submit" value = "가입하기"/>
         </FORM>
        </table>
        
-       <br/>
-       
-       로봇 인증 <input type = "checkbox"/> <br/><br/>
-       
-       <input type = "submit" value = "가입하기"/>
+       <br>
        <a href="/login_page"><input type = "reset" value = "뒤로가기"/></a>
        
        
-       </center>
+    </center>
 </body>
 </html>

@@ -4,6 +4,7 @@ import com.example.mapper.UserMapper;
 import com.example.vo.UserVo;
 import com.example.vo.ChannelVO;
 import com.example.vo.Criteria;
+import com.example.vo.CustomerVO;
 import com.example.vo.adVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,10 @@ public class UserService {
 
     public String detailChannel(String url){
         return mapper.detailChannel(url);
+    }
+
+    public int createCustomer(CustomerVO cus){
+        return mapper.createCustomer(cus);
     }
 
 }
