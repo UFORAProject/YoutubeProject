@@ -155,8 +155,8 @@
        
          <tr>
             <td>본인 확인 이메일</td>
-            <td>
-              <input type = "text"/> @ <input type = "text" id="email" name="email"/> &nbsp;
+            <td name="email">
+              <input type = "text" /> @ <input type = "text" id="email"/> &nbsp;
               <select id="select" onchange="myFunction(this.value)"> 
                 <option value="" selected="selected"> 직접입력 </option>
                 <option value="daum.net">daum.net</option> 
@@ -187,7 +187,8 @@
             <option> 018 </option>
             <option> 019 </option>
            </select>
-           <input type = "text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="4" maxlength="4" oninput="numberMaxLength(this);"/> - <input type = "text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="4" maxlength="4" oninput="numberMaxLength(this);"/>
+           <input type = "text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="4" maxlength="4" oninput="numberMaxLength(this);"/> - 
+           <input type = "text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="4" maxlength="4" oninput="numberMaxLength(this);"/>
           </td>
          </tr>
        
