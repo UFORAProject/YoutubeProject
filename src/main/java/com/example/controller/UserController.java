@@ -40,7 +40,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/get_channel_list")
-    public String getAll(Model model) throws Exception{
+    public String getAll(Model model, HttpSession session) throws Exception{
+        if(session.getAttribute("id").equals("")){
+            return "alert";
+        }
         List<ChannelVO> channelList = userService.getChannelList(); 
         model.addAttribute("channelList", channelList);
         return "channelList";
@@ -87,7 +90,10 @@ public class UserController {
     @RequestMapping(value = "/filterPage", method = RequestMethod.GET)
 	public String filterPage(@ModelAttribute("cvo") ChannelVO cvo,
                             Model model, HttpSession session) throws Exception {
-
+        if(session.getAttribute("id").equals("")){
+            return "alert";
+        }
+        
         if (cvo.getCategory()== null && session.getAttribute("cvo")!=null) { 
 
             cvo.setCategory( ((ChannelVO)session.getAttribute("cvo")).getCategory() );  
@@ -118,6 +124,9 @@ public class UserController {
 
     @RequestMapping(value="/detailPage", method = RequestMethod.GET)
     public String detailPage(@RequestParam("url") String url,Model model, HttpSession session) throws Exception{
+        if(session.getAttribute("id").equals("")){
+            return "alert";
+        }
         System.out.println("url 제대로 넘어오는지 체크 :  "+url);
         System.out.println("아이디 : "+session.getAttribute("id"));
         adVO av = new adVO();
