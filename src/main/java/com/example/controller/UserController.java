@@ -29,7 +29,7 @@ public class UserController {
     @RequestMapping(value="/login_page")
     public String getLoginPage(Model model,HttpSession httpSession) throws Exception{
         httpSession.removeAttribute("id");
-        System.out.println("아이디 아직 있음?"+httpSession.getAttribute("id"));
+        System.out.println("세션 아이디 지워졌음 : "+httpSession.getAttribute("id"));
         
         return "loginPage";
     }
@@ -55,22 +55,24 @@ public class UserController {
                             ChannelVO ch, HttpServletRequest httpServletRequest, HttpSession session){
 		
         CustomerVO cus = new CustomerVO();
-        if(httpServletRequest.getParameter("id") != null && httpServletRequest.getParameter("pw") != null){
-            cus.setId(httpServletRequest.getParameter("id"));
-            cus.setPw(httpServletRequest.getParameter("pw"));
-            System.out.println("아이디 : "+cus.getId());
-            System.out.println("비밀번호 : "+cus.getPw());
-            session.setAttribute("id", cus.getId());
-        }
-        else{
-            return "alert";
-        }
+        if(session.getAttribute("id") == null){
+            if(httpServletRequest.getParameter("id") != null && httpServletRequest.getParameter("pw") != null){
+                cus.setId(httpServletRequest.getParameter("id"));
+                cus.setPw(httpServletRequest.getParameter("pw"));
+                System.out.println("아이디 : "+cus.getId());
+                System.out.println("비밀번호 : "+cus.getPw());
+                if(userService.isRightCustomer(cus) == 1){
+                    System.out.println("우리 아이디 맞음!!!...");
+                    session.setAttribute("id", cus.getId());
+                }
+                else{
+                    return "alert";
+                }
+            }
+            else{
+                return "alert";
+            }
 
-        if(userService.isRightCustomer(cus) == 1){
-            System.out.println("우리 아이디 맞음!!!...");
-        }
-        else{
-            return "alert";
         }
 
         System.out.println("아이디 : "+session.getAttribute("id"));
@@ -90,7 +92,7 @@ public class UserController {
     @RequestMapping(value = "/filterPage", method = RequestMethod.GET)
 	public String filterPage(@ModelAttribute("cvo") ChannelVO cvo,
                             Model model, HttpSession session) throws Exception {
-        if(session.getAttribute("id").equals("")){
+        if(session.getAttribute("id") == null){
             return "alert";
         }
         
@@ -124,7 +126,7 @@ public class UserController {
 
     @RequestMapping(value="/detailPage", method = RequestMethod.GET)
     public String detailPage(@RequestParam("url") String url,Model model, HttpSession session) throws Exception{
-        if(session.getAttribute("id").equals("")){
+        if(session.getAttribute("id") == null){
             return "alert";
         }
         System.out.println("url 제대로 넘어오는지 체크 :  "+url);

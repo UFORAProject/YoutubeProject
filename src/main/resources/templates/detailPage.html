@@ -90,6 +90,7 @@
               <th> 업로드 날짜 </th>
               <th> 좋아요 수 </th>
               <th> 광고 영상 </th>
+              <th> 찜 버튼 </th>
             </tr>
             <tr th:each="ad,i : ${list}">
                 <td><span th:text="${ad.upday}"> 채널 이름 </span></td>
@@ -107,6 +108,7 @@
                     i = i+1;
                   </script>
                 </td>
+                <td></td>
             </tr>
           </table>
         </td>
