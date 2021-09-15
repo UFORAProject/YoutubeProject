@@ -123,7 +123,7 @@ public class UserController {
         adVO av = new adVO();
         model.addAttribute("contact", userService.detailChannel(url));
         model.addAttribute("list", userService.detailPage(url, av));
-        return "detailPage";
+        return "detailPage"; 
     }
 
     @RequestMapping(value="/sign", method = RequestMethod.POST)
