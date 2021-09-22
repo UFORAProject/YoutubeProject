@@ -1,4 +1,4 @@
-
+import sys
 import pymysql
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -93,10 +93,11 @@ def hash345(key_list, keylist):
         
     return answer
 
-#print(hash345(['강아지','개','고양이','털'],'강아지 개 고양이 털'))
-###
-keylist = "강아지 개 고양이 털" #광고주의 키워드 입력
+print("입력 받은 값 : ", sys)
+print(type(sys))
+#keylist = input(str()) #광고주의 키워드 입력
+keylist = "치킨"
 key_list = keylist.split(' ')
 
-hash345(key_list, keylist)
+print(hash345(key_list, keylist))
 ###

@@ -145,7 +145,23 @@ public class UserController {
         adVO av = new adVO();
         model.addAttribute("contact", userService.detailChannel(url));
         model.addAttribute("list", userService.detailPage(url, av));
+        model.addAttribute("url", url);
         return "detailPage"; 
+    }
+
+    @RequestMapping(value = "/ggim", method = RequestMethod.POST)
+    public String ggim(@ModelAttribute ChannelVO cvo, Model model, HttpSession session) throws Exception{
+        if(session.getAttribute("id") == null){
+            return "alert";
+        }
+        System.out.println("채널 url 제대로 받아오는지 : " +cvo.getCh_url());
+        System.out.println("세션아이디 제대로 받아오는지 : " +session.getAttribute("id"));
+        
+
+
+
+        String way = "redirect:detailPage" + "?url=" + cvo.getCh_url();
+        return way;
     }
 
     @RequestMapping(value="/sign", method = RequestMethod.POST)
@@ -162,28 +178,36 @@ public class UserController {
     }
 
     @RequestMapping(value = "/myPage")
-    public String myPage(){
+    public String myPage(HttpSession session){
+        if(session.getAttribute("id") == null){
+            return "alert";
+        }
         return "myPage";
     }
 
     @RequestMapping(value = "/SearchPage")
-    public String SearchPage(){
+    public String SearchPage(HttpSession session){
+        if(session.getAttribute("id") == null){
+            return "alert";
+        }
         return "SearchPage";
     }
 
 
     @RequestMapping(value = "/recommend" , method = RequestMethod.POST)
-    public String Recommend(@RequestParam("keyword") String rec) throws IOException {
+    public String Recommend(@RequestParam("keyword") String rec, HttpSession session) throws IOException {
+        if(session.getAttribute("id") == null){
+            return "alert";
+        }
         System.out.println("받은 키워드 : " +rec);
         Runtime r = Runtime.getRuntime();
-		Process p = r.exec("python src\\main\\java\\com\\example\\controller\\sim.py");
+		Process p = r.exec("python src\\main\\java\\com\\example\\controller\\sim.py" +" "+rec);
         //sim.py 파일이 존재하는 곳의 경로 
 
         BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
 		try {
 			p.waitFor();
-
 			String line = "";
 			while (br.ready()) {
 				line = br.readLine();
@@ -192,6 +216,7 @@ public class UserController {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+
         return "RecommendPage";
     }
 

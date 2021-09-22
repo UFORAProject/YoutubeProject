@@ -16,6 +16,7 @@
     <![CDATA[*/
       let header = 'https://www.youtube.com/embed/';
       let ad = /*[[${list}]]*/ 'default';
+      let chch = /*[[${url}]]*/ 'default';
       let url;
       let id;
       let i = 0;
@@ -84,6 +85,17 @@
           <script>
             $('#likebtn').click(function(){
               console.log('ㅋㅋㅋ');
+              console.log(chch);
+              if (confirm("찜 목록에 추가하시겠습니까?")) {
+                var html = "";
+                uri = '/ggim'
+                html += '<form name="dataForm" action="'+uri+'" method="post">';
+                html += '<input type="hidden" name="ch_url" value="'+chch+'" />';
+                html += '</form>';
+                
+                $("body").append(html);
+                document.dataForm.submit();
+              }
             });
           </script>
           &nbsp;&nbsp;&nbsp;<a href="/listPage"> 초기화 (개발자 모드)</a>
