@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        data-layout-decorate="~{samples/layout/sampleLayout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyPage</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>
+    *{
+      padding: 0px;
+      margin: 0px;
+    }
+    #header{
+      text-align: center; 
+      background-color: #535353;
+    }
+    #headertext{
+        margin: 7px;
+        display: inline-block;
+        color:  white;
+              vertical-align: middle;
+    }
+    #table{
+      margin: auto;
+    }
+    #footer {
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      padding: 100px 0;
+      text-align: center;
+      color: black;
+      background: #f5f5f7;
+      }
+  </style>
+<body>
+    <!-- header -->
+    <table id = "header" border="0" cellpadding="0" cellspacing="0" style="height:60px; width:100%" align=center>
+        <tr>
+            <td align=right>
+                <a href="/listPage">리스트 채널 조회</a>
+            </td>
+        </tr>
+    </table>
+    <!-- header -->
+
+    <h1>마이페이지 랍니다 !!!</h1>
+
+    <!--footer-->
+    <table cellpadding="1" width = "100%" height = "50" bgcolor="white" align="center">
+        <tr>
+            <td align="center">
+                @copyright: 갈라티코스
+            </td>
+        </tr>
+    </table>
+    <!--footer-->
+</body>
+</html>

@@ -55,7 +55,7 @@
   <table id = "header" border="0" cellpadding="0" cellspacing="0" style="height:60px; width:100%" align=center>
     <tr>
       <td align=right>
-        mypage
+        <a href="/myPage">myPage</a>
       </td>
     </tr>
   </table>
@@ -68,11 +68,24 @@
 
 
         <!---- 필터 ---->
-			  <td style="width:255px" valign=top bgcolor="lightgray">&nbsp;
+			  <td style="width:255px" align=center valign=top bgcolor="lightgray">&nbsp;
           <br>
-          <p align=Center size=9><b>연락처</b></p>
+          <p size=9><b>연락처</b></p>
           <br th:text="${contact}"></br>
           <br>
+          <span th:if = "${ggim.empty}">
+              <button type="button" class="btn btn-light" id="likebtn">찜 안되어 있음</button>
+              <input type="hidden" id="likecheck" value="">
+          </span>
+          <span th:unless="${ggim.empty}">
+              <button type="button" class="btn btn-light" id="likebtn"> 찜 되어 있음 </button>
+              <input type="hidden" id="likecheck" value="">
+          </span>
+          <script>
+            $('#likebtn').click(function(){
+              console.log('ㅋㅋㅋ');
+            });
+          </script>
           &nbsp;&nbsp;&nbsp;<a href="/listPage"> 초기화 (개발자 모드)</a>
 			  </td>
         <!---- 필터 ---->
@@ -90,7 +103,6 @@
               <th> 업로드 날짜 </th>
               <th> 좋아요 수 </th>
               <th> 광고 영상 </th>
-              <th> 찜 버튼 </th>
             </tr>
             <tr th:each="ad,i : ${list}">
                 <td><span th:text="${ad.upday}"> 채널 이름 </span></td>

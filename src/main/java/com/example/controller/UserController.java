@@ -2,11 +2,16 @@ package com.example.controller;
 
 import com.example.service.UserService;
 import com.example.vo.adVO;
+import com.example.vo.ggimVO;
 import com.example.vo.ChannelVO;
 import com.example.vo.Criteria;
 import com.example.vo.CustomerVO;
 import com.example.vo.FilterMaker;
 import com.example.vo.PageMaker;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -129,8 +134,14 @@ public class UserController {
         if(session.getAttribute("id") == null){
             return "alert";
         }
+        ggimVO gvo = new ggimVO();
+        gvo.setId(session.getAttribute("id").toString());
+        gvo.setCh_url(url);
+        model.addAttribute("ggim", userService.isGgim(gvo));
+        
         System.out.println("url 제대로 넘어오는지 체크 :  "+url);
         System.out.println("아이디 : "+session.getAttribute("id"));
+
         adVO av = new adVO();
         model.addAttribute("contact", userService.detailChannel(url));
         model.addAttribute("list", userService.detailPage(url, av));
@@ -148,6 +159,40 @@ public class UserController {
         System.out.println("느그 사업자등록 번호 : " + cus.getRegnum());
 
         return "";
+    }
+
+    @RequestMapping(value = "/myPage")
+    public String myPage(){
+        return "myPage";
+    }
+
+    @RequestMapping(value = "/SearchPage")
+    public String SearchPage(){
+        return "SearchPage";
+    }
+
+
+    @RequestMapping(value = "/recommend" , method = RequestMethod.POST)
+    public String Recommend(@RequestParam("keyword") String rec) throws IOException {
+        System.out.println("받은 키워드 : " +rec);
+        Runtime r = Runtime.getRuntime();
+		Process p = r.exec("python src\\main\\java\\com\\example\\controller\\sim.py");
+        //sim.py 파일이 존재하는 곳의 경로 
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+
+		try {
+			p.waitFor();
+
+			String line = "";
+			while (br.ready()) {
+				line = br.readLine();
+				System.out.println(line);
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+        return "RecommendPage";
     }
 
     

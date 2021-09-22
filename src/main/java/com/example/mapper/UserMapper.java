@@ -5,6 +5,7 @@ import com.example.vo.ChannelVO;
 import com.example.vo.Criteria;
 import com.example.vo.CustomerVO;
 import com.example.vo.adVO;
+import com.example.vo.ggimVO;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -29,5 +30,7 @@ public interface UserMapper {
     int createCustomer(CustomerVO cus);
 
     int isRightCustomer(CustomerVO cus);
+
+    List<ggimVO> isGgim(ggimVO gvo);
 }
 

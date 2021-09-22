@@ -5,6 +5,7 @@ import com.example.vo.ChannelVO;
 import com.example.vo.Criteria;
 import com.example.vo.CustomerVO;
 import com.example.vo.adVO;
+import com.example.vo.ggimVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,6 +57,10 @@ public class UserService {
 
     public int isRightCustomer(CustomerVO cus){
         return mapper.isRightCustomer(cus);
+    }
+
+    public List<ggimVO> isGgim(ggimVO gvo){
+        return mapper.isGgim(gvo);
     }
 
 }
