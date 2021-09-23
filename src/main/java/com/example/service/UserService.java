@@ -60,8 +60,20 @@ public class UserService {
         return mapper.isRightCustomer(cus);
     }
 
-    public List<ggimVO> isGgim(ggimVO gvo){
+    public int isGgim(ggimVO gvo){
         return mapper.isGgim(gvo);
+    }
+
+    public int insertGgim(ggimVO gvo){
+        return mapper.insertGgim(gvo);
+    }
+
+    public int deleteGgim(ggimVO gvo){
+        return mapper.deleteGgim(gvo);
+    }
+
+    public List<ChannelVO> showGgim(String id, ChannelVO cvo){
+        return mapper.showGgim(id, cvo);
     }
 
     public List<ChannelVO> firstStage(HashMap<String,String[]> hm, ChannelVO cvo){

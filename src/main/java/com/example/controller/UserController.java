@@ -34,6 +34,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    ////////////////////로그인 페이지로 넘기는 기능
     @RequestMapping(value="/login_page")
     public String getLoginPage(Model model,HttpSession httpSession) throws Exception{
         httpSession.removeAttribute("id");
@@ -41,12 +42,35 @@ public class UserController {
         
         return "loginPage";
     }
+    ////////////////////로그인 페이지로 넘기는 기능
 
+
+    ///////////////회원 가입 페이지로 넘기는 기능
     @RequestMapping(value="/signPage")
     public String getSignPage(Model model) throws Exception{
         return "SignPage";
     }
+    ///////////////회원 가입 페이지로 넘기는 기능
 
+    
+
+    //////////////////회원가입 기능
+    @RequestMapping(value="/sign", method = RequestMethod.POST)
+    public String sign(@ModelAttribute CustomerVO cus){
+        System.out.println("아이디 : " + cus.getId());
+        System.out.println("비밀번호 : " + cus.getPw());
+        System.out.println("이메일 : " + cus.getEmail());
+        System.out.println("느그 서장 이름 : " + cus.getCeo());
+        System.out.println("느그 일 하는 주소 : " + cus.getAddress());
+        System.out.println("느그 연락처 : " + cus.getPhone());
+        System.out.println("느그 사업자등록 번호 : " + cus.getRegnum());
+
+        return "";
+    }
+    //////////////////회원가입 기능
+
+
+    /////////////(개발자 모드)전체 채널 조회
     @RequestMapping(value = "/get_channel_list")
     public String getAll(Model model, HttpSession session) throws Exception{
         if(session.getAttribute("id").equals("")){
@@ -56,7 +80,9 @@ public class UserController {
         model.addAttribute("channelList", channelList);
         return "channelList";
     }
+    /////////////(개발자 모드)전체 채널 조회
 
+    ////////////////////////전체 채널 조회
     @RequestMapping(value = "/listPage", method = RequestMethod.GET)
 	public String listPage(@ModelAttribute("cri") Criteria cri, 
                             Model model,
@@ -96,7 +122,10 @@ public class UserController {
 		
 		return "listPage";
 	}
+    ////////////////////////전체 채널 조회
 
+
+    //////////////필터 된 결과 보여주는 기능
     @RequestMapping(value = "/filterPage", method = RequestMethod.GET)
 	public String filterPage(@ModelAttribute("cvo") ChannelVO cvo,
                             Model model, HttpSession session) throws Exception {
@@ -131,7 +160,9 @@ public class UserController {
 		
 		return "filterPage";
 	}
+    //////////////필터 된 결과 보여주는 기능
 
+    //////////////////////채널 상세 보기 페이지
     @RequestMapping(value="/detailPage", method = RequestMethod.GET)
     public String detailPage(@RequestParam("url") String url,Model model, HttpSession session) throws Exception{
         if(session.getAttribute("id") == null){
@@ -151,44 +182,76 @@ public class UserController {
         model.addAttribute("url", url);
         return "detailPage"; 
     }
+    //////////////////////채널 상세 보기 페이지
 
-    @RequestMapping(value = "/ggim", method = RequestMethod.POST)
-    public String ggim(@ModelAttribute ChannelVO cvo, Model model, HttpSession session) throws Exception{
+
+    ///////////////////////찜하기 기능
+    @RequestMapping(value = "/ggimInsert", method = RequestMethod.POST)
+    public String ggimInsert(@ModelAttribute ChannelVO cvo, Model model, HttpSession session) throws Exception{
         if(session.getAttribute("id") == null){
             return "alert";
         }
         System.out.println("채널 url 제대로 받아오는지 : " +cvo.getCh_url());
         System.out.println("세션아이디 제대로 받아오는지 : " +session.getAttribute("id"));
         
-
-
+        ggimVO gvo = new ggimVO();
+        gvo.setId(session.getAttribute("id").toString());
+        gvo.setCh_url(cvo.getCh_url());
+        if(userService.isGgim(gvo) == 0){
+            userService.insertGgim(gvo);
+        }
 
         String way = "redirect:detailPage" + "?url=" + cvo.getCh_url();
         return way;
     }
+    ////////////////////찜하기 기능
 
-    @RequestMapping(value="/sign", method = RequestMethod.POST)
-    public String sign(@ModelAttribute CustomerVO cus){
-        System.out.println("아이디 : " + cus.getId());
-        System.out.println("비밀번호 : " + cus.getPw());
-        System.out.println("이메일 : " + cus.getEmail());
-        System.out.println("느그 서장 이름 : " + cus.getCeo());
-        System.out.println("느그 일 하는 주소 : " + cus.getAddress());
-        System.out.println("느그 연락처 : " + cus.getPhone());
-        System.out.println("느그 사업자등록 번호 : " + cus.getRegnum());
-
-        return "";
-    }
-
-    @RequestMapping(value = "/myPage")
-    public String myPage(HttpSession session){
+    ///////////////////////찜하기 기능
+    @RequestMapping(value = "/ggimDelete", method = RequestMethod.POST)
+    public String ggimDelete(@ModelAttribute ChannelVO cvo, Model model, HttpSession session) throws Exception{
         if(session.getAttribute("id") == null){
             return "alert";
         }
+        System.out.println("채널 url 제대로 받아오는지 : " +cvo.getCh_url());
+        System.out.println("세션아이디 제대로 받아오는지 : " +session.getAttribute("id"));
+        
+        ggimVO gvo = new ggimVO();
+        gvo.setId(session.getAttribute("id").toString());
+        gvo.setCh_url(cvo.getCh_url());
+        if(userService.isGgim(gvo) >= 1){
+            userService.deleteGgim(gvo);
+        }
+        
+        String way = "redirect:detailPage" + "?url=" + cvo.getCh_url();
+        return way;
+    }
+    ////////////////////찜하기 기능
+
+
+    /////////////////마이페이지 기능
+    @RequestMapping(value = "/myPage")
+    public String myPage(HttpSession session, Model model){
+        if(session.getAttribute("id") == null){
+            return "alert";
+        }
+        String id = session.getAttribute("id").toString();
+        ChannelVO cvo = new ChannelVO();
+        model.addAttribute("ggimList", userService.showGgim(id, cvo));
         return "myPage";
     }
+    /////////////////마이페이지 기능
 
+    ///////////////////////추천 페이지로 넘기는 기능
+    @RequestMapping(value = "/SearchPage")
+    public String SearchPage(HttpSession session){
+        if(session.getAttribute("id") == null){
+            return "alert";
+        }
+        return "SearchPage";
+    }
+    ///////////////////////추천 페이지로 넘기는 기능
 
+    ///////////////////추천 기능
     @RequestMapping(value = "/recommend" , method = RequestMethod.POST)
     public String Recommend(@RequestParam("keyword") String rec, Model model,HttpSession session) throws Exception {
         if(session.getAttribute("id") == null){
@@ -208,7 +271,7 @@ public class UserController {
         HashMap<String,String[]> hm = new HashMap<>();
         hm.put("a", str);
         System.out.println(Arrays.toString(hm.get("a")));
-        model.addAttribute("general", userService.firstStage(hm, cvo));
+        model.addAttribute("general", userService.firstStage(hm, cvo)); 
 
         Runtime r = Runtime.getRuntime();
 		Process p = r.exec("python src\\main\\java\\com\\example\\controller\\sim.py " +rec);
@@ -243,23 +306,9 @@ public class UserController {
             j+= 1;
             rvo.add(temp);
         }
-
-
-        
         model.addAttribute("list", rvo);
-        System.out.println("되냐?");
         
         return "RecommendPage";
     }
-
-    @RequestMapping(value = "/SearchPage")
-    public String SearchPage(HttpSession session){
-        if(session.getAttribute("id") == null){
-            return "alert";
-        }
-        return "SearchPage";
-    }
-
-    
-
+    ///////////////////추천 기능
 }

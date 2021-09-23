@@ -74,21 +74,35 @@
           <p size=9><b>연락처</b></p>
           <br th:text="${contact}"></br>
           <br>
-          <span th:if = "${ggim.empty}">
-              <button type="button" class="btn btn-light" id="likebtn">찜 안되어 있음</button>
+          <span th:if = "${ggim} == 0">
+              <button type="button" class="btn btn-light" id="insert">찜 안되어 있음</button>
               <input type="hidden" id="likecheck" value="">
           </span>
-          <span th:unless="${ggim.empty}">
-              <button type="button" class="btn btn-light" id="likebtn"> 찜 되어 있음 </button>
+          <span th:unless="${ggim} == 0">
+              <button type="button" class="btn btn-light" id="delete"> 찜 되어 있음 </button>
               <input type="hidden" id="likecheck" value="">
           </span>
           <script>
-            $('#likebtn').click(function(){
+            $('#insert').click(function(){
               console.log('ㅋㅋㅋ');
               console.log(chch);
               if (confirm("찜 목록에 추가하시겠습니까?")) {
                 var html = "";
-                uri = '/ggim'
+                uri = '/ggimInsert'
+                html += '<form name="dataForm" action="'+uri+'" method="post">';
+                html += '<input type="hidden" name="ch_url" value="'+chch+'" />';
+                html += '</form>';
+                
+                $("body").append(html);
+                document.dataForm.submit();
+              }
+            });
+            $('#delete').click(function(){
+              console.log('ㅋㅋㅋ');
+              console.log(chch);
+              if (confirm("찜 목록에서 제거하시겠습니까?")) {
+                var html = "";
+                uri = '/ggimDelete'
                 html += '<form name="dataForm" action="'+uri+'" method="post">';
                 html += '<input type="hidden" name="ch_url" value="'+chch+'" />';
                 html += '</form>';

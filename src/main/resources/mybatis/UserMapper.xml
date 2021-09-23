@@ -70,8 +70,26 @@
         select count(*) from customer where id = #{id} and pw = #{pw}
     </select>
 
-    <select id = "isGgim" resultType = "com.example.vo.ggimVO">
-        select * from ggim where id = #{id} and ch_url = #{ch_url}
+    <select id = "isGgim" resultType = "int">
+        select count(*) from ggim where id = #{id} and ch_url = #{ch_url}
+    </select>
+
+    <insert id="insertGgim">
+        insert into ggim values(#{id},#{ch_url})
+    </insert>
+
+    <delete id="deleteGgim">
+        delete from ggim where id = #{id} and ch_url = #{ch_url}
+    </delete>
+
+    <select id="showGgim" parameterType = "String" resultType="com.example.vo.ChannelVO">
+        SELECT ch_url,ch_name,img
+        FROM channel
+        WHERE ch_url IN (
+            SELECT ch_url 
+            FROM ggim 
+            WHERE id = #{id}
+        )
     </select>
 
     <select id= "firstStage" parameterType="hashmap" resultType = "com.example.vo.ChannelVO">

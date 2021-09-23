@@ -32,7 +32,11 @@ public interface UserMapper {
 
     int isRightCustomer(CustomerVO cus);
 
-    List<ggimVO> isGgim(ggimVO gvo);
+    int isGgim(ggimVO gvo);
+    int insertGgim(ggimVO gvo);
+    int deleteGgim(ggimVO gvo);
+    List<ChannelVO> showGgim(String id, ChannelVO cvo);
+    
 
     List<ChannelVO> firstStage(HashMap<String,String[]> hm,ChannelVO cvo);
      
