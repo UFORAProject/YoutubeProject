@@ -10,6 +10,7 @@ import com.example.vo.ggimVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -61,6 +62,10 @@ public class UserService {
 
     public List<ggimVO> isGgim(ggimVO gvo){
         return mapper.isGgim(gvo);
+    }
+
+    public List<ChannelVO> firstStage(HashMap<String,String[]> hm, ChannelVO cvo){
+        return mapper.firstStage(hm, cvo);
     }
 
 }

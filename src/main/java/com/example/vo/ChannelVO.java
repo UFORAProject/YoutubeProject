@@ -13,87 +13,35 @@ public class ChannelVO {
     private int insta;
     private int upload;
     private String img;
-    private int adcount;
-    private int adMaxView;
-    private int adMinView;
-    private int adAvgView;
-    private int adSumView;
-    private int adMaxComment;
-    private int adMinComment;
-    private int adAvgComment;
-    private int adSumComment;
+    private String tag;
+    private int clust;
+    private Double adavgview;
 
-    public int getAdcount() {
-        return this.adcount;
+    public String getTag() {
+        return this.tag;
     }
 
-    public void setAdcount(int adcount) {
-        this.adcount = adcount;
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
-    public int getAdMaxView() {
-        return this.adMaxView;
+    public int getClust() {
+        return this.clust;
     }
 
-    public void setAdMaxView(int adMaxView) {
-        this.adMaxView = adMaxView;
+    public void setClust(int clust) {
+        this.clust = clust;
     }
 
-    public int getAdMinView() {
-        return this.adMinView;
+    public Double getAdavgview() {
+        return this.adavgview;
     }
 
-    public void setAdMinView(int adMinView) {
-        this.adMinView = adMinView;
+    public void setAdavgview(Double adavgview) {
+        this.adavgview = adavgview;
     }
 
-    public int getAdAvgView() {
-        return this.adAvgView;
-    }
-
-    public void setAdAvgView(int adAvgView) {
-        this.adAvgView = adAvgView;
-    }
-
-    public int getAdSumView() {
-        return this.adSumView;
-    }
-
-    public void setAdSumView(int adSumView) {
-        this.adSumView = adSumView;
-    }
-
-    public int getAdMaxComment() {
-        return this.adMaxComment;
-    }
-
-    public void setAdMaxComment(int adMaxComment) {
-        this.adMaxComment = adMaxComment;
-    }
-
-    public int getAdMinComment() {
-        return this.adMinComment;
-    }
-
-    public void setAdMinComment(int adMinComment) {
-        this.adMinComment = adMinComment;
-    }
-
-    public int getAdAvgComment() {
-        return this.adAvgComment;
-    }
-
-    public void setAdAvgComment(int adAvgComment) {
-        this.adAvgComment = adAvgComment;
-    }
-
-    public int getAdSumComment() {
-        return this.adSumComment;
-    }
-
-    public void setAdSumComment(int adSumComment) {
-        this.adSumComment = adSumComment;
-    }
+    
 
     public String getCh_url() {
         return this.ch_url;

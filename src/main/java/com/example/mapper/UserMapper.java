@@ -1,4 +1,5 @@
 package com.example.mapper;
+import java.util.HashMap;
 import java.util.List;
 
 import com.example.vo.ChannelVO;
@@ -32,5 +33,8 @@ public interface UserMapper {
     int isRightCustomer(CustomerVO cus);
 
     List<ggimVO> isGgim(ggimVO gvo);
+
+    List<ChannelVO> firstStage(HashMap<String,String[]> hm,ChannelVO cvo);
+     
 }
 

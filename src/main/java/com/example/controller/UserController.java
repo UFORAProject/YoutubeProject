@@ -8,9 +8,9 @@ import com.example.vo.Criteria;
 import com.example.vo.CustomerVO;
 import com.example.vo.FilterMaker;
 import com.example.vo.PageMaker;
+import com.example.vo.RecommendVO;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -185,39 +188,76 @@ public class UserController {
         return "myPage";
     }
 
-    @RequestMapping(value = "/SearchPage")
-    public String SearchPage(HttpSession session){
-        if(session.getAttribute("id") == null){
-            return "alert";
-        }
-        return "SearchPage";
-    }
-
 
     @RequestMapping(value = "/recommend" , method = RequestMethod.POST)
-    public String Recommend(@RequestParam("keyword") String rec, HttpSession session) throws IOException {
+    public String Recommend(@RequestParam("keyword") String rec, Model model,HttpSession session) throws Exception {
         if(session.getAttribute("id") == null){
             return "alert";
         }
         System.out.println("받은 키워드 : " +rec);
+        ChannelVO cvo = new ChannelVO();
+        String[] str = rec.split(" ");
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < str.length; i++){
+            sb.append("%");
+            sb.append(str[i]);
+            sb.append("%");
+            str[i] = sb.toString();
+            sb.setLength(0);
+        }
+        HashMap<String,String[]> hm = new HashMap<>();
+        hm.put("a", str);
+        System.out.println(Arrays.toString(hm.get("a")));
+        model.addAttribute("general", userService.firstStage(hm, cvo));
+
         Runtime r = Runtime.getRuntime();
-		Process p = r.exec("python src\\main\\java\\com\\example\\controller\\sim.py" +" "+rec);
-        //sim.py 파일이 존재하는 곳의 경로 
+		Process p = r.exec("python src\\main\\java\\com\\example\\controller\\sim.py " +rec);
+        //python + sim.py 파일이 존재하는 곳의 경로                                       //키워드를 입력받고자 함 
 
         BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+        String answer = "";
 
 		try {
 			p.waitFor();
 			String line = "";
 			while (br.ready()) {
 				line = br.readLine();
-				System.out.println(line);
+                answer = line;
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+        answer = answer.replaceAll("\\[", "");
+        answer = answer.replaceAll("\\]", "");
+        answer = answer.replaceAll("'", "");
+        String[] aaa = answer.split(",");
+        List<RecommendVO> rvo = new ArrayList<>();
+        int j = 0;
+        for(int i = 0; i < 4; i++){
+            RecommendVO temp = new RecommendVO();
+            temp.setCh_url(aaa[j]);
+            j += 1;
+            temp.setCh_name(aaa[j]);
+            j += 1;
+            temp.setSimilarity(Double.parseDouble(aaa[j]));
+            j+= 1;
+            rvo.add(temp);
+        }
 
+
+        
+        model.addAttribute("list", rvo);
+        System.out.println("되냐?");
+        
         return "RecommendPage";
+    }
+
+    @RequestMapping(value = "/SearchPage")
+    public String SearchPage(HttpSession session){
+        if(session.getAttribute("id") == null){
+            return "alert";
+        }
+        return "SearchPage";
     }
 
     

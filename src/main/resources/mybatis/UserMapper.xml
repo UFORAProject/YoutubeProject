@@ -74,4 +74,20 @@
         select * from ggim where id = #{id} and ch_url = #{ch_url}
     </select>
 
+    <select id= "firstStage" parameterType="hashmap" resultType = "com.example.vo.ChannelVO">
+        SELECT ch_url, ch_NAME, adavgview
+        FROM channel
+        WHERE ch_name IN (
+            SELECT NAME
+            FROM advideo 
+            WHERE
+            <foreach collection="hm.a" item = "arr"  separator = "or"  open="(" close=")">
+                hashtag like #{arr} or descript like #{arr}
+            </foreach>
+            GROUP BY NAME
+        )
+        ORDER BY adavgview DESC
+        limit 0,5;
+    </select>
+
 </mapper>

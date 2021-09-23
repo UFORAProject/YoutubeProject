@@ -9,30 +9,13 @@ conn = pymysql.connect(host="ec2-15-164-48-78.ap-northeast-2.compute.amazonaws.c
                        db = "project", charset = "utf8")
 cur = conn.cursor()
 
-#1단계: 광고주 키워드 입력(단, 단어마다 띄어쓰기 요구)
-#2단계: advideo의 descript, hashtag를 통한 기존 유료광고 채널 보여주기
-
-def hash(key_list): 
-    name_list = []
-    for j in range(len(key_list)):
-        keyword = key_list[j]
-        sel = "select ad_url,name from advideo where descript like"  #광고주의 키워드와 같은 기존 유료광고 채널 DB에서 불러오기
-        sel += "'%" + keyword +"%' or hashtag like '%" + keyword + "%'"
-        cur.execute(sel)
-        while(True):
-            row = cur.fetchone()
-            if row == None:
-                break
-            name_list.append(row[1])
-            
-    return name_list
-
 #3단계: 광고주의 키워드 리스트를 받고 가장 많은 클러스터 추출
 #4~5 단계: 클러스터 내 추천된 유료광고들과 같은 카테고리에 있는 채널 중 channel의 tag와 광고주의 키워드의 유사도 검사
 
 def hash345(key_list, keylist):
     clust_list = []
     tag_list = []
+    url_list = []
     name_list = []
     for i in range(len(key_list)):
         key = key_list[i]
@@ -66,15 +49,16 @@ def hash345(key_list, keylist):
             maxvalue = ccc[i]
             maxindex = i #광고주의 키워드가 가장 많은 클러스터(군집) 추출
             
-    sel_4 = "SELECT ch_name, tag FROM channel WHERE clust =" + str(maxindex)  
+    sel_4 = "SELECT ch_url, ch_name, tag FROM channel WHERE clust =" + str(maxindex) 
     cur.execute(sel_4)
     
     while(True):
         row = cur.fetchone()
         if row == None:
             break
-        tag_list.append(row[1])
-        name_list.append(row[0])
+        url_list.append(row[0])
+        name_list.append(row[1])
+        tag_list.append(row[2])
     
     result = [[] for i in range(len(tag_list))]
         
@@ -84,20 +68,22 @@ def hash345(key_list, keylist):
         tfidf_matrix= tfidf_vect_simple.fit_transform(sent)
         cs = cosine_similarity(tfidf_matrix[0:1],tfidf_matrix[1:2])
         sim = round(cs[0][0] * 100, 4)
+        result[i].append(url_list[i])
         result[i].append(name_list[i])
         result[i].append(sim)
     
-    result.sort(key=lambda x: -x[1])
+    result.sort(key=lambda x: -x[2])
     
     answer = result[:4]     #보여줄 범위 선택하세요..
         
     return answer
 
-print("입력 받은 값 : ", sys)
-print(type(sys))
-#keylist = input(str()) #광고주의 키워드 입력
-keylist = "치킨"
-key_list = keylist.split(' ')
+keyword = ''
+for i in range(1,len(sys.argv)):
+    keyword += sys.argv[i]
+    keyword += ' '
+keyword_array = keyword.split(' ')
 
-print(hash345(key_list, keylist))
+
+print(hash345(keyword_array, keyword))
 ###
