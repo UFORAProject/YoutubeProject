@@ -313,6 +313,8 @@ public class UserController {
         hm.put("a", str);
         model.addAttribute("general", userService.firstStage(hm, cvo)); 
 
+        System.out.println("기존 채널 함수 완료");
+        
         Runtime r = Runtime.getRuntime();
 		Process p = r.exec("python src\\main\\java\\com\\example\\controller\\sim.py " +rec);
         //python + sim.py 파일이 존재하는 곳의 경로                                       //키워드를 입력받고자 함 
