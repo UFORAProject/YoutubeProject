@@ -6,30 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-
-<style>
-    body {
-      background-image: url('https://i.ibb.co/3v8JG3H/2-login-1280-720.jpg');
-      background-color: black;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center center;
-      color: white;
-    }
-
-
-    h, td, tr, input, textarea, select, FORM {
-        font-family:고딕;
-        font-size:1em;
-        border-radius:5px;
-    }
-    
-    table, FORM {
-        border-spacing:15px;
-    }
-</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+    
     function myFunction(input) {
         document.getElementById("email").value = input;
     }
@@ -40,37 +20,41 @@
        }
    }
 
+   function chkPW(){
 
-   function check_pw(){
+        var reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
-       var pw = document.getElementById('pw').value;
-       var SC = ["*","!","@","#","$","%"];
-       var check_SC = 0;
+        var pw = $("#pw").val();
 
-       if(pw.length < 6 || pw.length>16){
-           window.alert('비밀번호는 6글자 이상, 16글자 이하만 이용 가능합니다.');
-           document.getElementById('pw').value='';
-       }
-       for(var i=0;i<SC.length;i++){
-           if(pw.indexOf(SC[i]) != -1){
-               check_SC = 1;
-           }
-       }
-       if(check_SC == 0){
-           window.alert('*,!,@,#,$,% 의 특수문자가 들어가 있지 않습니다.')
-           document.getElementById('pw').value='';
-       }
-       if(document.getElementById('pw').value !='' && document.getElementById('pw2').value!=''){
-           if(document.getElementById('pw').value==document.getElementById('pw2').value){
-               document.getElementById('check').innerHTML='비밀번호가 일치합니다.'
-               document.getElementById('check').style.color='blue';
-           }
-           else{
-               document.getElementById('check').innerHTML='비밀번호가 일치하지 않습니다.';
-               document.getElementById('check').style.color='red';
-           }
-       }
-   }
+        if(reg.test(pw) == false) {
+            alert('비밀번호는 8자 이상이어야 하며, 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다.');
+        }
+        else {
+            console.log("통과");
+        }
+
+        var pwd1 = $('#pw').val();
+        var pwd2 = $('#pw1').val();
+  
+        if ( pwd1 != '' && pwd2 == '' ) {
+            null;
+        } 
+        else if (pwd1 != "" || pwd2 != "") {
+            if (pwd1 == pwd2) {
+                $("#alert-success").css('display', 'inline-block');
+                $("#alert-danger").css('display', 'none');
+            } 
+            else {
+                alert("비밀번호가 일치하지 않습니다. 비밀번호를 재확인해주세요.");
+                $("#alert-success").css('display', 'none');
+                $("#alert-danger").css('display', 'inline-block');
+            }
+        }
+
+    }
+
+
+   
    function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -119,6 +103,27 @@
         }).open();
     }
 </script>
+<style>
+    body {
+      background-image: url('https://i.ibb.co/3v8JG3H/2-login-1280-720.jpg');
+      background-color: black;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      color: white;
+    }
+
+
+    h, td, tr, input, textarea, select, FORM {
+        font-family:고딕;
+        font-size:1em;
+        border-radius:5px;
+    }
+    
+    table, FORM {
+        border-spacing:15px;
+    }
+</style>
 <body bgcolor="#000000" style="overflow: hidden;">
     <center>
         <h1> 회원가입</h1>
@@ -128,27 +133,53 @@
         
                 <td> 아이디 </td>
                 <td>
-                <input type = "text" name = "id" placeholder="아이디"/>
-                <input type = "button" value = "중복확인"/>
+                <input type = "text" id = "id" name = "id" placeholder="아이디">
+                <button class="idCheck" type="button" id="idCheck" value="N"> 중복확인 </button>
                 </td>
             </tr>
+
+            <script>
+                $('#idCheck').click(function(){
+                    $.ajax({
+                        url : '/idCheck',
+                        type : 'POST',
+                        dataType : 'JSON',
+                        data : {'id': $('#id').val()},
+                        success : function (data){
+                            if(data == 1){
+                                alert('중복된 아이디입니다');
+                            }
+                            else if (data == 0){
+                                $('#idCheck').attr('value','Y');
+                                alert('사용가능한 아이디 입니다!');
+                            }
+                        }
+                    })
+                });
+            </script>
         
         
         
             <tr>
                 <td> 비밀번호 </td>
-                <td> <input type = "password" placeholder="비밀번호" name="userPW" id="pw" onchange="check_pw()"/> </td>
+                <td> <input type = "password" class="pw" placeholder="비밀번호" name="pw" id="pw" onchange="chkPW()"/> </td>
             </tr>
         
         
             <tr>
                 <td> 비밀번호 확인 </td>
-                <td> <input type = "password" placeholder="비밀번호 확인" name="pw" id="pw2" onchange="check_pw()"/>&nbsp; <span id="check"> </span></td>
+                <td> <input type = "password" class="pw" placeholder="비밀번호 확인" name="pw1" id="pw1" onchange="chkPW()"/>&nbsp; <span id="check"> </span></td>
+                <b>
+                    <span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span>
+                    <span id="alert-danger" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
+                </b>
             </tr>
+
+
         
             <tr>
                 <td> 대표자명 </td>
-                <td> <input type = "text" name = "ceo" placeholder="대표자명"/> </td>
+                <td> <input type = "text" id="ceo" name = "ceo" placeholder="대표자명"/> </td>
             </tr>
        
        
@@ -156,8 +187,8 @@
             <tr>
                 <td>본인 확인 이메일</td>
                 <td name="email">
-                <input type = "text" /> @ <input type = "text" id="email"/> &nbsp;
-                <select id="select" onchange="myFunction(this.value)"> 
+                <input type = "text" id = "mailhead"/> @ <input type = "text" id="mailtail"/> &nbsp;
+                <select id="selectmailTail" onchange="myFunction(this.value)"> 
                     <option value="" selected="selected"> 직접입력 </option>
                     <option value="daum.net">daum.net</option> 
                     <option value="gmail.com">gmail.com</option>
@@ -172,11 +203,11 @@
             <tr>
             <td> 전화번호 </td>
             <td>
-            <input type = "radio" name = "phone"/> SKT
-            <input type = "radio" name = "phone"/> KT
-            <input type = "radio" name = "phone"/> LGU+
+                <input type = "radio" name = "phone"/> SKT
+                <input type = "radio" name = "phone"/> KT
+                <input type = "radio" name = "phone"/> LGU+
             <br/>
-            <select>
+            <select id="telecom">
                 <option> 010 </option>
                 <option> 011 </option>
                 <option> 016 </option>
@@ -184,18 +215,38 @@
                 <option> 018 </option>
                 <option> 019 </option>
             </select>
-            <input type = "text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="4" maxlength="4" oninput="numberMaxLength(this);"/> - 
-            <input type = "text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="4" maxlength="4" oninput="numberMaxLength(this);"/>
+                <input type = "text" id = "mid" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="4" maxlength="4" oninput="numberMaxLength(this);"/> - 
+                <input type = "text" id = "tail" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="4" maxlength="4" oninput="numberMaxLength(this);"/>
             </td>
             </tr>
         
             <tr>
-            <td>사업자 등록번호 </td>
-            <td>
-            <input type = "text" name = "regnum" placeholder="사업자 등록번호"/>
-            <input type = "button" value = "중복확인"/>
-            </td>
+                <td>사업자 등록번호 </td>
+                <td>
+                    <input type = "text" id = "regnum" name = "regnum" placeholder="사업자 등록번호"/>
+                    <button class="regnumCheck" type="button" id="regnumCheck" value="N"> 중복확인 </button>
+                </td>
             </tr>
+
+            <script>
+                $('#regnumCheck').click(function(){
+                    $.ajax({
+                        url : '/regnumCheck',
+                        type : 'POST',
+                        dataType : 'JSON',
+                        data : {'regnum': $('#regnum').val()},
+                        success : function (data){
+                            if(data == 1){
+                                alert('중복된 사업자등록번호 입니다');
+                            }
+                            else if (data == 0){
+                                $('#regnumCheck').attr('value','Y');
+                                alert('사용가능한 사업자등록번호 입니다!');
+                            }
+                        }
+                    })
+                });
+            </script>
         
             <tr>
                 <td> 사업장 주소 </td>
@@ -214,12 +265,48 @@
             </tr>
        
        
-        <input type = "submit" value = "가입하기"/>
+            <button type="button" class="btn btn-light" id="submit"> 가입하기 ! </button>
         </FORM>
-       </table>
+        </table>
        
        <br>
        <a href="/login_page"><input type = "reset" value = "뒤로가기"/></a>
+
+       <script>
+           $('#submit').click(function(){
+              if (confirm("가입 하시겠습니까?")) {
+                var id = $('#id').val();
+                var pw = $('#pw').val();
+                var ceo = $('#ceo').val();
+                var email = $('#mailhead').val() + '@' +$('#selectmailTail option:selected').val();
+                var phone = $("#telecom option:selected").val() + $('#mid').val() + $('#tail').val();
+                var regnum = $('#regnum').val();
+                var address = $('#sample6_address').val() + $('#sample6_extraAddress').val() + $('#sample6_detailAddress').val();
+                console.log(id);
+                console.log(pw);
+                console.log(ceo);
+                console.log(email);
+                console.log(phone);
+                console.log(regnum);
+                console.log(address);
+                var html = "";
+                uri = '/sign'
+                html += '<form name="dataForm" action="'+uri+'" method="post">';
+                html += '<input type="hidden" name="id" value="'+id+'" />';
+                html += '<input type="hidden" name="pw" value="'+pw+'" />';
+                html += '<input type="hidden" name="ceo" value="'+ceo+'" />';
+                html += '<input type="hidden" name="email" value="'+email+'" />';
+                html += '<input type="hidden" name="phone" value="'+phone+'" />';
+                html += '<input type="hidden" name="regnum" value="'+regnum+'" />';
+                html += '<input type="hidden" name="address" value="'+address+'" />';
+                html += '</form>';
+                
+                $("body").append(html);
+                document.dataForm.submit(); 
+              }
+            });
+
+       </script>
        
        
     </center>

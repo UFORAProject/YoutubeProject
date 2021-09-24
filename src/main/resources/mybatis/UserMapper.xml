@@ -51,7 +51,7 @@
             <when test = "sub == 100000000">and sub between 10000000 and 1000000000</when>
         </choose>
     </select>
-
+    
     <select id="detailPage" parameterType="String" resultType="com.example.vo.adVO">
         select upday,name,likecnt,ad_url
         from advideo
@@ -60,6 +60,18 @@
 
     <select id="detailChannel" parameterType="String" resultType="String">
         select contact from channel where ch_url=#{url}
+    </select>
+
+    <select id = "idCheck" parameterType="com.example.vo.CustomerVO" resultType="int">
+        select count(*)
+        from customer
+        where id = #{id}
+    </select>
+
+    <select id = "regnumCheck" parameterType="com.example.vo.CustomerVO" resultType = "int">
+        select count(*)
+        from customer
+        where regnum = #{regnum}
     </select>
 
     <insert id="createCustomer">

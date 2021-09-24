@@ -76,11 +76,9 @@
           <br>
           <span th:if = "${ggim} == 0">
               <button type="button" class="btn btn-light" id="insert">찜 안되어 있음</button>
-              <input type="hidden" id="likecheck" value="">
           </span>
           <span th:unless="${ggim} == 0">
               <button type="button" class="btn btn-light" id="delete"> 찜 되어 있음 </button>
-              <input type="hidden" id="likecheck" value="">
           </span>
           <script>
             $('#insert').click(function(){

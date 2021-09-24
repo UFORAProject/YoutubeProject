@@ -52,6 +52,14 @@ public class UserService {
         return mapper.detailChannel(url);
     }
 
+    public int idCheck(CustomerVO cus){
+        return mapper.idCheck(cus);
+    }
+
+    public int regnumCheck(CustomerVO cus){
+        return mapper.regnumCheck(cus);
+    }
+
     public int createCustomer(CustomerVO cus){
         return mapper.createCustomer(cus);
     }

@@ -28,6 +28,8 @@ public interface UserMapper {
 
     String detailChannel(String url);
 
+    int idCheck(CustomerVO cus);
+    int regnumCheck(CustomerVO cus);
     int createCustomer(CustomerVO cus);
 
     int isRightCustomer(CustomerVO cus);
