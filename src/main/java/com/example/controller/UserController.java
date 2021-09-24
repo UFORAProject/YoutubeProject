@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -312,7 +311,6 @@ public class UserController {
         }
         HashMap<String,String[]> hm = new HashMap<>();
         hm.put("a", str);
-        System.out.println(Arrays.toString(hm.get("a")));
         model.addAttribute("general", userService.firstStage(hm, cvo)); 
 
         Runtime r = Runtime.getRuntime();

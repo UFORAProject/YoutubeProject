@@ -17,20 +17,27 @@ def hash345(key_list, keylist):
     tag_list = []
     url_list = []
     name_list = []
+    
+    tail = ""
     for i in range(len(key_list)):
         key = key_list[i]
-        sel_3 = """
-            SELECT A.clust
-            FROM channel A, advideo B
-            WHERE A.ch_url = B.ch_url
-            AND
-            (hashtag LIKE '%"""+ key + "%' OR descript LIKE '%"+key+ "%')"
-        cur.execute(sel_3)
-        while(True):
-            row = cur.fetchone()
-            if row == None:
-                break
-            clust_list.append(row[0])
+        tail += "(hashtag LIKE '%"+ key + "%' OR descript LIKE '%" + key + "%')"
+        if(i < len(key_list)-1):
+            tail += " or "
+    
+    sel_3 = """
+        SELECT A.clust
+        FROM channel A, advideo B
+        WHERE A.ch_url = B.ch_url
+        AND """ + tail
+    cur.execute(sel_3)
+
+    while(True):
+        row = cur.fetchone()
+        if row == None:
+            break
+        clust_list.append(row[0])
+
     ccc = [0,0,0,0]
     for i in range(len(clust_list)):
         if clust_list[i] == 0:
