@@ -48,7 +48,7 @@ public class UserService {
         return mapper.detailCount(av);
     }
 
-    public String detailChannel(String url){
+    public List<ChannelVO> detailChannel(String url){
         return mapper.detailChannel(url);
     }
 
@@ -78,6 +78,10 @@ public class UserService {
 
     public int deleteGgim(ggimVO gvo){
         return mapper.deleteGgim(gvo);
+    }
+
+    public int listGgim(ggimVO gvo){
+        return mapper.listGgim(gvo);
     }
 
     public List<ChannelVO> showGgim(String id, ChannelVO cvo){

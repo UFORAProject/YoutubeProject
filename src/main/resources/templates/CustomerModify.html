@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        data-layout-decorate="~{samples/layout/sampleLayout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyPage</title>
+</head>
+<style>
+  *{
+    padding: 0px;
+    margin: 0px;
+  }
+  /* header style */
+  
+    ul li img {
+        vertical-align: middle;
+    } /* ul, li, img 정렬 전부 적용하기 */
+
+    
+    ul li {
+        height: 55px;
+        line-height: 50px;
+    } /* ul, li 바, 텍스트 위치 사이즈 */
+
+    #header{
+    background-color: #313132;
+    
+    text-size-adjust: 100%;
+    vertical-align: middle;
+  }
+    ul{
+        text-align: center;
+        background-color: #ffff;
+        vertical-align: middle;
+    } /* ul 글자 위치, 그림자, 배경색, 수직 정렬 지정 */
+
+    li{
+        /*margin: 3px;*/
+        display: inline-block;
+        color:  white;
+        vertical-align: middle;
+    text-align: left;
+    }
+
+  /* header style */
+
+  #table{
+    margin: auto;
+  }
+
+  /* category style*/
+  .category{
+    background-color: 5px solid #ececec;
+    border-top: 5px solid #ececec;
+    border-right: 5px solid #ececec;
+    border-left: 5px solid #ececec;
+    border-bottom: 5px solid #ececec;
+  }
+  /* category style*/
+
+  /* content style */
+  .content{
+    background-color: 5px solid #ececec;
+    border-top: 5px solid #ececec;
+    border-right: 5px solid #ececec;
+    border-left: 5px solid #ececec;
+    border-bottom: 5px solid #ececec;
+  }
+  /* content style */
+
+  /* footer style */
+    footer {
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        padding: 0;
+        text-align: center;
+        color: white;
+        background: #f5f5f7;  
+        bottom: 0;
+
+
+        background:url('https://farm9.staticflickr.com/8760/17195790401_ceeeafcddb_o.jpg');
+        background-size:cover;
+        font-family: 'Cabin Condensed', sans-serif;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+    }
+
+
+            
+    svg{
+        font-weight:bold;max-width:600px;height:auto;
+    }
+
+    .table_2{
+        border-spacing: 10px;	  
+        width: 100%;
+        color: black;
+        border-top : 2px solid white;
+        border-right : none;
+        border-left : none;
+        border-bottom : none;
+    }
+
+  /* footer style */
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    
+  function myFunction(input) {
+      document.getElementById("email").value = input;
+  }
+
+ function numberMaxLength(e){
+     if(e.value.length > e.maxLength){
+         e.value = e.value.slice(0, e.maxLength);
+     }
+ }
+
+ function chkPW(){
+
+      var reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+
+      var pw = $("#pw").val();
+
+      if(reg.test(pw) == false) {
+          alert('비밀번호는 8자 이상이어야 하며, 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다.');
+      }
+      else {
+          console.log("통과");
+      }
+
+      var pwd1 = $('#pw').val();
+      var pwd2 = $('#pw1').val();
+
+      if ( pwd1 != '' && pwd2 == '' ) {
+          null;
+      } 
+      else if (pwd1 != "" || pwd2 != "") {
+          if (pwd1 == pwd2) {
+              $("#alert-success").css('display', 'inline-block');
+              $("#alert-danger").css('display', 'none');
+          } 
+          else {
+              alert("비밀번호가 일치하지 않습니다. 비밀번호를 재확인해주세요.");
+              $("#alert-success").css('display', 'none');
+              $("#alert-danger").css('display', 'inline-block');
+          }
+      }
+
+  }
+
+
+ 
+ function sample6_execDaumPostcode() {
+      new daum.Postcode({
+          oncomplete: function(data) {
+              // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+              // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+              // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+              var addr = ''; // 주소 변수
+              var extraAddr = ''; // 참고항목 변수
+
+              //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+              if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                  addr = data.roadAddress;
+              } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                  addr = data.jibunAddress;
+              }
+
+              // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+              if(data.userSelectedType === 'R'){
+                  // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                  // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                  if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                      extraAddr += data.bname;
+                  }
+                  // 건물명이 있고, 공동주택일 경우 추가한다.
+                  if(data.buildingName !== '' && data.apartment === 'Y'){
+                      extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                  }
+                  // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                  if(extraAddr !== ''){
+                      extraAddr = ' (' + extraAddr + ')';
+                  }
+                  // 조합된 참고항목을 해당 필드에 넣는다.
+                  document.getElementById("sample6_extraAddress").value = extraAddr;
+              
+              } else {
+                  document.getElementById("sample6_extraAddress").value = '';
+              }
+
+              // 우편번호와 주소 정보를 해당 필드에 넣는다.
+              document.getElementById('sample6_postcode').value = data.zonecode;
+              document.getElementById("sample6_address").value = addr;
+              // 커서를 상세주소 필드로 이동한다.
+              document.getElementById("sample6_detailAddress").focus();
+          }
+      }).open();
+  }
+</script>
+<body>
+    <!-- header -->
+    <div id='header'>
+      <table  border = "0" cellpadding="1" cellspacing="1" width = "100%">
+      <tr>
+          <td align="left">
+          &nbsp;&nbsp;&nbsp;<a href="index.html"><img src="https://i.ibb.co/4tfcjFQ/logo.png"> </a>
+          </td>
+          <td align="right">
+            <a href="/listPage"><img src="https://i.ibb.co/4MZLzwb/Search-button.png" onmouseover="this.src='https://i.ibb.co/8rfcfpq/Search-button.png'" onmouseout="this.src='https://i.ibb.co/4MZLzwb/Search-button.png'"></a>
+            <a href="/SearchPage"><img src="https://i.ibb.co/7GwrDPf/Recommendation-button.png" onmouseover="this.src='https://i.ibb.co/zbsBBWf/Recommendation-button.png'" onmouseout="this.src='https://i.ibb.co/7GwrDPf/Recommendation-button.png'"></a>
+            <a href="/myPage" align = right><img src="https://i.ibb.co/Sd9b5wJ/Mypage-button.png" onmouseover="this.src='https://i.ibb.co/5TFsZ4m/Mypage-button.png'" onmouseout="this.src='https://i.ibb.co/Sd9b5wJ/Mypage-button.png'"></a>
+          </td>
+      </tr>
+  
+      </table>
+      </div>
+  <!-- header -->
+
+  <br>
+    <br>
+    <br>
+
+    <!-- Main -->
+    <table id = "table" border="0" cellpadding="1" cellspacing="1" style="height:600px; width:1024px" align=center>
+        <tbody>
+            <tr>
+                <td style="width:255px" valign=top bgcolor="#ececec"  class = 'category' >&nbsp;
+                    <br>
+                    <p align=Center size=9><img src="https://i.ibb.co/tXftLwj/Mypage.png"></p>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;<a href="/myPage">찜 목록</a>
+                    <br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;<strong>>> 개인 정보 수정 </strong>
+                    <br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;<button type="button" id="logout"> 로그아웃 </button>
+      
+                </td>
+                <td class="content" style="width:755px" align="center"  valign=top>
+                  <br>
+                  <br>
+                  <table boder = "" cellspacing = "1" border="0">
+                    <FORM>
+                        <tr height="35">
+                            <td> 아이디 </td>
+                            <td>
+                            <input type = "text" id = "id" name = "id" placeholder="아이디">
+                            <button class="idCheck" type="button" id="idCheck" value="N"> 중복확인 </button>
+                            </td>
+                        </tr>
+
+            
+                        <script>
+                            $('#logout').click(function(){
+                                console.log('zzz');
+                                if(confirm('로그아웃 하시겠습니까?')){
+                                    var html = "";
+                                    uri = '/logout'
+                                    html += '<form name="dataForm" action="'+uri+'" method="post">';
+                                    html += '<input type="hidden" name="logout" value="logout" />';
+                                    html += '</form>';
+                                    
+                                    $("body").append(html);
+                                    document.dataForm.submit();
+                                }
+                            });
+                            $('#idCheck').click(function(){
+                                $.ajax({
+                                    url : '/idCheck',
+                                    type : 'POST',
+                                    dataType : 'JSON',
+                                    data : {'id': $('#id').val()},
+                                    success : function (data){
+                                        if(data == 1){
+                                            alert('중복된 아이디입니다');
+                                        }
+                                        else if (data == 0){
+                                            $('#idCheck').attr('value','Y');
+                                            alert('사용가능한 아이디 입니다!');
+                                        }
+                                    }
+                                })
+                            });
+                        </script>
+                    
+                    
+                    
+                        <tr height="35">
+                            <td> 비밀번호 </td>
+                            <td> <input type = "password" class="pw" placeholder="비밀번호" name="pw" id="pw" onchange="chkPW()"/> </td>
+                        </tr>
+                    
+                        <tr height="35">
+                            <td> 비밀번호 확인 </td>
+                            <td> <input type = "password" class="pw" placeholder="비밀번호 확인" name="pw1" id="pw1" onchange="chkPW()"/>&nbsp; <span id="check"> </span></td>
+                            <b>
+                                <span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span>
+                                <span id="alert-danger" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
+                            </b>
+                        </tr>
+            
+                    
+                        <tr height="35">
+                            <td> 대표자명 </td>
+                            <td> <input type = "text" id="ceo" name = "ceo" placeholder="대표자명"/> </td>
+                        </tr>
+                   
+                   
+
+                        <tr height="35">
+                            <td>본인 확인 이메일</td>
+                            <td name="email">
+                            <input type = "text" id = "mailhead"/> @ <input type = "text" id="mailtail"/> &nbsp;
+                            <select id="selectmailTail" onchange="myFunction(this.value)"> 
+                                <option value="" selected="selected"> 직접입력 </option>
+                                <option value="daum.net">daum.net</option> 
+                                <option value="gmail.com">gmail.com</option>
+                                <option value="hotmail.com">hotmail.com</option>
+                                <option value="korea.com">korea.com</option>
+                                <option value="nate.com">nate.com</option> 
+                                <option value="naver.com">naver.com</option> 
+                            </select>
+                            </td>
+                        </tr>
+                        
+
+                        <tr height="70">
+                        <td> 전화번호 </td>
+                          <td>
+                              <input type = "radio" name = "phone"/> SKT
+                              <input type = "radio" name = "phone"/> KT
+                              <input type = "radio" name = "phone"/> LGU+
+                          <br>
+                              <select id="telecom">
+                                  <option> 010 </option>
+                                  <option> 011 </option>
+                                  <option> 016 </option>
+                                  <option> 017 </option>
+                                  <option> 018 </option>
+                                  <option> 019 </option>
+                              </select>
+                              <input type = "text" id = "mid" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="4" maxlength="4" oninput="numberMaxLength(this);"/> - 
+                              <input type = "text" id = "tail" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="4" maxlength="4" oninput="numberMaxLength(this);"/>
+                          </td>
+                        </tr>
+                        
+
+                        <tr height="35">
+                            <td>사업자 등록번호 </td>
+                            <td>
+                                <input type = "text" id = "regnum" name = "regnum" placeholder="사업자 등록번호"/>
+                                <button class="regnumCheck" type="button" id="regnumCheck" value="N"> 중복확인 </button>
+                            </td>
+                        </tr>
+            
+                        <script>
+                            $('#regnumCheck').click(function(){
+                                $.ajax({
+                                    url : '/regnumCheck',
+                                    type : 'POST',
+                                    dataType : 'JSON',
+                                    data : {'regnum': $('#regnum').val()},
+                                    success : function (data){
+                                        if(data == 1){
+                                            alert('중복된 사업자등록번호 입니다');
+                                        }
+                                        else if (data == 0){
+                                            $('#regnumCheck').attr('value','Y');
+                                            alert('사용가능한 사업자등록번호 입니다!');
+                                        }
+                                    }
+                                })
+                            });
+                        </script>
+
+                    
+                        <tr height="35">
+                            <td> 사업장 주소 </td>
+                            <td>
+                            <input type="text" id="sample6_postcode" placeholder="우편번호">
+                            <input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기"><br>
+                            </td>
+                        </tr>
+
+
+                        <tr height="70">
+                            <td> 상세주소 </td>
+                            <td>
+                                <input type="text" id="sample6_address" placeholder="주소" style="width:270px">
+                                <input type="text" id="sample6_extraAddress" placeholder="참고항목" style="width:270px"><br>
+                                <input type="text" id="sample6_detailAddress" placeholder="상세주소" style="width:270px">
+                            </td>
+                        </tr>
+                        
+
+                        <tr height="35">
+                          <td>
+                            <button type="button" class="btn btn-light" id="submit"> 수정 </button>
+                          </td>
+                        </tr>
+                    </FORM>
+                    </table>
+
+                    <script>
+                      $('#submit').click(function(){
+                         if (confirm("가입 하시겠습니까?")) {
+                           var id = $('#id').val();
+                           var pw = $('#pw').val();
+                           var ceo = $('#ceo').val();
+                           var email = $('#mailhead').val() + '@' +$('#selectmailTail option:selected').val();
+                           var phone = $("#telecom option:selected").val() + $('#mid').val() + $('#tail').val();
+                           var regnum = $('#regnum').val();
+                           var address = $('#sample6_address').val() + $('#sample6_extraAddress').val() + $('#sample6_detailAddress').val();
+                           var html = "";
+                           uri = '/sign'
+                           html += '<form name="dataForm" action="'+uri+'" method="post">';
+                           html += '<input type="hidden" name="id" value="'+id+'" />';
+                           html += '<input type="hidden" name="pw" value="'+pw+'" />';
+                           html += '<input type="hidden" name="ceo" value="'+ceo+'" />';
+                           html += '<input type="hidden" name="email" value="'+email+'" />';
+                           html += '<input type="hidden" name="phone" value="'+phone+'" />';
+                           html += '<input type="hidden" name="regnum" value="'+regnum+'" />';
+                           html += '<input type="hidden" name="address" value="'+address+'" />';
+                           html += '</form>';
+                           
+                           $("body").append(html);
+                           document.dataForm.submit(); 
+                         }
+                       });
+           
+                  </script>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- Main -->
+
+    <br>
+    <br>
+    <br>
+
+    
+
+    <!--footer-->
+    <footer>
+      <br>
+      Copyright ⓒ 2021 team Galaticos. 모든 권리 보유. <br>
+      사업자 등록번호 : 120 81 71278 | 통신판매업신고번호 : 제 2021 - 서울중구 - 00961호 | <br>
+      대표이사 : KIMPARK JUNGSEO | 주소 : 서울특별시 중구 다동 88 | <br>
+      대표전화 : 010 - 3237 - 0219 | 팩스 : 02 - 490 - 7392 <br>
+  
+  
+      <svg viewbox="0 0 100 20">
+          <defs>
+            <linearGradient id="gradient" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="5%" stop-color="#326384"/>
+              <stop offset="95%" stop-color="#123752"/>
+            </linearGradient>
+            <pattern id="wave" x="0" y="0" width="120" height="20" patternUnits="userSpaceOnUse">
+              <path id="wavePath" d="M-40 9 Q-30 7 -20 9 T0 9 T20 9 T40 9 T60 9 T80 9 T100 9 T120 9 V20 H-40z" mask="url(#mask)" fill="url(#gradient)"> 
+                <animateTransform
+                    attributeName="transform"
+                    begin="0s"
+                    dur="1.5s"
+                    type="translate"
+                    from="0,0"
+                    to="40,0"
+                    repeatCount="indefinite" />
+              </path>
+            </pattern>
+          </defs>
+          <text text-anchor="middle" x="50" y="15" font-size="17" fill="url(#wave)"  fill-opacity="0.6">UFORA</text>
+          <text text-anchor="middle" x="50" y="15" font-size="17" fill="url(#gradient)" fill-opacity="0.1">UFORA</text>
+        </svg>
+        <div style="width:100vw; height: 30vh; display: flex; align-items: center; text-align:center;">
+          <div style="text-align:center; vertical-align: middle; margin: 0 auto;">
+              <table class="table_2">
+                  <FORM>
+                      <tr>
+                          <th align=center>[백엔드]</th>
+                          <th align=center>[데이터분석]</th>
+                          <th align=center>[데이터분석]</th>
+                          <th align=center>[프론트엔드]</th>
+                      </tr>
+                      <tr>
+                          <td align=center valign=top>
+                              박영상<br>
+                              010.3237.0219<br>
+                              dudtkd0219@gmail.com<br>
+                              </td>
+                              <td align=center valign=top>
+                                  정광의<br>
+                                  010.6788.1124<br>
+                                  jeongke26@naver.com<br>
+                              </td>
+                              <td align=center valign=top>
+                                  김태연<br>
+                                  010.7127.8378<br>
+                                  xodus0706@gmail.com<br>
+                              </td>
+                              <td align=center valign=top>
+                                  서예지<br>
+                                  010.6353.1401<br>
+                                  814askl@naver.com<br>
+                              </td>
+                      </tr>
+                  </FORM>
+              </table>
+          </div>
+      </div>
+  
+      <br>
+      <br>
+  </footer>
+  <!--footer-->
+
+  <script src="weather.js"></script>
+</body>
+</html>

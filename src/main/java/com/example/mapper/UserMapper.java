@@ -26,7 +26,7 @@ public interface UserMapper {
     List<adVO> detailPage(String url,adVO av);
     int detailCount(adVO av);
 
-    String detailChannel(String url);
+    List<ChannelVO> detailChannel(String url);
 
     int idCheck(CustomerVO cus);
     int regnumCheck(CustomerVO cus);
@@ -37,6 +37,8 @@ public interface UserMapper {
     int isGgim(ggimVO gvo);
     int insertGgim(ggimVO gvo);
     int deleteGgim(ggimVO gvo);
+
+    int listGgim(ggimVO gvo);
     List<ChannelVO> showGgim(String id, ChannelVO cvo);
     
 

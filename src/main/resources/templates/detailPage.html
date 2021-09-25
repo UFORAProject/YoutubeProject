@@ -15,6 +15,7 @@
   /*
     <![CDATA[*/
       let header = 'https://www.youtube.com/embed/';
+      let detail = /*[[${detail}]]*/ 'default';
       let ad = /*[[${list}]]*/ 'default';
       let chch = /*[[${url}]]*/ 'default';
       let url;
@@ -28,39 +29,124 @@
     padding: 0px;
     margin: 0px;
   }
-  #header{
-    text-align: center; 
-    background-color: #535353;
+  /* header style */
+  
+    ul li img {
+        vertical-align: middle;
+    } /* ul, li, img 정렬 전부 적용하기 */
+
+    
+    ul li {
+        height: 55px;
+        line-height: 50px;
+    } /* ul, li 바, 텍스트 위치 사이즈 */
+
+    #header{
+    background-color: #313132;
+    
+    text-size-adjust: 100%;
+    vertical-align: middle;
   }
-  #headertext{
-      margin: 7px;
-      display: inline-block;
-      color:  white;
-			vertical-align: middle;
-  }
+    ul{
+        text-align: center;
+        background-color: #ffff;
+        vertical-align: middle;
+    } /* ul 글자 위치, 그림자, 배경색, 수직 정렬 지정 */
+
+    li{
+        /*margin: 3px;*/
+        display: inline-block;
+        color:  white;
+        vertical-align: middle;
+    text-align: left;
+    }
+
+  /* header style */
+
   #table{
     margin: auto;
   }
-  #footer {
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	padding: 100px 0;
-	text-align: center;
-	color: black;
-	background: #f5f5f7;
-	}
+
+  /* category style*/
+  .category{
+    background-color: 5px solid #ececec;
+    border-top: 5px solid #ececec;
+    border-right: 5px solid #ececec;
+    border-left: 5px solid #ececec;
+    border-bottom: 5px solid #ececec;
+  }
+  /* category style*/
+
+  /* content style */
+  .content{
+    background-color: 5px solid #ececec;
+    border-top: 5px solid #ececec;
+    border-right: 5px solid #ececec;
+    border-left: 5px solid #ececec;
+    border-bottom: 5px solid #ececec;
+  }
+  /* content style */
+
+  /* footer style */
+    footer {
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        padding: 0;
+        text-align: center;
+        color: white;
+        background: #f5f5f7;  
+        bottom: 0;
+
+
+        background:url('https://farm9.staticflickr.com/8760/17195790401_ceeeafcddb_o.jpg');
+        background-size:cover;
+        font-family: 'Cabin Condensed', sans-serif;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+    }
+
+
+            
+    svg{
+        font-weight:bold;max-width:600px;height:auto;
+    }
+
+    .table_2{
+        border-spacing: 10px;	  
+        width: 100%;
+        color: black;
+        border-top : 2px solid white;
+        border-right : none;
+        border-left : none;
+        border-bottom : none;
+    }
+
+  /* footer style */
 </style>
 <body>
   <!-- header -->
-  <table id = "header" border="0" cellpadding="0" cellspacing="0" style="height:60px; width:100%" align=center>
+  <div id='header'>
+    <table  border = "0" cellpadding="1" cellspacing="1" width = "100%">
     <tr>
-      <td align=right>
-        <a href="/myPage">myPage</a>
-      </td>
+        <td align="left">
+        &nbsp;&nbsp;&nbsp;<a href="index.html"><img src="https://i.ibb.co/4tfcjFQ/logo.png"> </a> 
+        </td>
+        <td align="right">
+          <a href="/listPage"><img src="https://i.ibb.co/4MZLzwb/Search-button.png" onmouseover="this.src='https://i.ibb.co/8rfcfpq/Search-button.png'" onmouseout="this.src='https://i.ibb.co/4MZLzwb/Search-button.png'"></a>
+          <a href="/SearchPage"><img src="https://i.ibb.co/7GwrDPf/Recommendation-button.png" onmouseover="this.src='https://i.ibb.co/zbsBBWf/Recommendation-button.png'" onmouseout="this.src='https://i.ibb.co/7GwrDPf/Recommendation-button.png'"></a>
+          <a href="/myPage" align = right><img src="https://i.ibb.co/Sd9b5wJ/Mypage-button.png" onmouseover="this.src='https://i.ibb.co/5TFsZ4m/Mypage-button.png'" onmouseout="this.src='https://i.ibb.co/Sd9b5wJ/Mypage-button.png'"></a>
+        </td>
     </tr>
-  </table>
-  <!-- header-->
+
+    </table>
+    </div>
+<!-- header -->
+<br>
+<br>
+<br>
 
   <!---- main ----->
   <table id = "table" border="0" cellpadding="1" cellspacing="1" style="height:600px; width:1024px" align=center>
@@ -69,68 +155,91 @@
 
 
         <!---- 필터 ---->
-			  <td style="width:255px" align=center valign=top bgcolor="lightgray">&nbsp;
+			  <td style="width:255px" valign=top bgcolor="#ececec"  class = 'category' >&nbsp;
           <br>
-          <p size=9><b>연락처</b></p>
-          <br th:text="${contact}"></br>
+          <p align=Center size=9><img src="https://i.ibb.co/TYG3bpM/Search.png"></p>
           <br>
-          <span th:if = "${ggim} == 0">
-              <button type="button" class="btn btn-light" id="insert">찜 안되어 있음</button>
-          </span>
-          <span th:unless="${ggim} == 0">
-              <button type="button" class="btn btn-light" id="delete"> 찜 되어 있음 </button>
-          </span>
-          <script>
-            $('#insert').click(function(){
-              console.log('ㅋㅋㅋ');
-              console.log(chch);
-              if (confirm("찜 목록에 추가하시겠습니까?")) {
-                var html = "";
-                uri = '/ggimInsert'
-                html += '<form name="dataForm" action="'+uri+'" method="post">';
-                html += '<input type="hidden" name="ch_url" value="'+chch+'" />';
-                html += '</form>';
-                
-                $("body").append(html);
-                document.dataForm.submit();
-              }
-            });
-            $('#delete').click(function(){
-              console.log('ㅋㅋㅋ');
-              console.log(chch);
-              if (confirm("찜 목록에서 제거하시겠습니까?")) {
-                var html = "";
-                uri = '/ggimDelete'
-                html += '<form name="dataForm" action="'+uri+'" method="post">';
-                html += '<input type="hidden" name="ch_url" value="'+chch+'" />';
-                html += '</form>';
-                
-                $("body").append(html);
-                document.dataForm.submit();
-              }
-            });
-          </script>
-          &nbsp;&nbsp;&nbsp;<a href="/listPage"> 초기화 (개발자 모드)</a>
+          &nbsp;&nbsp;<strong> 채널 세부 정보 </strong>
+          <div align="center">
+            <table border="0" width = "90%">
+              <tr th:each = "detail : ${detail}">
+                <!--<td><span th:text = "${detail.totview}"></span></td>-->
+                <td>
+                <img id = 'profile' src="" alt="" width = "150px" height = "150px"><br>
+                채널 명 : <span th:text = "${detail.ch_name}"></span><br>
+                가입 날짜 : <span th:text = "${detail.regdate}"></span><br>
+                팬클럽 유무 : <span th:text = "${detail.fan}"></span><br>
+                한달 업로드 수 : <span th:text = "${detail.upload}"></span><br>
+                인스타 태그 수 : <span th:text = "${detail.insta}"></span><br>
+                카테고리 : <span th:text = "${detail.category}"></span><br>
+                평균 광고 조회수 : <span th:text = "${detail.adavgview}"></span><br>
+                광고 수 : <span th:text = "${detail.adcount}"></span><br>
+                연락처 : <span th:text = "${detail.contact}"></span>
+                </td>
+                <script>
+                  $('#profile').attr('src',detail[0].img);
+                </script>
+              </tr>
+            </table>
+
+            <br>
+            <span th:if = "${ggim} == 0">
+                <button type="button" class="btn btn-light" id="insert">찜 안되어 있음</button>
+            </span>
+            <span th:unless="${ggim} == 0">
+                <button type="button" class="btn btn-light" id="delete"> 찜 되어 있음 </button>
+            </span>
+            <script>
+              $('#insert').click(function(){
+                console.log('ㅋㅋㅋ');
+                console.log(chch);
+                if (confirm("찜 목록에 추가하시겠습니까?")) {
+                  var html = "";
+                  uri = '/ggimInsert'
+                  html += '<form name="dataForm" action="'+uri+'" method="post">';
+                  html += '<input type="hidden" name="ch_url" value="'+chch+'" />';
+                  html += '</form>';
+                  
+                  $("body").append(html);
+                  document.dataForm.submit();
+                }
+              });
+              $('#delete').click(function(){
+                console.log('ㅋㅋㅋ');
+                console.log(chch);
+                if (confirm("찜 목록에서 제거하시겠습니까?")) {
+                  var html = "";
+                  uri = '/ggimDelete'
+                  html += '<form name="dataForm" action="'+uri+'" method="post">';
+                  html += '<input type="hidden" name="ch_url" value="'+chch+'" />';
+                  html += '</form>';
+                  
+                  $("body").append(html);
+                  document.dataForm.submit();
+                }
+              });
+            </script>
+          </div>
 			  </td>
         <!---- 필터 ---->
 
 
         <!---- 내용 ---->
-        <td style="width:755px" align=center valign=top>
+        <td class="content" style="width:755px" align="center"  valign=top>
           <br>
-          <table class="table table-bordered">
+          <table align=center valign=top border="0">
             
-            <tr th:if="${list.empty}">
-              <img src="https://i.ibb.co/jTHtpG9/empty.png" alt="">
+            <tr th:if="${list.empty}" height="50px">
+              <img src="https://i.ibb.co/QdXBPC3/empty.png" alt="" width="80%" height="80%">
             </tr>
-            <tr th:unless="${list.empty}">
-              <th> 업로드 날짜 </th>
-              <th> 좋아요 수 </th>
+            <tr th:unless="${list.empty}" height="50px">
               <th> 광고 영상 </th>
+              <th width = "10px"></th>
+              <th> 업로드 날짜 </th>
+              <th width = "10px"></th>
+              <th> 좋아요 수 </th>
             </tr>
-            <tr th:each="ad,i : ${list}">
-                <td><span th:text="${ad.upday}"> 채널 이름 </span></td>
-                <td><span th:text="${ad.likecnt}"> 좋아요 수 </span></td>
+            <tr th:each="ad,i : ${list}" height="50px">
                 <td>
                   <iframe th:id="${i.index}" width="480" height="270" src="" 
                     title="YouTube video player" frameborder="0" 
@@ -144,25 +253,96 @@
                     i = i+1;
                   </script>
                 </td>
+                <td></td>
+                <td><span th:text="${ad.upday}"> 채널 이름 </span></td>
+                <td></td>
+                <td><span th:text="${ad.likecnt}"> 좋아요 수 </span></td>
             </tr>
           </table>
+          <br>
         </td>
         <!---- 내용 ---->
-
 
       </tr>
     </tbody>
   </table>
   <!---- main ----->
 
+  <br>
+<br>
+<br>
+
   <!--footer-->
-  <table cellpadding="1" width = "100%" height = "50" bgcolor="white" align="center">
-    <tr>
-      <td align="center">
-        @copyright: 갈라티코스
-      </td>
-    </tr>
-  </table>
+  <footer>
+    <br>
+    Copyright ⓒ 2021 team Galaticos. 모든 권리 보유. <br>
+    사업자 등록번호 : 120 81 71278 | 통신판매업신고번호 : 제 2021 - 서울중구 - 00961호 | <br>
+    대표이사 : KIMPARK JUNGSEO | 주소 : 서울특별시 중구 다동 88 | <br>
+    대표전화 : 010 - 3237 - 0219 | 팩스 : 02 - 490 - 7392 <br>
+  
+  
+    <svg viewbox="0 0 100 20">
+      <defs>
+        <linearGradient id="gradient" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="5%" stop-color="#326384"/>
+        <stop offset="95%" stop-color="#123752"/>
+        </linearGradient>
+        <pattern id="wave" x="0" y="0" width="120" height="20" patternUnits="userSpaceOnUse">
+        <path id="wavePath" d="M-40 9 Q-30 7 -20 9 T0 9 T20 9 T40 9 T60 9 T80 9 T100 9 T120 9 V20 H-40z" mask="url(#mask)" fill="url(#gradient)"> 
+          <animateTransform
+            attributeName="transform"
+            begin="0s"
+            dur="1.5s"
+            type="translate"
+            from="0,0"
+            to="40,0"
+            repeatCount="indefinite" />
+        </path>
+        </pattern>
+      </defs>
+      <text text-anchor="middle" x="50" y="15" font-size="17" fill="url(#wave)"  fill-opacity="0.6">UFORA</text>
+      <text text-anchor="middle" x="50" y="15" font-size="17" fill="url(#gradient)" fill-opacity="0.1">UFORA</text>
+      </svg>
+      <div style="width:100vw; height: 30vh; display: flex; align-items: center; text-align:center;">
+      <div style="text-align:center; vertical-align: middle; margin: 0 auto;">
+        <table class="table_2">
+          <FORM>
+            <tr>
+              <th align=center>[백엔드]</th>
+              <th align=center>[데이터분석]</th>
+              <th align=center>[데이터분석]</th>
+              <th align=center>[프론트엔드]</th>
+            </tr>
+            <tr>
+              <td align=center valign=top>
+                박영상<br>
+                010.3237.0219<br>
+                dudtkd0219@gmail.com<br>
+                </td>
+                <td align=center valign=top>
+                  정광의<br>
+                  010.6788.1124<br>
+                  jeongke26@naver.com<br>
+                </td>
+                <td align=center valign=top>
+                  김태연<br>
+                  010.7127.8378<br>
+                  xodus0706@gmail.com<br>
+                </td>
+                <td align=center valign=top>
+                  서예지<br>
+                  010.6353.1401<br>
+                  814askl@naver.com<br>
+                </td>
+            </tr>
+          </FORM>
+        </table>
+      </div>
+    </div>
+  
+    <br>
+    <br>
+  </footer>
   <!--footer-->
 
 </body>

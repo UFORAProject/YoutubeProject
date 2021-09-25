@@ -132,6 +132,8 @@ public class UserController {
 
         System.out.println("아이디 : "+session.getAttribute("id"));
 		model.addAttribute("list", userService.listCriteria(cri));  // 게시판의 글 리스트
+        model.addAttribute("myggimList", userService.showGgim(session.getAttribute("id").toString(), ch));
+
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(userService.listCountCriteria(ch));
@@ -198,7 +200,8 @@ public class UserController {
         System.out.println("아이디 : "+session.getAttribute("id"));
 
         adVO av = new adVO();
-        model.addAttribute("contact", userService.detailChannel(url));
+        model.addAttribute("detail", userService.detailChannel(url));
+        
         model.addAttribute("list", userService.detailPage(url, av));
         model.addAttribute("url", url);
         return "detailPage"; 
@@ -282,6 +285,14 @@ public class UserController {
     }
     /////////////////마이페이지 기능
 
+    /////////////////개인정보 수정으로 넘기는 기능
+    @RequestMapping(value = "/modify")
+    public String gotoModify(HttpSession session, Model model){
+
+        return "CustomerModify";
+    }
+    /////////////////개인정보 수정으로 넘기는 기능
+
     ///////////////////////추천 페이지로 넘기는 기능
     @RequestMapping(value = "/SearchPage")
     public String SearchPage(HttpSession session){
@@ -342,6 +353,8 @@ public class UserController {
             j += 1;
             temp.setCh_name(aaa[j]);
             j += 1;
+            temp.setImg(aaa[j]);
+            j += 1;
             temp.setSimilarity(Double.parseDouble(aaa[j]));
             j+= 1;
             rvo.add(temp);
@@ -351,4 +364,15 @@ public class UserController {
         return "RecommendPage";
     }
     ///////////////////추천 기능
+
+
+    //////////////////로그아웃 기능
+    @RequestMapping(value="/logout", method = RequestMethod.POST)
+    public String logout(HttpSession session ) throws Exception{
+        session.removeAttribute("id");
+        
+        return "logoutAlert";
+    }
+
+    /////////////////로그아웃 기능
 }

@@ -3,7 +3,16 @@ package com.example.vo;
 public class RecommendVO {
     private String ch_url;
     private String ch_name;
+    private String img;
     private Double similarity;
+
+    public String getImg() {
+        return this.img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
 
     public String getCh_url() {
         return this.ch_url;

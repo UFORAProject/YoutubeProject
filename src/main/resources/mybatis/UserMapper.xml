@@ -17,12 +17,16 @@
     </select>
 
     <select id="listCriteria" resultType="com.example.vo.ChannelVO">
-        select ch_url, img, ch_name, sub, category from channel order by sub desc limit #{pageStart}, #{perPageNum}
+        select ch_url, img, ch_name, sub, category, adcount from channel order by sub desc limit #{pageStart}, #{perPageNum}
+    </select>
+
+    <select id="listGgim" parameterType = "com.example.vo.ggimVO" resultType = "int">
+        select count(*) from ggim where id=#{id} and ch_url = #{ch_url}
     </select>
 
     <select id="filterPage" resultType="com.example.vo.ChannelVO">
       
-        select ch_url, ch_name, sub, category, img
+        select ch_url, ch_name, sub, category, img, adcount
         from channel
         where 
         category = #{category}
@@ -58,8 +62,8 @@
         where ch_url=#{url}
     </select>
 
-    <select id="detailChannel" parameterType="String" resultType="String">
-        select contact from channel where ch_url=#{url}
+    <select id="detailChannel" parameterType="String" resultType="com.example.vo.ChannelVO">
+        select * from channel where ch_url=#{url}
     </select>
 
     <select id = "idCheck" parameterType="com.example.vo.CustomerVO" resultType="int">
@@ -95,7 +99,7 @@
     </delete>
 
     <select id="showGgim" parameterType = "String" resultType="com.example.vo.ChannelVO">
-        SELECT ch_url,ch_name,img
+        SELECT ch_url,ch_name,img,sub,category,adcount
         FROM channel
         WHERE ch_url IN (
             SELECT ch_url 
@@ -105,7 +109,7 @@
     </select>
 
     <select id= "firstStage" parameterType="hashmap" resultType = "com.example.vo.ChannelVO">
-        SELECT ch_url, ch_NAME, adavgview
+        SELECT ch_url, ch_NAME, adavgview, img
         FROM channel
         WHERE ch_name IN (
             SELECT NAME

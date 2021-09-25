@@ -16,6 +16,15 @@ public class ChannelVO {
     private String tag;
     private int clust;
     private Double adavgview;
+    private int adcount;
+
+    public int getAdcount() {
+        return this.adcount;
+    }
+
+    public void setAdcount(int adcount) {
+        this.adcount = adcount;
+    }
 
     public String getTag() {
         return this.tag;

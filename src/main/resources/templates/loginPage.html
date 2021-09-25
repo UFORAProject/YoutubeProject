@@ -39,26 +39,26 @@
 			  <table align=center >
 				 <FORM action="/listPage" method="get">
 						<tr>
-							<td align=center valign=bottom>ID :</td>
-							<td align=center valign=bottom>
+							<td align=left valign=bottom>ID :</td>
+							<td align=left valign=bottom>
                                 <input type = "text" name = "id" placeholder="아이디"/>
                             </td>
 						</tr>
 						<tr>
-							<td align=center valign=top>PW :</td>
-							<td align=center valign=top>
+							<td align=left valign=top>PW :</td>
+							<td align=left valign=top>
                                 <input type = "password" name = "pw" placeholder="비밀번호"/>
+                                <input type="submit" value="로그인" />
                             </td>
 						</tr>
-                        <tr>
-                            <td rowspan="2">
-                                <img src="https://i.ibb.co/4Rc2ZWx/login-box2.jpg" class="button2" alt="login_button">
-                                <input type="submit" value="로그인" />
+                        <tr align="left">
+                            <td>&nbsp;</td>
+                            <td>
+                                <a href ="/signPage">처음 오셨나요 ? 회원가입</a>
                             </td>
                         </tr>
 				 </FORM>
 			  </table>
-			  <a href ="/signPage">Sign in</a> | Find Account( <a href="#">ID</a> / <a href="#">PW</a> )
 		</div>
 	</div>
 
@@ -70,25 +70,6 @@
 
 
 
-
-    <h1> hi! it's school page! </h1>
-    <form action="/get_user" method="post">
-        <input type="text" name="id" />
-        <input type="submit" value="사용자 조회" />
-    </form>
-    
-    <br>
-    <br>
-        
-
-    <form action="/login_success" method="post">
-        <input type="text" name="id" />
-        <input type="text" name="password" />
-        <input type="submit" value="로그인!" />
-    </form>
-
-    <br>
-    <br>
 
     <a href="/get_user_list">전체 사용자 조회</a>
 

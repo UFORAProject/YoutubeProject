@@ -105,11 +105,10 @@
 </script>
 <style>
     body {
-      background-image: url('https://i.ibb.co/3v8JG3H/2-login-1280-720.jpg');
+        background-image: url('https://i.ibb.co/3v8JG3H/2-login-1280-720.jpg');
       background-color: black;
       background-size: cover;
       background-repeat: no-repeat;
-      background-position: center center;
       color: white;
     }
 
@@ -126,11 +125,15 @@
 </style>
 <body bgcolor="#000000" style="overflow: hidden;">
     <center>
-        <h1> 회원가입</h1>
-        <table boder = "" cellspacing = "1" >
+        <table boder = "1" cellspacing = "1" cellpadding = "1" valign = "top">
         <FORM action = "/sign" method="post">
             <tr>
-        
+                <td></td>
+                <td align="left">
+                    <h2>회원가입</h2>
+                </td>
+            </tr>
+            <tr>
                 <td> 아이디 </td>
                 <td>
                 <input type = "text" id = "id" name = "id" placeholder="아이디">
@@ -158,13 +161,14 @@
                 });
             </script>
         
-        
+            <br>
         
             <tr>
                 <td> 비밀번호 </td>
                 <td> <input type = "password" class="pw" placeholder="비밀번호" name="pw" id="pw" onchange="chkPW()"/> </td>
             </tr>
-        
+            
+            <br>
         
             <tr>
                 <td> 비밀번호 확인 </td>
@@ -175,14 +179,14 @@
                 </b>
             </tr>
 
-
+            <br>
         
             <tr>
                 <td> 대표자명 </td>
                 <td> <input type = "text" id="ceo" name = "ceo" placeholder="대표자명"/> </td>
             </tr>
        
-       
+            <br>
        
             <tr>
                 <td>본인 확인 이메일</td>
@@ -199,6 +203,8 @@
                 </select>
                 </td>
             </tr>
+
+            <br>
        
             <tr>
             <td> 전화번호 </td>
@@ -219,7 +225,9 @@
                 <input type = "text" id = "tail" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="4" maxlength="4" oninput="numberMaxLength(this);"/>
             </td>
             </tr>
-        
+            
+            <br>
+
             <tr>
                 <td>사업자 등록번호 </td>
                 <td>
@@ -247,6 +255,8 @@
                     })
                 });
             </script>
+
+            <br>
         
             <tr>
                 <td> 사업장 주소 </td>
@@ -255,6 +265,9 @@
                 <input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기"><br>
                 </td>
             </tr>
+
+            <br>
+
             <tr>
                 <td> 상세주소 </td>
                 <td>
@@ -263,15 +276,19 @@
                     <input type="text" id="sample6_detailAddress" placeholder="상세주소" style="width:270px">
                 </td>
             </tr>
-       
-       
-            <button type="button" class="btn btn-light" id="submit"> 가입하기 ! </button>
+            
+            <br>
+            <tr>
+                <td>
+
+                </td>
+                <td align="left">
+                    <button type="button" class="btn btn-light" id="submit"> 가입하기 ! </button>
+                </td>
+            </tr>
+            
         </FORM>
         </table>
-       
-       <br>
-       <a href="/login_page"><input type = "reset" value = "뒤로가기"/></a>
-
        <script>
            $('#submit').click(function(){
               if (confirm("가입 하시겠습니까?")) {
@@ -282,13 +299,6 @@
                 var phone = $("#telecom option:selected").val() + $('#mid').val() + $('#tail').val();
                 var regnum = $('#regnum').val();
                 var address = $('#sample6_address').val() + $('#sample6_extraAddress').val() + $('#sample6_detailAddress').val();
-                console.log(id);
-                console.log(pw);
-                console.log(ceo);
-                console.log(email);
-                console.log(phone);
-                console.log(regnum);
-                console.log(address);
                 var html = "";
                 uri = '/sign'
                 html += '<form name="dataForm" action="'+uri+'" method="post">';

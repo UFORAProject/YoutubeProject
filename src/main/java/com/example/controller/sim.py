@@ -17,6 +17,7 @@ def hash345(key_list, keylist):
     tag_list = []
     url_list = []
     name_list = []
+    img_list = []
     
     tail = ""
     for i in range(len(key_list)):
@@ -56,7 +57,7 @@ def hash345(key_list, keylist):
             maxvalue = ccc[i]
             maxindex = i #광고주의 키워드가 가장 많은 클러스터(군집) 추출
             
-    sel_4 = "SELECT ch_url, ch_name, tag FROM channel WHERE clust =" + str(maxindex) 
+    sel_4 = "SELECT ch_url, ch_name, img, tag FROM channel WHERE clust =" + str(maxindex) 
     cur.execute(sel_4)
     
     while(True):
@@ -65,7 +66,8 @@ def hash345(key_list, keylist):
             break
         url_list.append(row[0])
         name_list.append(row[1])
-        tag_list.append(row[2])
+        img_list.append(row[2])
+        tag_list.append(row[3])
     
     result = [[] for i in range(len(tag_list))]
         
@@ -77,9 +79,10 @@ def hash345(key_list, keylist):
         sim = round(cs[0][0] * 100, 4)
         result[i].append(url_list[i])
         result[i].append(name_list[i])
+        result[i].append(img_list[i])
         result[i].append(sim)
     
-    result.sort(key=lambda x: -x[2])
+    result.sort(key=lambda x: -x[3])
     
     answer = result[:4]     #보여줄 범위 선택하세요..
         
