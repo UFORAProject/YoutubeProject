@@ -355,7 +355,7 @@ public class UserController {
             j += 1;
             temp.setCh_name(aaa[j]);
             j += 1;
-            temp.setImg(aaa[j]);
+            temp.setImg(aaa[j]);  
             j += 1;
             temp.setSimilarity(Double.parseDouble(aaa[j]));
             j+= 1;

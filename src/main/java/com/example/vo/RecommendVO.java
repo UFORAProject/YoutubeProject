@@ -5,7 +5,7 @@ public class RecommendVO {
     private String ch_name;
     private String img;
     private Double similarity;
-
+ 
     public String getImg() {
         return this.img;
     }
