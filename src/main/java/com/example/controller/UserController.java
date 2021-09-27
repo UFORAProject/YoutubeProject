@@ -251,6 +251,22 @@ public class UserController {
     }
     ////////////////////상세 페이지에서 찜하기 제거기능
 
+
+    ///////////////////광고동영상 상세 페이지
+    @RequestMapping(value = "/DetailADvideo", method = RequestMethod.GET)
+    public String DetailADvideo(@RequestParam("adurl") String url,Model model, HttpSession session){
+        if(session.getAttribute("id") == null){
+            return "alert";
+        }
+        adVO avo = new adVO();
+        System.out.println("광고동영상 url : " +url);
+        model.addAttribute("list", userService.DetailADvideo(url, avo));
+        model.addAttribute("wordcloud", userService.wordCloud(url));
+
+        return "DetailADvideoPage";
+    }
+    ///////////////////광고동영상 상세 페이지
+
     ///////////////////////마이 페이지에서 찜하기 제거기능
     @RequestMapping(value = "/ggimErase", method = RequestMethod.POST)
     public String ggimDeleteMyPage(@ModelAttribute ChannelVO cvo, Model model, HttpSession session) throws Exception{

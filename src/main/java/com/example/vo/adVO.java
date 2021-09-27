@@ -13,6 +13,15 @@ public class adVO {
     private int comment;
     private String hashtag;
     private String descript;
+    private Double foreign;
+
+    public Double getForeign() {
+        return this.foreign;
+    }
+
+    public void setForeign(Double foreign) {
+        this.foreign = foreign;
+    }
 
     public String getHashtag() {
         return this.hashtag;

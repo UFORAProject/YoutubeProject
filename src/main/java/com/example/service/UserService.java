@@ -88,6 +88,14 @@ public class UserService {
         return mapper.showGgim(id, cvo);
     }
 
+    public List<adVO> DetailADvideo(String url, adVO avo){
+        return mapper.DetailADvideo(url, avo);
+    }
+
+    public String wordCloud(String url){
+        return mapper.wordCloud(url);
+    }
+
     public List<ChannelVO> firstStage(HashMap<String,String[]> hm, ChannelVO cvo){
         return mapper.firstStage(hm, cvo);
     }

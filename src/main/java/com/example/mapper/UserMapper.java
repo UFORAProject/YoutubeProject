@@ -41,6 +41,8 @@ public interface UserMapper {
     int listGgim(ggimVO gvo);
     List<ChannelVO> showGgim(String id, ChannelVO cvo);
     
+    List<adVO> DetailADvideo(String url, adVO avo);
+    String wordCloud(String url);
 
     List<ChannelVO> firstStage(HashMap<String,String[]> hm,ChannelVO cvo);
      

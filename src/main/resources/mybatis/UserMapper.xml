@@ -66,6 +66,18 @@
         select * from channel where ch_url=#{url}
     </select>
 
+    <select id="DetailADvideo" parameterType="String" resultType="com.example.vo.adVO">
+        select * 
+        from advideo
+        where ad_url = #{url}
+    </select>
+
+    <select id="wordCloud" parameterType="String" resultType="String">
+        select comment
+        from adcomment
+        where url = #{url}
+    </select>
+
     <select id = "idCheck" parameterType="com.example.vo.CustomerVO" resultType="int">
         select count(*)
         from customer

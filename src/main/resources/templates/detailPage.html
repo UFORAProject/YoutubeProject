@@ -242,7 +242,7 @@
                   </script>
                 </td>
                 <td></td>
-                <td><span th:text="${ad.upday}"> 채널 이름 </span></td>
+                <td><a th:href="@{/DetailADvideo(adurl=${ad.ad_url})}"><span th:text="${ad.upday}"> 채널 이름 </span></a></td>
                 <td></td>
                 <td><span th:text="${ad.likecnt}"> 좋아요 수 </span></td>
             </tr>

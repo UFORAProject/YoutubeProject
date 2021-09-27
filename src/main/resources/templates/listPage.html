@@ -236,7 +236,7 @@
                   <th width = "50px" align="center"> 찜 </th>
                 </tr>
                 <tr th:each="channel,i : ${list}">
-                  <td><a th:href="@{/detailPage(url=${channel.ch_url})}"><img th:id = "${i.index}" src='' alt="" width="125" height="125"></a></td>  <!-- 채널 프로필 사진 이미지 태그-->
+                  <td><a th:href="@{/detailPage(url=${channel.ch_url})}"><img th:id = "${i.index}" src='' alt="" width="125" height="125" th:value = "${channel.ch_url}"></a></td>  <!-- 채널 프로필 사진 이미지 태그-->
                   <td>&nbsp;</td>
                   <td align="center"><span th:text="${channel.ch_name}"> 채널 이름 </span></td>
                   <td>&nbsp;</td>
@@ -246,7 +246,7 @@
                   <td>&nbsp;</td>
                   <td align="center"><a th:href="@{/detailPage(url=${channel.ch_url})}"><span th:text="${channel.adcount}"> 광고 개수 </span></a></td>
                   <td></td>
-                  <td><span th:value = "${channel.ch_url}"></span></td>
+                  <td></td>
                   <script>
                     id = '#';
                     id = id + i;
