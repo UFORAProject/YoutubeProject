@@ -114,21 +114,7 @@
   </style>
 <body>
     <!-- header -->
-    <div id='header'>
-        <table  border = "0" cellpadding="1" cellspacing="1" width = "100%">
-        <tr>
-            <td align="left">
-            &nbsp;&nbsp;&nbsp;<a href="index.html"><img src="https://i.ibb.co/4tfcjFQ/logo.png"> </a>
-            </td>
-            <td align="right">
-                <a href="/listPage"><img src="https://i.ibb.co/4MZLzwb/Search-button.png" onmouseover="this.src='https://i.ibb.co/8rfcfpq/Search-button.png'" onmouseout="this.src='https://i.ibb.co/4MZLzwb/Search-button.png'"></a>
-                <a href="/SearchPage"><img src="https://i.ibb.co/7GwrDPf/Recommendation-button.png" onmouseover="this.src='https://i.ibb.co/zbsBBWf/Recommendation-button.png'" onmouseout="this.src='https://i.ibb.co/7GwrDPf/Recommendation-button.png'"></a>
-                <a href="/myPage" align = right><img src="https://i.ibb.co/Sd9b5wJ/Mypage-button.png" onmouseover="this.src='https://i.ibb.co/5TFsZ4m/Mypage-button.png'" onmouseout="this.src='https://i.ibb.co/Sd9b5wJ/Mypage-button.png'"></a>
-            </td>
-        </tr>
-    
-        </table>
-        </div>
+    <div th:replace="header.html"></div>
     <!-- header -->
 
     <br>
@@ -166,76 +152,7 @@
     <br>
 
     <!--footer-->
-    <footer>
-        <br>
-        Copyright ⓒ 2021 team Galaticos. 모든 권리 보유. <br>
-        사업자 등록번호 : 120 81 71278 | 통신판매업신고번호 : 제 2021 - 서울중구 - 00961호 | <br>
-        대표이사 : KIMPARK JUNGSEO | 주소 : 서울특별시 중구 다동 88 | <br>
-        대표전화 : 010 - 3237 - 0219 | 팩스 : 02 - 490 - 7392 <br>
-    
-    
-        <svg viewbox="0 0 100 20">
-            <defs>
-              <linearGradient id="gradient" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="5%" stop-color="#326384"/>
-                <stop offset="95%" stop-color="#123752"/>
-              </linearGradient>
-              <pattern id="wave" x="0" y="0" width="120" height="20" patternUnits="userSpaceOnUse">
-                <path id="wavePath" d="M-40 9 Q-30 7 -20 9 T0 9 T20 9 T40 9 T60 9 T80 9 T100 9 T120 9 V20 H-40z" mask="url(#mask)" fill="url(#gradient)"> 
-                  <animateTransform
-                      attributeName="transform"
-                      begin="0s"
-                      dur="1.5s"
-                      type="translate"
-                      from="0,0"
-                      to="40,0"
-                      repeatCount="indefinite" />
-                </path>
-              </pattern>
-            </defs>
-            <text text-anchor="middle" x="50" y="15" font-size="17" fill="url(#wave)"  fill-opacity="0.6">UFORA</text>
-            <text text-anchor="middle" x="50" y="15" font-size="17" fill="url(#gradient)" fill-opacity="0.1">UFORA</text>
-          </svg>
-          <div style="width:100vw; height: 30vh; display: flex; align-items: center; text-align:center;">
-            <div style="text-align:center; vertical-align: middle; margin: 0 auto;">
-                <table class="table_2">
-                    <FORM>
-                        <tr>
-                            <th align=center>[백엔드]</th>
-                            <th align=center>[데이터분석]</th>
-                            <th align=center>[데이터분석]</th>
-                            <th align=center>[프론트엔드]</th>
-                        </tr>
-                        <tr>
-                            <td align=center valign=top>
-                                박영상<br>
-                                010.3237.0219<br>
-                                dudtkd0219@gmail.com<br>
-                                </td>
-                                <td align=center valign=top>
-                                    정광의<br>
-                                    010.6788.1124<br>
-                                    jeongke26@naver.com<br>
-                                </td>
-                                <td align=center valign=top>
-                                    김태연<br>
-                                    010.7127.8378<br>
-                                    xodus0706@gmail.com<br>
-                                </td>
-                                <td align=center valign=top>
-                                    서예지<br>
-                                    010.6353.1401<br>
-                                    814askl@naver.com<br>
-                                </td>
-                        </tr>
-                    </FORM>
-                </table>
-            </div>
-        </div>
-    
-        <br>
-        <br>
-    </footer>
+    <div th:replace = "footer.html"></div>
     <!--footer-->
 </body>
 </html>

@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        data-layout-decorate="~{samples/layout/sampleLayout}"
+>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -104,41 +108,82 @@
     }
 </script>
 <style>
-    body {
-        background-image: url('https://i.ibb.co/3v8JG3H/2-login-1280-720.jpg');
-      background-color: black;
-      background-size: cover;
-      background-repeat: no-repeat;
-      color: white;
+    /* 위에 bar style 시작 */
+    *{
+        padding: 0px;
+        margin: 0px;
+        overflow: auto;
     }
 
-
-    h, td, tr, input, textarea, select, FORM {
-        font-family:고딕;
-        font-size:1em;
-        border-radius:5px;
-    }
-    
+        
     table, FORM {
-        border-spacing:15px;
+        border-spacing:20px;
+        border-top : 5px solid rgb(163, 163, 163);
+        border-right : 5px solid #444444; 
+        border-left : 5px solid #444444; 
+        border-bottom : 5px solid rgb(163, 163, 163);
+    }
+
+    footer {
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		padding: 0;
+		text-align: center;
+		color: white;
+		background: #f5f5f7;  
+		bottom: 0;
+
+
+		background:url('https://farm9.staticflickr.com/8760/17195790401_ceeeafcddb_o.jpg');
+		background-size:cover;
+		font-family: 'Cabin Condensed', sans-serif;
+		display:flex;
+		flex-direction:column;
+		justify-content:center;
+		align-items:center;
+	}
+
+    .home {
+		float: right;
+		line-height: 20px;          
+		vertical-align: middle;
+		text-align:center;
+	}
+
+    ul{
+            text-align: center;
+            background-color: #313132;
+    }
+    li{
+        margin: 7px;
+        display: inline-block;
+        color:  white;
+        vertical-align: middle;
     }
 </style>
-<body bgcolor="#000000" style="overflow: hidden;">
+<body>
+    <!-- header -->
+    <ul>
+        <li><img src="https://i.ibb.co/VBw2P70/logo.png" width="30" height="40"></li>
+        <li class="home">
+            <a href="index.html">
+                <img src="https://i.ibb.co/jyxvDW1/home.png" onmouseover="this.src='https://i.ibb.co/tLkFjpw/home2.png'" onmouseout="this.src='https://i.ibb.co/jyxvDW1/home.png'" width="42" height="40">
+            </a>
+        </li>
+    </ul>
+    <!-- header -->
     <center>
-        <table boder = "1" cellspacing = "1" cellpadding = "1" valign = "top">
-        <FORM action = "/sign" method="post">
-            <tr>
-                <td></td>
-                <td align="left">
-                    <h2>회원가입</h2>
-                </td>
-            </tr>
+        <img src="https://i.ibb.co/phgt8s6/sign-up.gif">
+        <table boder = "1" cellspacing = "1">
+        <FORM>
             <tr>
                 <td> 아이디 </td>
                 <td>
                 <input type = "text" id = "id" name = "id" placeholder="아이디">
                 <button class="idCheck" type="button" id="idCheck" value="N"> 중복확인 </button>
                 </td>
+                <td></td>
             </tr>
 
             <script>
@@ -161,32 +206,30 @@
                 });
             </script>
         
-            <br>
         
             <tr>
                 <td> 비밀번호 </td>
                 <td> <input type = "password" class="pw" placeholder="비밀번호" name="pw" id="pw" onchange="chkPW()"/> </td>
+                <td></td>
             </tr>
             
-            <br>
         
             <tr>
                 <td> 비밀번호 확인 </td>
                 <td> <input type = "password" class="pw" placeholder="비밀번호 확인" name="pw1" id="pw1" onchange="chkPW()"/>&nbsp; <span id="check"> </span></td>
-                <b>
+                <td align="left">
                     <span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span>
                     <span id="alert-danger" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
-                </b>
+                </td>
             </tr>
 
-            <br>
         
             <tr>
                 <td> 대표자명 </td>
                 <td> <input type = "text" id="ceo" name = "ceo" placeholder="대표자명"/> </td>
+                <td></td>
             </tr>
        
-            <br>
        
             <tr>
                 <td>본인 확인 이메일</td>
@@ -202,31 +245,31 @@
                     <option value="naver.com">naver.com</option> 
                 </select>
                 </td>
+                <td></td>
             </tr>
 
-            <br>
        
             <tr>
-            <td> 전화번호 </td>
-            <td>
-                <input type = "radio" name = "phone"/> SKT
-                <input type = "radio" name = "phone"/> KT
-                <input type = "radio" name = "phone"/> LGU+
-            <br/>
-            <select id="telecom">
-                <option> 010 </option>
-                <option> 011 </option>
-                <option> 016 </option>
-                <option> 017 </option>
-                <option> 018 </option>
-                <option> 019 </option>
-            </select>
-                <input type = "text" id = "mid" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="4" maxlength="4" oninput="numberMaxLength(this);"/> - 
-                <input type = "text" id = "tail" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="4" maxlength="4" oninput="numberMaxLength(this);"/>
-            </td>
+                <td> 전화번호 </td>
+                <td>
+                    <input type = "radio" name = "phone"/> SKT
+                    <input type = "radio" name = "phone"/> KT
+                    <input type = "radio" name = "phone"/> LGU+
+                    <br>
+                    <select id="telecom">
+                        <option> 010 </option>
+                        <option> 011 </option>
+                        <option> 016 </option>
+                        <option> 017 </option>
+                        <option> 018 </option>
+                        <option> 019 </option>
+                    </select>
+                        <input type = "text" id = "mid" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="4" maxlength="4" oninput="numberMaxLength(this);"/> - 
+                        <input type = "text" id = "tail" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="4" maxlength="4" oninput="numberMaxLength(this);"/>
+                </td>
+                <td></td>
             </tr>
             
-            <br>
 
             <tr>
                 <td>사업자 등록번호 </td>
@@ -234,6 +277,7 @@
                     <input type = "text" id = "regnum" name = "regnum" placeholder="사업자 등록번호"/>
                     <button class="regnumCheck" type="button" id="regnumCheck" value="N"> 중복확인 </button>
                 </td>
+                <td></td>
             </tr>
 
             <script>
@@ -256,17 +300,16 @@
                 });
             </script>
 
-            <br>
         
             <tr>
                 <td> 사업장 주소 </td>
                 <td>
-                <input type="text" id="sample6_postcode" placeholder="우편번호">
-                <input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기"><br>
+                    <input type="text" id="sample6_postcode" placeholder="우편번호">
+                    <input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기"><br>
                 </td>
+                <td></td>
             </tr>
 
-            <br>
 
             <tr>
                 <td> 상세주소 </td>
@@ -275,20 +318,26 @@
                     <input type="text" id="sample6_extraAddress" placeholder="참고항목" style="width:270px"><br>
                     <input type="text" id="sample6_detailAddress" placeholder="상세주소" style="width:270px">
                 </td>
+                <td></td>
             </tr>
             
-            <br>
-            <tr>
-                <td>
-
-                </td>
-                <td align="left">
-                    <button type="button" class="btn btn-light" id="submit"> 가입하기 ! </button>
-                </td>
-            </tr>
             
         </FORM>
         </table>
+        <br>
+        <br>
+
+        <button type="button" class="btn btn-light" id="submit">
+            <img src="https://i.ibb.co/0nYqmQL/signup-button.png" class="button2" alt="sign_in_button" 
+            onmouseover="this.src='https://i.ibb.co/Kw3p0s3/signup-button.png'" 
+            onmouseout="this.src='https://i.ibb.co/0nYqmQL/signup-button.png'" value = "가입하기"/>
+        </button>
+        &nbsp;
+        <a href="/login_page">
+            <img src="https://i.ibb.co/Vt8XmKZ/back-button.png" class="button2" alt="back_button" 
+            onmouseover="this.src='https://i.ibb.co/X2DbfZV/back-button.png'" 
+            onmouseout="this.src='https://i.ibb.co/Vt8XmKZ/back-button.png'" value = "뒤로가기"/>
+        </a>
        <script>
            $('#submit').click(function(){
               if (confirm("가입 하시겠습니까?")) {
@@ -320,5 +369,11 @@
        
        
     </center>
+    <br>
+    <br>
+    
+    <!--footer-->
+    <div th:replace = "footer.html"></div>
+    <!--footer-->
 </body>
 </html>
