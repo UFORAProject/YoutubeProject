@@ -279,6 +279,7 @@ public class UserController {
             return "alert";
         }
         String id = session.getAttribute("id").toString();
+        model.addAttribute("CustomID", id);
         ChannelVO cvo = new ChannelVO();
         model.addAttribute("ggimList", userService.showGgim(id, cvo));
         return "myPage";
