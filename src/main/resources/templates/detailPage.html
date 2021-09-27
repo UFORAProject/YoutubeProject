@@ -184,10 +184,12 @@
 
             <br>
             <span th:if = "${ggim} == 0">
-                <button type="button" class="btn btn-light" id="insert">찜 안되어 있음</button>
+                <button type="button" class="btn btn-light" id="insert"><img src="https://i.ibb.co/g6MZYqm/calldibs-button.png" 
+                  onmouseover="this.src='https://i.ibb.co/YDRmjrG/calldibs-button.png'" 
+                  onmouseout="this.src='https://i.ibb.co/g6MZYqm/calldibs-button.png'"></button>
             </span>
             <span th:unless="${ggim} == 0">
-                <button type="button" class="btn btn-light" id="delete"> 찜 되어 있음 </button>
+                <button type="button" class="btn btn-light" id="delete"><img src="https://i.ibb.co/CJr1zpV/calldibs-button2.png"></button>
             </span>
             <script>
               $('#insert').click(function(){
