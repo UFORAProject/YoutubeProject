@@ -201,12 +201,8 @@ public class UserController {
         
         System.out.println("url 제대로 넘어오는지 체크 :  "+avo.getCh_url());
         System.out.println("아이디 : "+session.getAttribute("id"));
-        System.out.println("총 결과 수 : " +userService.detailPageCount(avo));
-        System.out.println("현재 페이지 : "+avo.getPage());
-        System.out.println("페이지 시작 점: "+avo.getPageStart());
 
         model.addAttribute("detail", userService.detailChannel(avo.getCh_url()));
-        
         model.addAttribute("list", userService.detailPage(avo));
         model.addAttribute("url", avo.getCh_url());
 
@@ -215,9 +211,6 @@ public class UserController {
         DetailMarker.setTotalCount(userService.detailPageCount(avo));
 
         model.addAttribute("DetailMaker", DetailMarker);
-
-        System.out.println("받은 값 : "+DetailMarker.getAvo());
-
 
         return "detailPage"; 
     }
