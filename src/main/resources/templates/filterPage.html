@@ -5,14 +5,17 @@
 	>
 	
 <head>
-<title>게시판예제-페이징</title>
+<title>필터된 채널들</title>
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script th:inline="javascript">
   /*
     <![CDATA[*/
       let channel = /*[[${list}]]*/ 'default';
+      let ggim = /*[[${myggimList}]]*/ 'default';
       let id;
+      let buttonInsert;
+      let buttonDelete;
       let i = 0;
       function checkOnlyOne(element) {
   
@@ -243,17 +246,71 @@
               <td></td>
               <td align="center"><a th:href="@{/detailPage(url=${channel.ch_url})}"><span th:text="${channel.adcount}"> 광고 수 </span></a></td>
               <td></td>
-              <td align="center"><span th:value = "${channel.ch_url}"></span></td>
-              
+              <td align="center">
+                <button type="button" th:id="${i.index}" name = "delete" th:value = "${channel.ch_url}">
+                  <img src="https://i.ibb.co/CJr1zpV/calldibs-button2.png">
+                </button>
+                <button type="button" th:id="${i.index}" name = "insert" th:value = "${channel.ch_url}">
+                  <img src="https://i.ibb.co/g6MZYqm/calldibs-button.png" 
+                  onmouseover="this.src='https://i.ibb.co/YDRmjrG/calldibs-button.png'" 
+                  onmouseout="this.src='https://i.ibb.co/g6MZYqm/calldibs-button.png'">
+                </button>
+              </td>
               <script>
                 id = '#';
                 id = id + i;
+                buttonInsert = "button[id='"+i+"'][name='insert']";
+                buttonDelete = "button[id='"+i+"'][name='delete']";
                 $(id).attr('src',channel[i].img);
+                $(buttonInsert).show();
+                $(buttonDelete).hide();
+                for(var j = 0; j < ggim.length; j++){
+                  if(ggim[j].ch_url == channel[i].ch_url){
+                    $(buttonInsert).hide();
+                    $(buttonDelete).show();
+                    break;
+                  }
+                }
                 i = i + 1;
               </script>
           </tr>
         </table>
         <!--   출력 내용 -->
+
+        <script>
+          for(var j = 0; j < channel.length; j++){
+            let aaa = "button[id='"+j+"'][name='insert']";
+            let bbb = "button[id='"+j+"'][name='delete']";
+            $(aaa).click(function(){
+              if (confirm("찜 목록에 추가하시겠습니까?")) {
+                var html = "";
+                var uri = '/filterInsertGgim'
+                let redirect = window.location.href;
+                html += '<form name="dataForm" action="'+uri+'" method="post">';
+                html += '<input type="hidden" name="redirect" value="'+redirect+'" />';
+                html += '<input type="hidden" name="url" value="'+$(aaa).val()+'" />';
+                html += '</form>';
+                console.log('추가완료');
+                $("body").append(html);
+                document.dataForm.submit();
+              }
+            });
+            $(bbb).click(function(){
+              if (confirm("찜 목록에서 제거하시겠습니까?")) {
+                var html = "";
+                var uri = '/filterDeleteGgim'
+                let redirect = window.location.href;
+                html += '<form name="dataForm" action="'+uri+'" method="post">';
+                html += '<input type="hidden" name="redirect" value="'+redirect+'" />';
+                html += '<input type="hidden" name="url" value="'+$(bbb).val()+'" />';
+                html += '</form>';
+                console.log('제거완료');
+                $("body").append(html);
+                document.dataForm.submit();
+              }
+            });
+          }
+        </script>
               
         <!-- 게시판 하단의 페이징 버튼 -->
         <div class="box-footer clearfix">

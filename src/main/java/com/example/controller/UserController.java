@@ -167,6 +167,7 @@ public class UserController {
         System.out.println("받은 구독자 값 : "+ cvo.getSub());
 
         model.addAttribute("list", userService.filterPage(cvo));
+        model.addAttribute("myggimList", userService.showGgim(session.getAttribute("id").toString(), cvo));
         model.addAttribute("cvo", cvo );
 
         session.setAttribute("cvo", cvo);  
@@ -250,6 +251,94 @@ public class UserController {
         return way;
     }
     ////////////////////상세 페이지에서 찜하기 제거기능
+
+    ///////////////////전체목록 페이지에서 찜하기 기능
+    @RequestMapping(value="/listInsertGgim", method = RequestMethod.POST)
+    public String listInsertGgim(@RequestParam("url") String url, @RequestParam("redirect") String redirect ,Model model, HttpSession session) throws Exception{
+        if(session.getAttribute("id") == null){
+            return "alert";
+        }
+        redirect = redirect.substring(redirect.indexOf("listPage"));
+        System.out.println("채널 url 잘 받아 오는지 : "+url);
+        System.out.println("경로 잘 받아 오는지 : "+redirect);
+        ggimVO gvo = new ggimVO();
+        gvo.setId(session.getAttribute("id").toString());
+        gvo.setCh_url(url);
+        if(userService.isGgim(gvo) == 0){
+            userService.insertGgim(gvo);
+        }
+
+        String way = "redirect:"+redirect;
+
+        return way;
+    }
+    ///////////////////전체목록 페이지에서 찜하기 기능
+
+    ///////////////////전체목록 페이지에서 찜 제거기능
+    @RequestMapping(value="/listDeleteGgim", method = RequestMethod.POST)
+    public String listDeleteGgim(@RequestParam("url") String url, @RequestParam("redirect") String redirect ,Model model, HttpSession session) throws Exception{
+        if(session.getAttribute("id") == null){
+            return "alert";
+        }
+        redirect = redirect.substring(redirect.indexOf("listPage"));
+        System.out.println("채널 url 잘 받아 오는지 : "+url);
+        System.out.println("경로 잘 받아 오는지 : "+redirect);
+        ggimVO gvo = new ggimVO();
+        gvo.setId(session.getAttribute("id").toString());
+        gvo.setCh_url(url);
+        if(userService.isGgim(gvo) >= 1){
+            userService.deleteGgim(gvo);
+        }
+
+        String way = "redirect:"+redirect;
+
+        return way;
+    }
+    ///////////////////전체목록 페이지에서 찜 제거기능
+
+    ///////////////////필터페이지 페이지에서 찜하기 기능
+    @RequestMapping(value="/filterInsertGgim", method = RequestMethod.POST)
+    public String filterInsertGgim(@RequestParam("url") String url, @RequestParam("redirect") String redirect ,Model model, HttpSession session) throws Exception{
+        if(session.getAttribute("id") == null){
+            return "alert";
+        }
+        redirect = redirect.substring(redirect.indexOf("filterPage"));
+        System.out.println("채널 url 잘 받아 오는지 : "+url);
+        System.out.println("경로 잘 받아 오는지 : "+redirect);
+        ggimVO gvo = new ggimVO();
+        gvo.setId(session.getAttribute("id").toString());
+        gvo.setCh_url(url);
+        if(userService.isGgim(gvo) == 0){
+            userService.insertGgim(gvo);
+        }
+
+        String way = "redirect:"+redirect;
+
+        return way;
+    }
+    ///////////////////필터페이지 페이지에서 찜하기 기능
+
+    ///////////////////필터페이지 페이지에서 찜 제거기능
+    @RequestMapping(value="/filterDeleteGgim", method = RequestMethod.POST)
+    public String filterDeleteGgim(@RequestParam("url") String url, @RequestParam("redirect") String redirect ,Model model, HttpSession session) throws Exception{
+        if(session.getAttribute("id") == null){
+            return "alert";
+        }
+        redirect = redirect.substring(redirect.indexOf("filterPage"));
+        System.out.println("채널 url 잘 받아 오는지 : "+url);
+        System.out.println("경로 잘 받아 오는지 : "+redirect);
+        ggimVO gvo = new ggimVO();
+        gvo.setId(session.getAttribute("id").toString());
+        gvo.setCh_url(url);
+        if(userService.isGgim(gvo) >= 1){
+            userService.deleteGgim(gvo);
+        }
+
+        String way = "redirect:"+redirect;
+
+        return way;
+    }
+    ///////////////////필터페이지 페이지에서 찜 제거기능
 
 
     ///////////////////광고동영상 상세 페이지
