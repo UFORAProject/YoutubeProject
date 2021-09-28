@@ -23,10 +23,11 @@ public interface UserMapper {
     List<ChannelVO> filterPage(ChannelVO ch);
     int filterPageCount(ChannelVO ch);
 
-    List<adVO> detailPage(String url,adVO av);
-    int detailCount(adVO av);
+    List<adVO> detailPage(adVO avo);
+    int detailPageCount(adVO avo);
 
     List<ChannelVO> detailChannel(String url);
+    
 
     int idCheck(CustomerVO cus);
     int regnumCheck(CustomerVO cus);

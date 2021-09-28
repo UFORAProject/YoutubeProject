@@ -56,10 +56,17 @@
         </choose>
     </select>
     
-    <select id="detailPage" parameterType="String" resultType="com.example.vo.adVO">
+    <select id="detailPage" resultType="com.example.vo.adVO">
         select upday,name,likecnt,ad_url
         from advideo
-        where ch_url=#{url}
+        where ch_url = #{ch_url}
+        limit #{pageStart}, #{perPageNum}
+    </select>
+
+    <select id="detailPageCount" resultType="int">
+        select count(*)
+        from advideo
+        where ch_url = #{ch_url}
     </select>
 
     <select id="detailChannel" parameterType="String" resultType="com.example.vo.ChannelVO">

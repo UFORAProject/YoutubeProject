@@ -210,8 +210,11 @@
           </div>
           <!-- 구독자 수 선택 -->
           <br>
-          <center><input TYPE="IMAGE" src="https://i.ibb.co/QcnSd4c/search-Button.png" onmouseover="this.src='https://i.ibb.co/smB0fq5/search-Button.png'" 
-            onmouseout="this.src='https://i.ibb.co/QcnSd4c/search-Button.png'" name="submit" value="submit"><center/>
+          <center><input TYPE="IMAGE" src="https://i.ibb.co/QcnSd4c/search-Button.png" 
+            onmouseover="this.src='https://i.ibb.co/smB0fq5/search-Button.png'" 
+            onmouseout="this.src='https://i.ibb.co/QcnSd4c/search-Button.png'" 
+            name="submit" value="submit">
+          <center/>
         </form>
 			</td>
       <!---- 필터 ---->
@@ -236,7 +239,7 @@
               <th> 찜 </th>
           </tr>
           <tr th:each="channel,i : ${list}">
-              <td><a th:href="@{/detailPage(url=${channel.ch_url})}"><img th:id = "${i.index}" src='' alt=""></a></td>
+              <td><a th:href="@{/detailPage(ch_url=${channel.ch_url})}"><img th:id = "${i.index}" src='' alt=""></a></td>
               <td></td>
               <td align="center"><span th:text="${channel.ch_name}">채널 이름 </span></td>
               <td></td>
@@ -244,7 +247,7 @@
               <td></td>
               <td align="center"><span th:text="${channel.category}"> 카테고리 </span></td>
               <td></td>
-              <td align="center"><a th:href="@{/detailPage(url=${channel.ch_url})}"><span th:text="${channel.adcount}"> 광고 수 </span></a></td>
+              <td align="center"><a th:href="@{/detailPage(ch_url=${channel.ch_url})}"><span th:text="${channel.adcount}"> 광고 수 </span></a></td>
               <td></td>
               <td align="center">
                 <button type="button" th:id="${i.index}" name = "delete" th:value = "${channel.ch_url}">

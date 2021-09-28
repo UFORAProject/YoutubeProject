@@ -6,6 +6,7 @@ import com.example.vo.ggimVO;
 import com.example.vo.ChannelVO;
 import com.example.vo.Criteria;
 import com.example.vo.CustomerVO;
+import com.example.vo.DetailMaker;
 import com.example.vo.FilterMaker;
 import com.example.vo.PageMaker;
 import com.example.vo.RecommendVO;
@@ -188,23 +189,36 @@ public class UserController {
 
     //////////////////////채널 상세 보기 페이지
     @RequestMapping(value="/detailPage", method = RequestMethod.GET)
-    public String detailPage(@RequestParam("url") String url,Model model, HttpSession session) throws Exception{
+    public String detailPage(@ModelAttribute("avo") adVO avo,Model model, HttpSession session) throws Exception{
         if(session.getAttribute("id") == null){
             return "alert";
         }
+
         ggimVO gvo = new ggimVO();
         gvo.setId(session.getAttribute("id").toString());
-        gvo.setCh_url(url);
+        gvo.setCh_url(avo.getCh_url());
         model.addAttribute("ggim", userService.isGgim(gvo));
         
-        System.out.println("url 제대로 넘어오는지 체크 :  "+url);
+        System.out.println("url 제대로 넘어오는지 체크 :  "+avo.getCh_url());
         System.out.println("아이디 : "+session.getAttribute("id"));
+        System.out.println("총 결과 수 : " +userService.detailPageCount(avo));
+        System.out.println("현재 페이지 : "+avo.getPage());
+        System.out.println("페이지 시작 점: "+avo.getPageStart());
 
-        adVO av = new adVO();
-        model.addAttribute("detail", userService.detailChannel(url));
+        model.addAttribute("detail", userService.detailChannel(avo.getCh_url()));
         
-        model.addAttribute("list", userService.detailPage(url, av));
-        model.addAttribute("url", url);
+        model.addAttribute("list", userService.detailPage(avo));
+        model.addAttribute("url", avo.getCh_url());
+
+        DetailMaker DetailMarker = new DetailMaker();
+        DetailMarker.setAvo(avo);
+        DetailMarker.setTotalCount(userService.detailPageCount(avo));
+
+        model.addAttribute("DetailMaker", DetailMarker);
+
+        System.out.println("받은 값 : "+DetailMarker.getAvo());
+
+
         return "detailPage"; 
     }
     //////////////////////채널 상세 보기 페이지

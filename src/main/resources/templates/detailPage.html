@@ -247,9 +247,30 @@
                 <td><span th:text="${ad.likecnt}"> 좋아요 수 </span></td>
             </tr>
           </table>
+          <!-- 게시판 하단의 페이징 버튼 -->
+        <div>
+          <ul>
+          
+            <b th:if="${DetailMaker.prev} == true">
+              <a th:href="@{/detailPage(ch_url = ${url}, page=${DetailMaker.startPage}-1,perPageNum=${DetailMaker.avo.perPageNum})}">&laquo;</a>
+            </b>
+            
+            <b th:each="idx,iterStat : ${#numbers.sequence(DetailMaker.startPage,DetailMaker.endPage)}"  th:classappend="${DetailMaker.avo.page} == ${idx} ? active : null">
+              <a th:href="@{/detailPage(ch_url = ${url},page=${idx},perPageNum=${DetailMaker.avo.perPageNum})}" th:text="${idx}"></a>
+            </b>
+            
+            <b th:if="${DetailMaker.next} == true and ${DetailMaker.endPage > 0}">
+              <a th:href="@{/detailPage(ch_url = ${url},page=${DetailMaker.endPage}+1,perPageNum=${DetailMaker.avo.perPageNum})}">&raquo;</a>
+            </b>
+          
+          </ul>
+        </div>
+        <!-- 게시판 하단의 페이징 버튼 -->
+
           <br>
         </td>
         <!---- 내용 ---->
+
 
       </tr>
     </tbody>

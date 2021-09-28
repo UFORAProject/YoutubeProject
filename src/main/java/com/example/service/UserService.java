@@ -40,13 +40,14 @@ public class UserService {
         return mapper.filterPageCount(ch);
     }
 
-    public List<adVO> detailPage(String url,adVO av){
-        return mapper.detailPage(url,av);
+    public List<adVO> detailPage(adVO avo){
+        return mapper.detailPage(avo);
     }
 
-    public int detailCount(adVO av){
-        return mapper.detailCount(av);
+    public int detailPageCount(adVO avo){
+        return mapper.detailPageCount(avo);
     }
+
 
     public List<ChannelVO> detailChannel(String url){
         return mapper.detailChannel(url);
