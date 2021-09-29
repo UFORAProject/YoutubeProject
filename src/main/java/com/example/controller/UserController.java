@@ -203,9 +203,12 @@ public class UserController {
         System.out.println("url 제대로 넘어오는지 체크 :  "+avo.getCh_url());
         System.out.println("아이디 : "+session.getAttribute("id"));
 
-        model.addAttribute("detail", userService.detailChannel(avo.getCh_url()));
+        List<ChannelVO> detail = userService.detailChannel(avo.getCh_url());
+        model.addAttribute("detail", detail);
         model.addAttribute("list", userService.detailPage(avo));
         model.addAttribute("url", avo.getCh_url());
+        System.out.println("총 조회수 잘 나오는지 .. " +detail.get(0).getTotview());
+        
 
         DetailMaker DetailMarker = new DetailMaker();
         DetailMarker.setAvo(avo);

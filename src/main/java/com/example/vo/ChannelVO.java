@@ -6,7 +6,7 @@ public class ChannelVO {
     private String ch_name;
     private int sub;
     private String regdate;
-    private double totView;
+    private Double totview;
     private String category;
     private String contact;
     private String fan;
@@ -17,6 +17,14 @@ public class ChannelVO {
     private int clust;
     private Double adavgview;
     private int adcount;
+
+    public Double getTotview() {
+        return this.totview;
+    }
+
+    public void setTotview(Double totview) {
+        this.totview = totview;
+    }
 
     public int getAdcount() {
         return this.adcount;
@@ -92,13 +100,7 @@ public class ChannelVO {
         this.regdate = regdate;
     }
 
-    public double getTotView() {
-        return this.totView;
-    }
-
-    public void setTotView(double totView) {
-        this.totView = totView;
-    }
+    
 
     public String getCategory() {
         return this.category;
