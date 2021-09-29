@@ -117,6 +117,7 @@
     /*
     <![CDATA[*/
     let ordin = /*[[${general}]]*/ 'default';
+    let recom = /*[[${list}]]*/ 'default';
     let i = 0;
     let id;
     /*]]>
@@ -174,15 +175,19 @@
                     </table>
 
                     <br>
-                    <h2> 입력한 키워드들을 tf-idf를 통해서 추천한 채널들 </h2>
+                    <h2> 입력한 키워드들을 코사인 유사도를 통해서 추천한 채널들 </h2>
                     <br>
                     <table class="recommend" border="0">
                         <tr>
+                            <th></th>
+                            <th width = "10px"></th>
                             <th> 이름 </th>
                             <th width = "10px"></th>
                             <th> 유사도 </th>
                         </tr>
                         <tr th:each="recom,i : ${list}">
+                            <td><a th:href="@{/detailPage(ch_url=${recom.ch_url})}"><img th:id = "${i.index}" name="secret" src="" alt=""></a></td>
+                            <td></td>
                             <td align="center"><a th:href="@{/detailPage(ch_url=${recom.ch_url})}"><span th:text="${recom.ch_name}"> 채널 이름 </span></a></td>
                             <td></td>
                             <td align="center"><span th:text="${recom.similarity}"> 유사도 </span></td>
@@ -190,6 +195,14 @@
                     </table>
                     <br>
                     <br>
+
+                    <script>
+                        let maria;
+                        for(var k = 0; k < recom.length; k++){
+                            maria = "img[id='"+k+"'][name='secret']";
+                            $(maria).attr('src',recom[k].img);
+                        }
+                    </script>
 
 
                 </td>
