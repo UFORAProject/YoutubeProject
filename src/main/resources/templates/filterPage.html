@@ -13,6 +13,13 @@
     <![CDATA[*/
       let channel = /*[[${list}]]*/ 'default';
       let ggim = /*[[${myggimList}]]*/ 'default';
+      let category = /*[[${category}]]*/ 'default';
+      let sub = /*[[${sub}]]*/ 'default';
+      $("input:checkbox[name='category']").prop("checked", false);
+      $("input:checkbox[name='sub']").prop("checked", false);
+      let a;
+      console.log(category);
+      console.log(sub); 
       let id;
       let buttonInsert;
       let buttonDelete;
@@ -167,31 +174,31 @@
           <br>
           &nbsp;<strong> 카테고리 </strong>
           <div>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="음악" onclick='checkOnlyOne(this) ' checked='off'>음악
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" id = "category0" name="category" value="음악" onclick='checkOnlyOne(this)'>음악
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="노하우/스타일" onclick='checkOnlyOne(this)'>노하우/스타일
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" id = "category1" name="category" value="노하우/스타일" onclick='checkOnlyOne(this)'>노하우/스타일
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="뉴스/정치" onclick='checkOnlyOne(this)'>뉴스/정치
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" id = "category2" name="category" value="뉴스/정치" onclick='checkOnlyOne(this)'>뉴스/정치
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="코미디" onclick='checkOnlyOne(this)'>코미디
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" id = "category3" name="category" value="코미디" onclick='checkOnlyOne(this)'>코미디
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="자동차" onclick='checkOnlyOne(this)'>자동차
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" id = "category4" name="category" value="자동차" onclick='checkOnlyOne(this)'>자동차
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="인물/블로그" onclick='checkOnlyOne(this)'>인물/블로그
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" id = "category5" name="category" value="인물/블로그" onclick='checkOnlyOne(this)'>인물/블로그
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="스포츠" onclick='checkOnlyOne(this)'>스포츠
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" id = "category6" name="category" value="스포츠" onclick='checkOnlyOne(this)'>스포츠
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="엔터테이먼트" onclick='checkOnlyOne(this)'>엔터테이먼트
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" id = "category7" name="category" value="엔터테이먼트" onclick='checkOnlyOne(this)'>엔터테이먼트
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="동물" onclick='checkOnlyOne(this)'>동물
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" id = "category8" name="category" value="동물" onclick='checkOnlyOne(this)'>동물
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="여행/이벤트" onclick='checkOnlyOne(this)'>여행/이벤트
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" id = "category9" name="category" value="여행/이벤트" onclick='checkOnlyOne(this)'>여행/이벤트
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="교육" onclick='checkOnlyOne(this)'>교육
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" id = "category10" name="category" value="교육" onclick='checkOnlyOne(this)'>교육
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="영화/애니메이션" onclick='checkOnlyOne(this)'>영화/애니메이션
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" id = "category11" name="category" value="영화/애니메이션" onclick='checkOnlyOne(this)'>영화/애니메이션
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="게임" onclick='checkOnlyOne(this)'>게임
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" id = "category12" name="category" value="게임" onclick='checkOnlyOne(this)'>게임
             <br>
           </div>
           <!--카테고리 선택-->
@@ -200,15 +207,37 @@
           <br>
           &nbsp;<strong> 구독자</strong>
           <div>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="sub" value="100000" onclick='checkOnlyOne1(this)'>10만 이하
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" id = "sub0" name="sub" value="100000" onclick='checkOnlyOne1(this)'>10만 이하
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="sub" value="1000000" onclick='checkOnlyOne1(this)'>10만 ~ 100만
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" id = "sub1" name="sub" value="1000000" onclick='checkOnlyOne1(this)'>10만 ~ 100만
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="sub" value="10000000" onclick='checkOnlyOne1(this)'>100만 ~ 1000만
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" id = "sub2" name="sub" value="10000000" onclick='checkOnlyOne1(this)'>100만 ~ 1000만
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="sub" value="100000000" onclick='checkOnlyOne1(this)'>1000만 이상
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" id = "sub3" name="sub" value="100000000" onclick='checkOnlyOne1(this)'>1000만 이상
           </div>
           <!-- 구독자 수 선택 -->
+
+          <!-- 체크 되게 하는 함수 -->
+          <script>
+            for(var k = 0; k <= 12; k++){
+              a = "input:checkbox[id='category" + k +"']";
+              console.log(a);
+              if($(a).val() == category){
+                $(a).prop("checked", true);
+                break;
+              }
+            }
+            for(var k = 0; k <= 3; k++){
+              console.log(a);
+              a = "input:checkbox[id='sub" + k +"']";
+              if($(a).val() == sub){
+                $(a).prop("checked", true);
+                break;
+              }
+            }
+          </script>
+          <!-- 체크 되게 하는 함수 -->
+
           <br>
           <center><input TYPE="IMAGE" src="https://i.ibb.co/QcnSd4c/search-Button.png" 
             onmouseover="this.src='https://i.ibb.co/smB0fq5/search-Button.png'" 

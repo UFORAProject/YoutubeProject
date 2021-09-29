@@ -180,7 +180,8 @@ public class UserController {
         System.out.println("받은 값 : " + FilterMaker.getCvo());
         System.out.println("총 결과 수 : " + FilterMaker.getTotalCount());
         
-		
+        model.addAttribute("category", cvo.getCategory());
+		model.addAttribute("sub", cvo.getSub());
 		model.addAttribute("FilterMaker", FilterMaker);  // 게시판 하단의 페이징 관련, 이전페이지, 페이지 링크 , 다음 페이지
 		
 		return "filterPage";

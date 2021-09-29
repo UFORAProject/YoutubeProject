@@ -208,12 +208,13 @@
           </div>
           <!-- 구독자 수 선택 -->
           <br>
+          <!-- 검색 버튼 --><!----------------------------------------------------------------------------------------------------->
           <center><input TYPE="IMAGE" src="https://i.ibb.co/QcnSd4c/search-Button.png" 
             onmouseover="this.src='https://i.ibb.co/smB0fq5/search-Button.png'" 
             onmouseout="this.src='https://i.ibb.co/QcnSd4c/search-Button.png'" 
             name="submit" value="submit">
           <center/>
-
+          <!-- 검색 버튼 --><!----------------------------------------------------------------------------------------------------->
         </form>
 
 
@@ -251,14 +252,19 @@
                   <td align="center"><a th:href="@{/detailPage(ch_url=${channel.ch_url})}"><span th:text="${channel.adcount}"> 광고 개수 </span></a></td>
                   <td></td>
                   <td th:id="${i.index}">
-                    <button type="button" th:id="${i.index}" name = "delete" th:value = "${channel.ch_url}">
-                      <img src="https://i.ibb.co/CJr1zpV/calldibs-button2.png">
+                    <!-- 찜 완료 버튼 --><!----------------------------------------------------------------------------------------------------->
+                    <button type="button" th:id="${i.index}" class="btn btn-secondary" name = "delete" th:value = "${channel.ch_url}">
+                      <!--<img src="https://i.ibb.co/CJr1zpV/calldibs-button2.png">-->
                     </button>
-                    <button type="button" th:id="${i.index}" name = "insert" th:value = "${channel.ch_url}">
-                      <img src="https://i.ibb.co/g6MZYqm/calldibs-button.png" 
+                    <!-- 찜 완료 버튼 --><!----------------------------------------------------------------------------------------------------->
+
+                    <!-- 찜 하기 버튼 --><!----------------------------------------------------------------------------------------------------->
+                    <button type="button" th:id="${i.index}" class="btn btn-secondary" name = "insert" th:value = "${channel.ch_url}">
+                      <!--<img src="https://i.ibb.co/g6MZYqm/calldibs-button.png" 
                       onmouseover="this.src='https://i.ibb.co/YDRmjrG/calldibs-button.png'" 
-                      onmouseout="this.src='https://i.ibb.co/g6MZYqm/calldibs-button.png'">
+                      onmouseout="this.src='https://i.ibb.co/g6MZYqm/calldibs-button.png'">-->
                     </button>
+                    <!-- 찜 하기 버튼 --><!----------------------------------------------------------------------------------------------------->
                   </td>
                   <script>
                     id = '#';

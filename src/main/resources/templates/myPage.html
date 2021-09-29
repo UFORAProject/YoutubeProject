@@ -172,7 +172,7 @@
                       <th width = "50px" align="center"> 찜 </th>
                     </tr>
                     <tr th:each="ggim,i : ${ggimList}">
-                      <td><a th:href="@{/detailPage(url=${ggim.ch_url})}"><img th:id = "${i.index}" src='' alt="" width="125" height="125"></a></td> 
+                      <td><a th:href="@{/detailPage(ch_url=${ggim.ch_url})}"><img th:id = "${i.index}" src='' alt="" width="125" height="125"></a></td> 
                       <td>&nbsp;</td>
                       <td align="center"><span th:text="${ggim.ch_name}"> 채널 이름 </span></td>
                       <td>&nbsp;</td>
@@ -180,7 +180,7 @@
                       <td>&nbsp;</td>
                       <td align="center"><span th:text="${ggim.category}"> 카테고리 </span></td>
                       <td>&nbsp;</td>
-                      <td align="center"><a th:href="@{/detailPage(url=${ggim.ch_url})}"><span th:text="${ggim.adcount}"> 광고 개수 </span></a></td>
+                      <td align="center"><a th:href="@{/detailPage(ch_url=${ggim.ch_url})}"><span th:text="${ggim.adcount}"> 광고 개수 </span></a></td>
                       <td></td>
                         <td align="center"><button type="button" class="btn btn-light" id="delete" th:value = "${ggim.ch_url}"> 제거 </button></td>
                         <script>
