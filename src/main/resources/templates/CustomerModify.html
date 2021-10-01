@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<html   xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        data-layout-decorate="~{samples/layout/sampleLayout}"
->
+<html   xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -113,10 +110,21 @@
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script th:inline = "javascript">
+    /*
+    <![CDATA[*/
+        let list = /*[[${list}]]*/ 'default';
+        console.log(list[0]);
+        $('#userid').text(list[0].id);
+        $('#pw').val(list[0].pw);
+        $('#pw1').val(list[0].pw);
+    /*]]>
+  */
+</script>
 <script>
     
   function myFunction(input) {
-      document.getElementById("email").value = input;
+    $('#mailtail').val(input);
   }
 
  function numberMaxLength(e){
@@ -242,55 +250,20 @@
                         <tr height="35">
                             <td> 아이디 </td>
                             <td>
-                            <input type = "text" id = "id" name = "id" placeholder="아이디">
-                            <button class="idCheck" type="button" id="idCheck" value="N"> 중복확인 </button>
+                                <span id = "userid"></span>
                             </td>
                         </tr>
 
-            
-                        <script>
-                            $('#logout').click(function(){
-                                console.log('zzz');
-                                if(confirm('로그아웃 하시겠습니까?')){
-                                    var html = "";
-                                    uri = '/logout'
-                                    html += '<form name="dataForm" action="'+uri+'" method="post">';
-                                    html += '<input type="hidden" name="logout" value="logout" />';
-                                    html += '</form>';
-                                    
-                                    $("body").append(html);
-                                    document.dataForm.submit();
-                                }
-                            });
-                            $('#idCheck').click(function(){
-                                $.ajax({
-                                    url : '/idCheck',
-                                    type : 'POST',
-                                    dataType : 'JSON',
-                                    data : {'id': $('#id').val()},
-                                    success : function (data){
-                                        if(data == 1){
-                                            alert('중복된 아이디입니다');
-                                        }
-                                        else if (data == 0){
-                                            $('#idCheck').attr('value','Y');
-                                            alert('사용가능한 아이디 입니다!');
-                                        }
-                                    }
-                                })
-                            });
-                        </script>
-                    
-                    
-                    
                         <tr height="35">
                             <td> 비밀번호 </td>
-                            <td> <input type = "password" class="pw" placeholder="비밀번호" name="pw" id="pw" onchange="chkPW()"/> </td>
+                            <td> <input type = "password" class="pw" placeholder="비밀번호" name="pw" id="pw" onchange="chkPW()" value=""/> </td>
                         </tr>
                     
                         <tr height="35">
                             <td> 비밀번호 확인 </td>
-                            <td> <input type = "password" class="pw" placeholder="비밀번호 확인" name="pw1" id="pw1" onchange="chkPW()"/>&nbsp; <span id="check"> </span></td>
+                            <td> <input type = "password" class="pw" placeholder="비밀번호 확인" name="pw1" id="pw1" onchange="chkPW()" value=""/>
+                                &nbsp;<span id="check"> </span>
+                            </td>
                             <b>
                                 <span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span>
                                 <span id="alert-danger" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
@@ -308,7 +281,7 @@
                         <tr height="35">
                             <td>본인 확인 이메일</td>
                             <td name="email">
-                            <input type = "text" id = "mailhead"/> @ <input type = "text" id="mailtail"/> &nbsp;
+                            <input type = "text" id = "mailhead"/> @ <input type = "text" id="mailtail" value=""/> &nbsp;
                             <select id="selectmailTail" onchange="myFunction(this.value)"> 
                                 <option value="" selected="selected"> 직접입력 </option>
                                 <option value="daum.net">daum.net</option> 
@@ -337,8 +310,10 @@
                                   <option> 018 </option>
                                   <option> 019 </option>
                               </select>
-                              <input type = "text" id = "mid" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="4" maxlength="4" oninput="numberMaxLength(this);"/> - 
-                              <input type = "text" id = "tail" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="4" maxlength="4" oninput="numberMaxLength(this);"/>
+                              <input type = "text" id = "mid" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" 
+                                size="4" maxlength="4" oninput="numberMaxLength(this);"/> - 
+                              <input type = "text" id = "tail" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" 
+                                size="4" maxlength="4" oninput="numberMaxLength(this);"/>
                           </td>
                         </tr>
                         
@@ -346,30 +321,9 @@
                         <tr height="35">
                             <td>사업자 등록번호 </td>
                             <td>
-                                <input type = "text" id = "regnum" name = "regnum" placeholder="사업자 등록번호"/>
-                                <button class="regnumCheck" type="button" id="regnumCheck" value="N"> 중복확인 </button>
+                                <span></span>
                             </td>
                         </tr>
-            
-                        <script>
-                            $('#regnumCheck').click(function(){
-                                $.ajax({
-                                    url : '/regnumCheck',
-                                    type : 'POST',
-                                    dataType : 'JSON',
-                                    data : {'regnum': $('#regnum').val()},
-                                    success : function (data){
-                                        if(data == 1){
-                                            alert('중복된 사업자등록번호 입니다');
-                                        }
-                                        else if (data == 0){
-                                            $('#regnumCheck').attr('value','Y');
-                                            alert('사용가능한 사업자등록번호 입니다!');
-                                        }
-                                    }
-                                })
-                            });
-                        </script>
 
                     
                         <tr height="35">
@@ -399,34 +353,42 @@
                     </FORM>
                     </table>
 
-                    <script>
-                      $('#submit').click(function(){
-                         if (confirm("가입 하시겠습니까?")) {
-                           var id = $('#id').val();
-                           var pw = $('#pw').val();
-                           var ceo = $('#ceo').val();
-                           var email = $('#mailhead').val() + '@' +$('#selectmailTail option:selected').val();
-                           var phone = $("#telecom option:selected").val() + $('#mid').val() + $('#tail').val();
-                           var regnum = $('#regnum').val();
-                           var address = $('#sample6_address').val() + $('#sample6_extraAddress').val() + $('#sample6_detailAddress').val();
-                           var html = "";
-                           uri = '/sign'
-                           html += '<form name="dataForm" action="'+uri+'" method="post">';
-                           html += '<input type="hidden" name="id" value="'+id+'" />';
-                           html += '<input type="hidden" name="pw" value="'+pw+'" />';
-                           html += '<input type="hidden" name="ceo" value="'+ceo+'" />';
-                           html += '<input type="hidden" name="email" value="'+email+'" />';
-                           html += '<input type="hidden" name="phone" value="'+phone+'" />';
-                           html += '<input type="hidden" name="regnum" value="'+regnum+'" />';
-                           html += '<input type="hidden" name="address" value="'+address+'" />';
-                           html += '</form>';
-                           
-                           $("body").append(html);
-                           document.dataForm.submit(); 
-                         }
-                       });
-           
-                  </script>
+                <script>
+                    $('#logout').click(function(){
+                        console.log('zzz');
+                        if(confirm('로그아웃 하시겠습니까?')){
+                            var html = "";
+                            uri = '/logout'
+                            html += '<form name="dataForm" action="'+uri+'" method="post">';
+                            html += '<input type="hidden" name="logout" value="logout" />';
+                            html += '</form>';
+                            
+                            $("body").append(html);
+                            document.dataForm.submit();
+                        }
+                    });
+                    $('#submit').click(function(){
+                        if (confirm("수정하시겠습니까?")) {
+                        var pw = $('#pw').val();
+                        var ceo = $('#ceo').val();
+                        var email = $('#mailhead').val() + '@' +$('#selectmailTail option:selected').val();
+                        var phone = $("#telecom option:selected").val() + $('#mid').val() + $('#tail').val();
+                        var address = $('#sample6_address').val() + $('#sample6_extraAddress').val() + $('#sample6_detailAddress').val();
+                        var html = "";
+                        uri = '/modifyCustomer'
+                        html += '<form name="dataForm" action="'+uri+'" method="post">';
+                        html += '<input type="hidden" name="pw" value="'+pw+'" />';
+                        html += '<input type="hidden" name="ceo" value="'+ceo+'" />';
+                        html += '<input type="hidden" name="email" value="'+email+'" />';
+                        html += '<input type="hidden" name="phone" value="'+phone+'" />';
+                        html += '<input type="hidden" name="address" value="'+address+'" />';
+                        html += '</form>';
+                        
+                        $("body").append(html);
+                        document.dataForm.submit(); 
+                        }
+                    });
+                </script>
                 </td>
             </tr>
         </tbody>

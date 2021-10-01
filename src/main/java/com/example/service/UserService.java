@@ -96,6 +96,16 @@ public class UserService {
     public String wordCloud(String url){
         return mapper.wordCloud(url);
     }
+    
+    /* 회원정보 수정 기능들 */
+    public List<CustomerVO> showCustomer(String id,CustomerVO cus){
+        return mapper.showCustomer(id,cus);
+    }
+
+    public int modifyCustomer(CustomerVO cus){
+        return mapper.modifyCustomer(cus);
+    }
+    /* 회원정보 수정 기능들 */
 
     public List<ChannelVO> firstStage(HashMap<String,String[]> hm, ChannelVO cvo){
         return mapper.firstStage(hm, cvo);

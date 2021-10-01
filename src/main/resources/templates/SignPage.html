@@ -15,7 +15,7 @@
 <script>
     
     function myFunction(input) {
-        document.getElementById("email").value = input;
+        $('#mailtail').val(input);
     }
 
    function numberMaxLength(e){
@@ -124,26 +124,6 @@
         border-bottom : 5px solid rgb(163, 163, 163);
     }
 
-    footer {
-		left: 0;
-		bottom: 0;
-		width: 100%;
-		padding: 0;
-		text-align: center;
-		color: white;
-		background: #f5f5f7;  
-		bottom: 0;
-
-
-		background:url('https://farm9.staticflickr.com/8760/17195790401_ceeeafcddb_o.jpg');
-		background-size:cover;
-		font-family: 'Cabin Condensed', sans-serif;
-		display:flex;
-		flex-direction:column;
-		justify-content:center;
-		align-items:center;
-	}
-
     .home {
 		float: right;
 		line-height: 20px;          
@@ -161,6 +141,46 @@
         color:  white;
         vertical-align: middle;
     }
+
+    /* footer style */
+		footer {
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		padding: 0;
+		text-align: center;
+		color: white;
+		background: #f5f5f7;  
+		bottom: 0;
+
+
+		background:url('https://farm9.staticflickr.com/8760/17195790401_ceeeafcddb_o.jpg');
+		background-size:cover;
+		font-family: 'Cabin Condensed', sans-serif;
+		display:flex;
+		flex-direction:column;
+		justify-content:center;
+		align-items:center;
+
+		}
+
+
+		
+		svg{
+			font-weight:bold;max-width:600px;height:auto;
+		}
+
+		.table_2{
+			border-spacing: 10px;	  
+			width: 100%;
+			color: black;
+			border-top : 2px solid white;
+			border-right : none;
+			border-left : none;
+			border-bottom : none;
+		}
+
+	    /* footer style */
 </style>
 <body>
     <!-- header -->
@@ -185,26 +205,6 @@
                 </td>
                 <td></td>
             </tr>
-
-            <script>
-                $('#idCheck').click(function(){
-                    $.ajax({
-                        url : '/idCheck',
-                        type : 'POST',
-                        dataType : 'JSON',
-                        data : {'id': $('#id').val()},
-                        success : function (data){
-                            if(data == 1){
-                                alert('중복된 아이디입니다');
-                            }
-                            else if (data == 0){
-                                $('#idCheck').attr('value','Y');
-                                alert('사용가능한 아이디 입니다!');
-                            }
-                        }
-                    })
-                });
-            </script>
         
         
             <tr>
@@ -234,7 +234,7 @@
             <tr>
                 <td>본인 확인 이메일</td>
                 <td name="email">
-                <input type = "text" id = "mailhead"/> @ <input type = "text" id="mailtail"/> &nbsp;
+                <input type = "text" id = "mailhead"/> @ <input type = "text" id="mailtail" value=""/> &nbsp;
                 <select id="selectmailTail" onchange="myFunction(this.value)"> 
                     <option value="" selected="selected"> 직접입력 </option>
                     <option value="daum.net">daum.net</option> 
@@ -280,26 +280,6 @@
                 <td></td>
             </tr>
 
-            <script>
-                $('#regnumCheck').click(function(){
-                    $.ajax({
-                        url : '/regnumCheck',
-                        type : 'POST',
-                        dataType : 'JSON',
-                        data : {'regnum': $('#regnum').val()},
-                        success : function (data){
-                            if(data == 1){
-                                alert('중복된 사업자등록번호 입니다');
-                            }
-                            else if (data == 0){
-                                $('#regnumCheck').attr('value','Y');
-                                alert('사용가능한 사업자등록번호 입니다!');
-                            }
-                        }
-                    })
-                });
-            </script>
-
         
             <tr>
                 <td> 사업장 주소 </td>
@@ -339,6 +319,40 @@
             onmouseout="this.src='https://i.ibb.co/Vt8XmKZ/back-button.png'" value = "뒤로가기"/>
         </a>
        <script>
+           $('#idCheck').click(function(){
+                $.ajax({
+                    url : '/idCheck',
+                    type : 'POST',
+                    dataType : 'JSON',
+                    data : {'id': $('#id').val()},
+                    success : function (data){
+                        if(data == 1){
+                            alert('중복된 아이디입니다');
+                        }
+                        else if (data == 0){
+                            $('#idCheck').attr('value','Y');
+                            alert('사용가능한 아이디 입니다!');
+                        }
+                    }
+                })
+            });
+           $('#regnumCheck').click(function(){
+                $.ajax({
+                    url : '/regnumCheck',
+                    type : 'POST',
+                    dataType : 'JSON',
+                    data : {'regnum': $('#regnum').val()},
+                    success : function (data){
+                        if(data == 1){
+                            alert('중복된 사업자등록번호 입니다');
+                        }
+                        else if (data == 0){
+                            $('#regnumCheck').attr('value','Y');
+                            alert('사용가능한 사업자등록번호 입니다!');
+                        }
+                    }
+                })
+            });
            $('#submit').click(function(){
               if (confirm("가입 하시겠습니까?")) {
                 var id = $('#id').val();

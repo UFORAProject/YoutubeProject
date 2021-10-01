@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html   lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,35 +9,103 @@
     <title>Document</title>
 </head>
 <style>
-    body {
-       background-image: url('https://i.ibb.co/3v8JG3H/2-login-1280-720.jpg');
-       background-repeat: no-repeat;
-       background-position: center top;
-       font-family: sans-serif;
-       color: white;
+    /* 위에 bar style 시작 */
+    *{
+        padding: 0px;
+        margin: 0px;
+        overflow: auto;
     }
 
-    table, FORM
-    {
-     border-spacing:15px;	  
+        
+    table, FORM {
+        border-spacing:20px;
+        border-top : 5px solid rgb(163, 163, 163);
+        border-right : 5px solid #444444; 
+        border-left : 5px solid #444444; 
+        border-bottom : 5px solid rgb(163, 163, 163);
     }
-   
 
- </style>
-<body bgcolor="#000000" style="overflow: hidden;">
+    .home {
+		float: right;
+		line-height: 20px;          
+		vertical-align: middle;
+		text-align:center;
+	}
 
-    <p align=right>
-        <a href="index.html">
-            <img src="https://i.ibb.co/ZSHBFyT/home.png" onmouseover="this.src='https://i.ibb.co/BtvN0ff/home2.png'" 
-                                                        onmouseout="this.src='https://i.ibb.co/ZSHBFyT/home.png'">
-        </a>
-    </p>
+    ul{
+            text-align: center;
+            background-color: #313132;
+    }
+    li{
+        margin: 7px;
+        display: inline-block;
+        color:  white;
+        vertical-align: middle;
+    }
+
+    #signbutton{
+        text-decoration: none;
+        color: black;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    /* footer style */
+    footer {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 0;
+    text-align: center;
+    color: white;
+    background: #f5f5f7;  
+    bottom: 0;
 
 
+    background:url('https://farm9.staticflickr.com/8760/17195790401_ceeeafcddb_o.jpg');
+    background-size:cover;
+    font-family: 'Cabin Condensed', sans-serif;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
 
-	<div style="width:100vw; height: 100vh; display: flex; align-items: center; margin: 0 auto; text-align:center; ">
+    }
+
+
+    
+    svg{
+        font-weight:bold;max-width:600px;height:auto;
+    }
+
+    .table_2{
+        border-spacing: 10px;	  
+        width: 100%;
+        color: black;
+        border-top : 2px solid white;
+        border-right : none;
+        border-left : none;
+        border-bottom : none;
+    }
+
+    /* footer style */
+</style>
+<body>
+    <!-- header -->
+    <ul>
+        <li><img src="https://i.ibb.co/VBw2P70/logo.png" width="30" height="40"></li>
+        <li class="home">
+            <a href="index.html">
+                <img src="https://i.ibb.co/jyxvDW1/home.png" onmouseover="this.src='https://i.ibb.co/tLkFjpw/home2.png'" onmouseout="this.src='https://i.ibb.co/jyxvDW1/home.png'" width="42" height="40">
+            </a>
+        </li>
+    </ul>
+    <!-- header -->
+
+
+	<div style="width:100vw; height: 70vh; display: flex; align-items: center; text-align:center;">
 		<div style="text-align:center; vertical-align: middle; margin: 0 auto;">
-			  <center><img src="https://i.ibb.co/19pkQ0X/login-title.png"></center>
+			  <center><img src="https://i.ibb.co/pRyJDTd/login-title.gif"></center>
 			  <table align=center >
 				 <FORM action="/listPage" method="get">
 						<tr>
@@ -48,38 +118,17 @@
 							<td align=left valign=top>PW :</td>
 							<td align=left valign=top>
                                 <input type = "password" name = "pw" placeholder="비밀번호"/>
-                                <input type="submit" value="로그인" />
+                                <input type="submit" value="로그인" ></input>
                             </td>
 						</tr>
-                        <tr align="left">
-                            <td>&nbsp;</td>
-                            <td>
-                                <a href ="/signPage">처음 오셨나요 ? 회원가입</a>
-                            </td>
-                        </tr>
 				 </FORM>
 			  </table>
+              <a href ="/signPage" id='signbutton'>처음 오셨나요 ? 회원가입</a>
 		</div>
 	</div>
 
-
-
-
-
-
-
-
-
-
-    <a href="/get_user_list">전체 사용자 조회</a>
-
-
-    <br>
-    <br>
-    <a href="/get_channel_list">전체 채널 조회</a>
-
-    <br>
-    <br>
-    <a href="/listPage">ㄱㄱ</a>
+    <!--footer-->
+    <div th:replace = "footer.html"></div>
+    <!--footer-->
 </body>
 </html>

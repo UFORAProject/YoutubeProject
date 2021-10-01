@@ -41,6 +41,11 @@ public interface UserMapper {
 
     int listGgim(ggimVO gvo);
     List<ChannelVO> showGgim(String id, ChannelVO cvo);
+
+    /*회원 정보 수정 기능들 */
+    List<CustomerVO> showCustomer(String id,CustomerVO cus);
+    int modifyCustomer(CustomerVO cus);
+    /*회원 정보 수정 기능들 */
     
     List<adVO> DetailADvideo(String url, adVO avo);
     String wordCloud(String url);

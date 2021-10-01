@@ -101,6 +101,18 @@
         insert into customer values(#{id},#{pw},#{ceo},#{email},#{phone},#{regnum},#{address})
     </insert>
 
+    <select id="showCustomer" parameterType="String" resultType="com.example.vo.CustomerVO">
+        select *
+        from customer
+        where id = #{id};
+    </select>
+
+    <update id="modifyCustomer" parameterType="com.example.vo.CustomerVO">
+        UPDATE customer 
+        SET pw = #{pw}, ceo = #{ceo}, email = #{email}, phone = #{phone}, address = #{address}
+        WHERE id = #{id};
+    </update>
+
     <select id = "isRightCustomer" resultType="int">
         select count(*) from customer where id = #{id} and pw = #{pw}
     </select>

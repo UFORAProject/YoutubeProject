@@ -402,13 +402,38 @@ public class UserController {
     }
     /////////////////마이페이지 기능
 
-    /////////////////개인정보 수정으로 넘기는 기능
+    /////////////////개인정보 수정페이지로 넘기는 기능
     @RequestMapping(value = "/modify")
     public String gotoModify(HttpSession session, Model model){
+        if(session.getAttribute("id") == null){
+            return "alert";
+        }
+        CustomerVO cus = new CustomerVO();
+        String id = session.getAttribute("id").toString();
 
+        model.addAttribute("list", userService.showCustomer(id, cus));
         return "CustomerModify";
     }
-    /////////////////개인정보 수정으로 넘기는 기능
+    /////////////////개인정보 수정페이지로 넘기는 기능
+
+    /////////////////개인정보 수정 하는 기능
+    @RequestMapping(value="/modifyCustomer", method = RequestMethod.POST)
+    public String modifyCustomer(@ModelAttribute CustomerVO cus, HttpSession session){
+        if(session.getAttribute("id") == null){
+            return "alert";
+        }
+        cus.setId(session.getAttribute("id").toString());
+        System.out.println("아이디는 그대로지 ~ : " +cus.getId());
+        System.out.println("비밀번호 그대로인지 : "+cus.getPw());
+        System.out.println("사장님 그대로인지 : " + cus.getCeo());
+        System.out.println("이메일 그대로인지 : "+cus.getEmail());
+        System.out.println("휴대전화 그대로인지 : "+cus.getPhone());
+        System.out.println("주소 그대로인지 : " + cus.getAddress());
+        System.out.println("사업자등록번호는 아마 null일것이다 !  : " +cus.getRegnum());
+
+        return "redirect:modify";
+    }
+    /////////////////개인정보 수정 하는 기능
 
     ///////////////////////추천 페이지로 넘기는 기능
     @RequestMapping(value = "/SearchPage")
