@@ -4,6 +4,7 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
+
 conn = pymysql.connect(host="ec2-15-164-48-78.ap-northeast-2.compute.amazonaws.com", 
                        user = "root", password = "park19960826", 
                        db = "project", charset = "utf8")
@@ -13,6 +14,7 @@ cur = conn.cursor()
 #4~5 단계: 클러스터 내 추천된 유료광고들과 같은 카테고리에 있는 채널 중 channel의 tag와 광고주의 키워드의 유사도 검사
 
 def hash345(key_list, keylist):
+    ###########
     clust_list = []
     tag_list = []
     url_list = []
@@ -56,7 +58,9 @@ def hash345(key_list, keylist):
         if(ccc[i] > maxvalue):
             maxvalue = ccc[i]
             maxindex = i #광고주의 키워드가 가장 많은 클러스터(군집) 추출
-            
+    
+    #######
+    
     sel_4 = "SELECT ch_url, ch_name, img, tag FROM channel WHERE clust =" + str(maxindex) 
     cur.execute(sel_4)
     

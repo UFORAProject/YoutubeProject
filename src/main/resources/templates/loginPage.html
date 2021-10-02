@@ -89,6 +89,21 @@
     }
 
     /* footer style */
+
+    /* 로그인 버튼 이미지 삽입*/
+    #loginGO{
+        background-image: url('https://i.ibb.co/fDdVrCR/login-box1.png');
+        background-repeat: no-repeat;
+        width: 66px;
+        height: 90px;
+        border: 0px;
+        cursor:pointer;
+        outline: 0;
+    }
+    #loginGO:hover{
+        background-image: url('https://i.ibb.co/PWnCFgB/login-box2.png');
+    }
+    /* 로그인 버튼 이미지 삽입*/
 </style>
 <body>
     <!-- header -->
@@ -106,23 +121,24 @@
 	<div style="width:100vw; height: 70vh; display: flex; align-items: center; text-align:center;">
 		<div style="text-align:center; vertical-align: middle; margin: 0 auto;">
 			  <center><img src="https://i.ibb.co/pRyJDTd/login-title.gif"></center>
-			  <table align=center >
+			  <table align=center border="0">
 				 <FORM action="/listPage" method="get">
 						<tr>
 							<td align=left valign=bottom>ID :</td>
 							<td align=left valign=bottom>
                                 <input type = "text" name = "id" placeholder="아이디"/>
                             </td>
+                            <td rowspan="2"> <input type="submit" id = "loginGO" value=""> </td>
 						</tr>
 						<tr>
 							<td align=left valign=top>PW :</td>
 							<td align=left valign=top>
                                 <input type = "password" name = "pw" placeholder="비밀번호"/>
-                                <input type="submit" value="로그인" ></input>
                             </td>
 						</tr>
 				 </FORM>
 			  </table>
+              <br>
               <a href ="/signPage" id='signbutton'>처음 오셨나요 ? 회원가입</a>
 		</div>
 	</div>

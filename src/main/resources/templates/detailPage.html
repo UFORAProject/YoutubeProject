@@ -125,6 +125,10 @@
     }
 
   /* footer style */
+
+  button.btn{
+    border : none;
+  }
 </style>
 <body>
   <!-- header -->
@@ -176,7 +180,7 @@
                   onmouseout="this.src='https://i.ibb.co/g6MZYqm/calldibs-button.png'"></button>
             </span>
             <span th:unless="${ggim} == 0">
-                <button type="button" class="btn btn-light" id="delete"><img src="https://i.ibb.co/CJr1zpV/calldibs-button2.png"></button>
+                <button type="button" class="btn" id="delete"><img src="https://i.ibb.co/CJr1zpV/calldibs-button2.png"></button>
             </span>
             <script>
               $('#insert').click(function(){

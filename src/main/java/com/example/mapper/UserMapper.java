@@ -51,6 +51,8 @@ public interface UserMapper {
     String wordCloud(String url);
 
     List<ChannelVO> firstStage(HashMap<String,String[]> hm,ChannelVO cvo);
+
+    int[] secondStage(HashMap<String,String[]> hm, int[] arr);
      
 }
 

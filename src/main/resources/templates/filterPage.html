@@ -149,6 +149,10 @@
 	}
 
   /* footer style */
+
+  button.btn{
+    border : none;
+  }
 </style>
 </head>
 <body>
@@ -279,13 +283,15 @@
               <td align="center"><a th:href="@{/detailPage(ch_url=${channel.ch_url})}"><span th:text="${channel.adcount}"> 광고 수 </span></a></td>
               <td></td>
               <td align="center">
-                <button type="button" th:id="${i.index}" name = "delete" th:value = "${channel.ch_url}">
-                  <img src="https://i.ibb.co/CJr1zpV/calldibs-button2.png">
+                <button type="button" class = "btn" th:id="${i.index}" name = "delete" th:value = "${channel.ch_url}">
+                  <center border="0"><img src="https://i.ibb.co/THssXXW/heart-button.png" border="0">
+                    <center/>
                 </button>
-                <button type="button" th:id="${i.index}" name = "insert" th:value = "${channel.ch_url}">
-                  <img src="https://i.ibb.co/g6MZYqm/calldibs-button.png" 
-                  onmouseover="this.src='https://i.ibb.co/YDRmjrG/calldibs-button.png'" 
-                  onmouseout="this.src='https://i.ibb.co/g6MZYqm/calldibs-button.png'">
+                <button type="button" class = "btn" th:id="${i.index}" name = "insert" th:value = "${channel.ch_url}">
+                  <center border="0"><img src="https://i.ibb.co/FwHHDTx/heart-button.png" 
+                    onmouseover="this.src='https://i.ibb.co/THssXXW/heart-button.png'" 
+                    onmouseout="this.src='https://i.ibb.co/FwHHDTx/heart-button.png'" border="0"> 
+                  <center/>
                 </button>
               </td>
               <script>

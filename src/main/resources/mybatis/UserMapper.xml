@@ -155,4 +155,16 @@
         limit 0,5;
     </select>
 
+    <select id="secondStage" parameterType = "hashmap" resultType = "Integer">
+        SELECT A.clust as good
+        FROM channel A, advideo B
+        WHERE A.ch_url = B.ch_url
+        AND
+        <foreach collection="hm.a" item = "arr"  separator = "or"  open="(" close=")">
+            hashtag like #{arr} or descript like #{arr}
+        </foreach>
+    </select>
+
+    
+
 </mapper>

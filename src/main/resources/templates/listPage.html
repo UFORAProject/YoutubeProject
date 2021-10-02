@@ -141,6 +141,11 @@
 	}
 
   /* footer style */
+
+  button.btn{
+    border : none;
+  }
+
 </style>
 </head>
 <body>
@@ -163,48 +168,48 @@
         <form action="/filterPage">
           <!--카테고리 선택-->
           <br>
-          &nbsp;<strong> 카테고리 </strong>
+          <h3><strong>&nbsp;&nbsp;[카테고리]</strong></h3>
           <div>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="음악" onclick='checkOnlyOne(this)'>음악
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="음악" onclick='checkOnlyOne(this)'>&nbsp;음악
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="노하우/스타일" onclick='checkOnlyOne(this)'>노하우/스타일
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="노하우/스타일" onclick='checkOnlyOne(this)'>&nbsp;노하우/스타일
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="뉴스/정치" onclick='checkOnlyOne(this)'>뉴스/정치
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="뉴스/정치" onclick='checkOnlyOne(this)'>&nbsp;뉴스/정치
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="코미디" onclick='checkOnlyOne(this)'>코미디
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="코미디" onclick='checkOnlyOne(this)'>&nbsp;코미디
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="자동차" onclick='checkOnlyOne(this)'>자동차
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="자동차" onclick='checkOnlyOne(this)'>&nbsp;자동차
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="인물/블로그" onclick='checkOnlyOne(this)'>인물/블로그
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="인물/블로그" onclick='checkOnlyOne(this)'>&nbsp;인물/블로그
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="스포츠" onclick='checkOnlyOne(this)'>스포츠
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="스포츠" onclick='checkOnlyOne(this)'>&nbsp;스포츠
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="엔터테이먼트" onclick='checkOnlyOne(this)'>엔터테이먼트
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="엔터테이먼트" onclick='checkOnlyOne(this)'>&nbsp;엔터테이먼트
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="동물" onclick='checkOnlyOne(this)'>동물
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="동물" onclick='checkOnlyOne(this)'>&nbsp;동물
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="여행/이벤트" onclick='checkOnlyOne(this)'>여행/이벤트
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="여행/이벤트" onclick='checkOnlyOne(this)'>&nbsp;여행/이벤트
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="교육" onclick='checkOnlyOne(this)'>교육
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="교육" onclick='checkOnlyOne(this)'>&nbsp;교육
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="영화/애니메이션" onclick='checkOnlyOne(this)'>영화/애니메이션
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="영화/애니메이션" onclick='checkOnlyOne(this)'>&nbsp;영화/애니메이션
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="게임" onclick='checkOnlyOne(this)'>게임
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="category" value="게임" onclick='checkOnlyOne(this)'>&nbsp;게임
             <br>
           </div>
           <!--카테고리 선택-->
 
           <!-- 구독자 수 선택-->
           <br>
-          &nbsp;<strong> 구독자</strong>
+          <h3><strong>&nbsp;&nbsp;[구독자]</strong></h3>
           <div>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="sub" value="100000" onclick='checkOnlyOne1(this)'>10만 이하
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="sub" value="100000" onclick='checkOnlyOne1(this)'>&nbsp;10만 이하
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="sub" value="1000000" onclick='checkOnlyOne1(this)'>10만 ~ 100만
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="sub" value="1000000" onclick='checkOnlyOne1(this)'>&nbsp;10만 ~ 100만
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="sub" value="10000000" onclick='checkOnlyOne1(this)'>100만 ~ 1000만
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="sub" value="10000000" onclick='checkOnlyOne1(this)'>&nbsp;100만 ~ 1000만
             <br>
-            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="sub" value="100000000" onclick='checkOnlyOne1(this)'>1000만 이상
+            &nbsp;&nbsp;&nbsp;<input type="checkbox" name="sub" value="100000000" onclick='checkOnlyOne1(this)'>&nbsp;1000만 이상
           </div>
           <!-- 구독자 수 선택 -->
           <br>
@@ -253,16 +258,17 @@
                   <td></td>
                   <td th:id="${i.index}">
                     <!-- 찜 완료 버튼 --><!----------------------------------------------------------------------------------------------------->
-                    <button type="button" th:id="${i.index}" class="btn btn-secondary" name = "delete" th:value = "${channel.ch_url}">
-                      <img src="https://i.ibb.co/CJr1zpV/calldibs-button2.png">
+                    <button type="button" th:id="${i.index}" class="btn" name = "delete" th:value = "${channel.ch_url}">
+                      <img src="https://i.ibb.co/tBVdpm3/off.png">
                     </button>
                     <!-- 찜 완료 버튼 --><!----------------------------------------------------------------------------------------------------->
 
                     <!-- 찜 하기 버튼 --><!----------------------------------------------------------------------------------------------------->
-                    <button type="button" th:id="${i.index}" class="btn btn-secondary" name = "insert" th:value = "${channel.ch_url}">
-                      <img src="https://i.ibb.co/g6MZYqm/calldibs-button.png" 
-                      onmouseover="this.src='https://i.ibb.co/YDRmjrG/calldibs-button.png'" 
-                      onmouseout="this.src='https://i.ibb.co/g6MZYqm/calldibs-button.png'">
+                    <button type="button" th:id="${i.index}" class="btn" name = "insert" th:value = "${channel.ch_url}">
+                      <center border="0"><img src="https://i.ibb.co/FwHHDTx/heart-button.png" 
+                        onmouseover="this.src='https://i.ibb.co/tBVdpm3/off.png'" 
+                        onmouseout="this.src='https://i.ibb.co/FwHHDTx/heart-button.png'" border="0"> 
+                      <center/>
                     </button>
                     <!-- 찜 하기 버튼 --><!----------------------------------------------------------------------------------------------------->
                   </td>

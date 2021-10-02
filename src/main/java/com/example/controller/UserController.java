@@ -237,7 +237,7 @@ public class UserController {
             userService.insertGgim(gvo);
         }
 
-        String way = "redirect:detailPage" + "?url=" + cvo.getCh_url();
+        String way = "redirect:detailPage" + "?ch_url=" + cvo.getCh_url();
         return way;
     }
     ////////////////////상세 페이지에서 찜하기 하는 기능
@@ -258,7 +258,7 @@ public class UserController {
             userService.deleteGgim(gvo);
         }
         
-        String way = "redirect:detailPage" + "?url=" + cvo.getCh_url();
+        String way = "redirect:detailPage" + "?ch_url=" + cvo.getCh_url();
         return way;
     }
     ////////////////////상세 페이지에서 찜하기 제거기능
@@ -451,6 +451,7 @@ public class UserController {
         if(session.getAttribute("id") == null){
             return "alert";
         }
+        long before = System.currentTimeMillis();
         System.out.println("받은 키워드 : " +rec);
         ChannelVO cvo = new ChannelVO();
         String[] str = rec.split(" ");
@@ -465,9 +466,12 @@ public class UserController {
         HashMap<String,String[]> hm = new HashMap<>();
         hm.put("a", str);
         model.addAttribute("general", userService.firstStage(hm, cvo)); 
+        long after = System.currentTimeMillis();
 
-        System.out.println("기존 채널 함수 완료");
-        
+        System.out.println("기존 채널 함수 완료 , 걸린 시간 : " + (after-before)/1000);
+
+
+        before = System.currentTimeMillis();
         Runtime r = Runtime.getRuntime();
 		Process p = r.exec("python src\\main\\java\\com\\example\\controller\\sim.py " +rec);
         //python + sim.py 파일이 존재하는 곳의 경로                                       //키워드를 입력받고자 함 
@@ -485,6 +489,10 @@ public class UserController {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+        after = System.currentTimeMillis();
+        System.out.println("파이썬 갔다 왔음 , 걸린 시간 : " + (after-before)/1000);
+
+        before = System.currentTimeMillis();
         answer = answer.replaceAll("\\[", "");
         answer = answer.replaceAll("\\]", "");
         answer = answer.replaceAll("'", "");
@@ -504,6 +512,8 @@ public class UserController {
             rvo.add(temp);
         }
         model.addAttribute("list", rvo);
+        after = System.currentTimeMillis();
+        System.out.println("마이 베티스로 갔다 왔음 , 걸린 시간 : " + (after-before)/1000);
         
         return "RecommendPage";
     }

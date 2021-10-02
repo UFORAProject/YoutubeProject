@@ -111,4 +111,8 @@ public class UserService {
         return mapper.firstStage(hm, cvo);
     }
 
+    public int[] secondStage(HashMap<String,String[]> hm, int[] arr){
+        return mapper.secondStage(hm,arr);
+    }
+
 }
