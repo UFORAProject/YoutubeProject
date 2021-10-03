@@ -155,13 +155,10 @@
         limit 0,5;
     </select>
 
-    <select id="secondStage" parameterType = "hashmap" resultType = "Integer">
-        SELECT A.clust as good
-        FROM channel A, advideo B
-        WHERE A.ch_url = B.ch_url
-        AND
-        <foreach collection="hm.a" item = "arr"  separator = "or"  open="(" close=")">
-            hashtag like #{arr} or descript like #{arr}
+    <select id="secondStage" parameterType = "hashmap" resultType = "arraylist">
+        SELECT clust FROM channel ch, advideo av WHERE ch.ch_url = av.ch_url AND
+        <foreach collection="hm.a" item = "sss"  separator = "or">
+            hashtag like #{sss} or descript like #{sss}
         </foreach>
     </select>
 

@@ -29,7 +29,7 @@ def hash345(key_list, keylist):
             tail += " or "
     
     sel_3 = """
-        SELECT A.clust
+        SELECT clust
         FROM channel A, advideo B
         WHERE A.ch_url = B.ch_url
         AND """ + tail

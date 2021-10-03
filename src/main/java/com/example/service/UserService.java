@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.ArrayList;
 
 
 
@@ -111,8 +112,8 @@ public class UserService {
         return mapper.firstStage(hm, cvo);
     }
 
-    public int[] secondStage(HashMap<String,String[]> hm, int[] arr){
-        return mapper.secondStage(hm,arr);
+    public ArrayList<Integer> secondStage(HashMap<String,String[]> hm, ArrayList<Integer> clust){
+        return mapper.secondStage(hm,clust);
     }
 
 }
