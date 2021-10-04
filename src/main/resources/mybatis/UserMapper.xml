@@ -155,13 +155,4 @@
         limit 0,5;
     </select>
 
-    <select id="secondStage" parameterType = "hashmap" resultType = "arraylist">
-        SELECT clust FROM channel ch, advideo av WHERE ch.ch_url = av.ch_url AND
-        <foreach collection="hm.a" item = "sss"  separator = "or">
-            hashtag like #{sss} or descript like #{sss}
-        </foreach>
-    </select>
-
-    
-
 </mapper>

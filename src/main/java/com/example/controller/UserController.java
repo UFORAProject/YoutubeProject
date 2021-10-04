@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -468,11 +467,6 @@ public class UserController {
         HashMap<String,String[]> hm = new HashMap<>();
         hm.put("a", str);
         model.addAttribute("general", userService.firstStage(hm, cvo));
-        ArrayList<Integer> clust = new ArrayList<>();
-        System.out.println(Arrays.toString(hm.get("a")));
-        ArrayList<Integer> list = new ArrayList<>();
-        list = userService.secondStage(hm, clust);
-        System.out.println(list);
         long after = System.currentTimeMillis();
 
         System.out.println("기존 채널 함수 완료 , 걸린 시간 : " + (after-before)/1000);

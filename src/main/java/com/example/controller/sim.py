@@ -15,49 +15,36 @@ cur = conn.cursor()
 
 def hash345(key_list, keylist):
     ###########
-    clust_list = []
     tag_list = []
     url_list = []
     name_list = []
     img_list = []
     
-    tail = ""
+    tail = "("
     for i in range(len(key_list)):
         key = key_list[i]
-        tail += "(hashtag LIKE '%"+ key + "%' OR descript LIKE '%" + key + "%')"
+        tail += "hashtag LIKE '%"+ key + "%' OR descript LIKE '%" + key + "%'"
         if(i < len(key_list)-1):
             tail += " or "
+    tail += ")"
     
     sel_3 = """
-        SELECT clust
+        SELECT clust,COUNT(*) AS count
         FROM channel A, advideo B
         WHERE A.ch_url = B.ch_url
-        AND """ + tail
+        AND """ + tail + """
+        group by clust
+        order by count desc
+        limit 0,1
+        """
     cur.execute(sel_3)
 
+    maxindex = 0
     while(True):
         row = cur.fetchone()
         if row == None:
             break
-        clust_list.append(row[0])
-
-    ccc = [0,0,0,0]
-    for i in range(len(clust_list)):
-        if clust_list[i] == 0:
-            ccc[0] += 1
-        elif clust_list[i] == 1:
-            ccc[1] += 1
-        elif clust_list[i] == 2:
-            ccc[2] += 1
-        else:
-            ccc[3] += 1
-    
-    maxindex = 0
-    maxvalue = 0
-    for i in range(len(ccc)):
-        if(ccc[i] > maxvalue):
-            maxvalue = ccc[i]
-            maxindex = i #광고주의 키워드가 가장 많은 클러스터(군집) 추출
+        maxindex = row[0]
     
     #######
     

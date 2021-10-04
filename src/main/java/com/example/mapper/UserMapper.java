@@ -1,5 +1,4 @@
 package com.example.mapper;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -53,7 +52,6 @@ public interface UserMapper {
 
     List<ChannelVO> firstStage(HashMap<String,String[]> hm,ChannelVO cvo);
 
-    ArrayList<Integer> secondStage(HashMap<String,String[]> hm, ArrayList<Integer> clust);
      
 }
 
