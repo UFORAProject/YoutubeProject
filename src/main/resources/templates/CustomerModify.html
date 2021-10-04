@@ -114,10 +114,12 @@
     /*
     <![CDATA[*/
         let list = /*[[${list}]]*/ 'default';
-        console.log(list[0]);
-        $('#userid').text(list[0].id);
-        $('#pw').val(list[0].pw);
-        $('#pw1').val(list[0].pw);
+        var beforeEmail = list[0].email;
+        var beforeHeadEmail = beforeEmail.split('@')[0];
+        var beforeTailEmail = beforeEmail.split('@')[1];
+        var beforePhone = list[0].phone;
+        var beforeMiddlePhone = beforePhone.split('-')[1];
+        var beforeTailPhone = beforePhone.split('-')[2];
     /*]]>
   */
 </script>
@@ -247,10 +249,10 @@
                   <br>
                   <table boder = "" cellspacing = "1" border="0">
                     <FORM>
-                        <tr height="35">
+                        <tr height="35" th:each = "a : ${list}">
                             <td> 아이디 </td>
                             <td>
-                                <span id = "userid"></span>
+                                <span th:text = "${a.id}"> </span>
                             </td>
                         </tr>
 
@@ -271,9 +273,9 @@
                         </tr>
             
                     
-                        <tr height="35">
+                        <tr height="35" th:each = "a : ${list}">
                             <td> 대표자명 </td>
-                            <td> <input type = "text" id="ceo" name = "ceo" placeholder="대표자명"/> </td>
+                            <td> <input type = "text" id="ceo" name = "ceo" placeholder="대표자명" th:value = "${a.ceo}"/> </td>
                         </tr>
                    
                    
@@ -281,7 +283,11 @@
                         <tr height="35">
                             <td>본인 확인 이메일</td>
                             <td name="email">
-                            <input type = "text" id = "mailhead"/> @ <input type = "text" id="mailtail" value=""/> &nbsp;
+                            <input type = "text" id = "mailhead" value = ""/> @ <input type = "text" id="mailtail" value=""/> &nbsp;
+                            <script>
+                                $('#mailhead').val(beforeHeadEmail);
+                                $('#mailtail').val(beforeTailEmail);
+                            </script>
                             <select id="selectmailTail" onchange="myFunction(this.value)"> 
                                 <option value="" selected="selected"> 직접입력 </option>
                                 <option value="daum.net">daum.net</option> 
@@ -311,17 +317,21 @@
                                   <option> 019 </option>
                               </select>
                               <input type = "text" id = "mid" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" 
-                                size="4" maxlength="4" oninput="numberMaxLength(this);"/> - 
+                                size="4" maxlength="4" oninput="numberMaxLength(this);" value = ""/> - 
                               <input type = "text" id = "tail" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" 
-                                size="4" maxlength="4" oninput="numberMaxLength(this);"/>
+                                size="4" maxlength="4" oninput="numberMaxLength(this);" value = ""/>
+                              <script>
+                                  $('#mid').val(beforeMiddlePhone);
+                                  $('#tail').val(beforeTailPhone);
+                              </script>
                           </td>
                         </tr>
                         
 
-                        <tr height="35">
+                        <tr height="35" th:each = "a : ${list}">
                             <td>사업자 등록번호 </td>
                             <td>
-                                <span></span>
+                                <span th:text = "${a.regnum}"></span>
                             </td>
                         </tr>
 
@@ -371,9 +381,15 @@
                         if (confirm("수정하시겠습니까?")) {
                         var pw = $('#pw').val();
                         var ceo = $('#ceo').val();
-                        var email = $('#mailhead').val() + '@' +$('#selectmailTail option:selected').val();
-                        var phone = $("#telecom option:selected").val() + $('#mid').val() + $('#tail').val();
-                        var address = $('#sample6_address').val() + $('#sample6_extraAddress').val() + $('#sample6_detailAddress').val();
+                        var email;
+                        if($('#selectmailTail option:selected').val() == null){
+                            email = $('#mailhead').val() + '@' +$('#selectmailTail option:selected').val();
+                        }
+                        else{
+                            email = $('#mailhead').val() + '@' +beforeTailEmail;
+                        }
+                        var phone = $("#telecom option:selected").val() + '-'+$('#mid').val() + '-'+$('#tail').val();
+                        var address = $('#sample6_address').val() + ' ' + $('#sample6_extraAddress').val() + ' ' +$('#sample6_detailAddress').val();
                         var html = "";
                         uri = '/modifyCustomer'
                         html += '<form name="dataForm" action="'+uri+'" method="post">';
@@ -405,6 +421,6 @@
     <div th:replace = "footer.html"></div>
     <!--footer-->
 
-  <script src="weather.js"></script>
+
 </body>
 </html>

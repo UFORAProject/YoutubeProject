@@ -430,6 +430,7 @@ public class UserController {
         System.out.println("휴대전화 그대로인지 : "+cus.getPhone());
         System.out.println("주소 그대로인지 : " + cus.getAddress());
         System.out.println("사업자등록번호는 아마 null일것이다 !  : " +cus.getRegnum());
+        userService.modifyCustomer(cus);
 
         return "redirect:modify";
     }
