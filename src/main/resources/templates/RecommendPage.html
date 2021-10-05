@@ -134,18 +134,24 @@
     <table id = "table" border="0" cellpadding="1" cellspacing="1" style="height:600px; width:1024px" align=center>
         <tbody>
             <tr>
-                <td style="width:255px" valign=top bgcolor="#ececec"  class = 'category' >&nbsp;
+                <td style="width:255px" align = center valign=top bgcolor="#ececec"  class = 'category' >&nbsp;
                     <br>
-                    <p align=Center size=9><img src="https://i.ibb.co/f2ghtBm/Recommendation.png"></p>
+                    <p align=center size=9><img src="https://i.ibb.co/f2ghtBm/Recommendation.png"></p>
                     <br>
-                    &nbsp;&nbsp;&nbsp;키워드를 입력해주세요
                     <br>
-                    <form action="/recommend" method="POST" border="1">
-                        &nbsp;&nbsp;&nbsp;<input type="text" name = "keyword" placeholder="">
-                        <br>
-                        <br>
-                        &nbsp;&nbsp;&nbsp;<input type="submit" value=" 추천 " />
-                    </form>
+                    <div>
+                        <h3>키워드를 입력해주세요</h3>
+                    </div>
+                    <br>
+                        <form action="/recommend" method="POST" border="1">
+                            <input type="text" name = "keyword" placeholder="" style="width:200px;height:30px;font-size:20px;">
+                            <br>
+                            <br>
+                            <input TYPE="IMAGE" src="https://i.ibb.co/pPxMtZj/recommendation-Button.png" 
+                                onmouseover="this.src='https://i.ibb.co/6mW8dzq/recommendation-Button.png'" 
+                                onmouseout="this.src='https://i.ibb.co/pPxMtZj/recommendation-Button.png'" 
+                                name="submit" value="submit">
+                        </form>
                 </td>
                 <td class="content" style="width:755px" align="center"  valign=top>
                     <br>

@@ -123,6 +123,8 @@
         let list = /*[[${list}]]*/ 'default';
         var korean = 1-list[0].foreign;
         var foreign = list[0].foreign;
+        var like = list[0].likecnt;
+        var dislike = list[0].dislike;
         const word_list = word.split(' ');
         console.log(word_list);
       /*]]>
@@ -161,7 +163,6 @@
                         좋아요 비율 : <span th:text = "${a.ratio}"></span><br>
                         조회수 : <span th:text = "${a.click}"></span><br>
                         댓글 수 : <span th:text = "${a.comment}"></span><br>
-                        외국인 비율 : <span th:text = "${a.foreign}"></span><br>
                         해시태그 : <span th:text = "${a.hashtag}"></span><br>
                     </td>
                 </tr>
@@ -182,61 +183,13 @@
               <tr>
                   <td id="graph">
                     <div>
-                      <canvas id="myChart"></canvas>
+                      <canvas id="foreignRatio"></canvas>
                     </div>
-                    <script type="text/javascript">
-                      var context = document
-                          .getElementById('myChart')
-                          .getContext('2d');
-                      var myChart = new Chart(context, {
-                          type: 'pie', // 차트의 형태
-                          data: { // 차트에 들어갈 데이터
-                              labels: [
-                                  //x 축
-                                  '한국인','외국인'
-                              ],
-                              datasets: [
-                                  { //데이터
-                                      label: 'test1', //차트 제목
-                                      fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-                                      data: [
-                                          korean,foreign //x축 label에 대응되는 데이터 값
-                                      ],
-                                      backgroundColor: [
-                                          //색상
-                                          'rgba(255, 99, 132, 0.2)',
-                                          'rgba(54, 162, 235, 0.2)'/*,                                          
-                                          'rgba(255, 206, 86, 0.2)',
-                                          'rgba(75, 192, 192, 0.2)',
-                                          'rgba(153, 102, 255, 0.2)',
-                                          'rgba(255, 159, 64, 0.2)'*/
-                                      ],
-                                      borderColor: [
-                                          //경계선 색상
-                                          'rgba(255, 99, 132, 1)',
-                                          'rgba(54, 162, 235, 1)'/*,
-                                          'rgba(255, 206, 86, 1)',
-                                          'rgba(75, 192, 192, 1)',
-                                          'rgba(153, 102, 255, 1)',
-                                          'rgba(255, 159, 64, 1)'*/
-                                      ],
-                                      borderWidth: 1 //경계선 굵기
-                                  }
-                              ]
-                          },
-                          options: {
-                              scales: {
-                                  yAxes: [
-                                      {
-                                          ticks: {
-                                              beginAtZero: true
-                                          }
-                                      }
-                                  ]
-                              }
-                          }
-                      });
-                  </script>
+                  </td>
+                  <td>
+                    <div>
+                      <canvas id="likeRatio"></canvas>
+                    </div>
                   </td>
               </tr>
           </table>
@@ -260,4 +213,83 @@
     <div th:replace = "footer.html"></div>
     <!--footer-->
 </body>
+<script type="text/javascript">
+  var context = document.getElementById('foreignRatio').getContext('2d');
+  var myChart = new Chart(context, {
+      type: 'pie', // 차트의 형태
+      data: { // 차트에 들어갈 데이터
+          labels: [
+              //x 축
+              '한국인','외국인'
+          ],
+          datasets: [
+              { //데이터
+                  label: 'test1', //차트 제목
+                  fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+                  data: [
+                      korean,foreign //x축 label에 대응되는 데이터 값
+                  ],
+                  backgroundColor: [
+                      //색상
+                      'rgba(255, 99, 132, 0.2)',
+                      'rgba(54, 162, 235, 0.2)'/*,                                          
+                      'rgba(255, 206, 86, 0.2)',
+                      'rgba(75, 192, 192, 0.2)',
+                      'rgba(153, 102, 255, 0.2)',
+                      'rgba(255, 159, 64, 0.2)'*/
+                  ],
+                  borderColor: [
+                      //경계선 색상
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)'/*,
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)',
+                      'rgba(153, 102, 255, 1)',
+                      'rgba(255, 159, 64, 1)'*/
+                  ],
+                  borderWidth: 1 //경계선 굵기
+              }
+          ]
+      }
+  });
+
+  var context1 = document.getElementById('likeRatio').getContext('2d');
+  var myChart = new Chart(context1, {
+      type: 'bar', // 차트의 형태
+      data: { // 차트에 들어갈 데이터
+          labels: [
+              //x 축
+              '싫어요','좋아요'
+          ],
+          datasets: [
+              { //데이터
+                  label: '좋아요 싫어요', //차트 제목
+                  fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+                  data: [
+                      dislike,like //x축 label에 대응되는 데이터 값
+                  ],
+                  backgroundColor: [
+                      //색상
+                      'rgba(255, 99, 132, 0.2)',
+                      'rgba(54, 162, 235, 0.2)'/*,                                          
+                      'rgba(255, 206, 86, 0.2)',
+                      'rgba(75, 192, 192, 0.2)',
+                      'rgba(153, 102, 255, 0.2)',
+                      'rgba(255, 159, 64, 0.2)'*/
+                  ],
+                  borderColor: [
+                      //경계선 색상
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)'/*,
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)',
+                      'rgba(153, 102, 255, 1)',
+                      'rgba(255, 159, 64, 1)'*/
+                  ],
+                  borderWidth: 1 //경계선 굵기
+              }
+          ]
+      }
+  });
+</script>
 </html>
