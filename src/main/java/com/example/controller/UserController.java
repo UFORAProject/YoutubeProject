@@ -529,6 +529,15 @@ public class UserController {
         
         return "logoutAlert";
     }
-
     /////////////////로그아웃 기능
+
+    ////////////////서비스 소개 페이지로 넘기는 기능
+    @RequestMapping(value="/servicePage")
+    public String servicePage(HttpSession session) {
+        if(session.getAttribute("id") == null){
+            return "alert";
+        }
+        return "servicePage";
+    }
+    ////////////////서비스 소개 페이지로 넘기는 기능
 }
