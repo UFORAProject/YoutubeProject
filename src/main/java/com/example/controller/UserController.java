@@ -13,6 +13,7 @@ import com.example.vo.RecommendVO;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -207,7 +208,9 @@ public class UserController {
         model.addAttribute("detail", detail);
         model.addAttribute("list", userService.detailPage(avo));
         model.addAttribute("url", avo.getCh_url());
-        System.out.println("총 조회수 잘 나오는지 .. " +detail.get(0).getTotview());
+        double totview = detail.get(0).getTotview();
+        BigDecimal bigDecimal = new BigDecimal(totview);
+        model.addAttribute("totview", bigDecimal.toString());
         
 
         DetailMaker DetailMarker = new DetailMaker();

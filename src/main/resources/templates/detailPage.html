@@ -18,6 +18,7 @@
       let detail = /*[[${detail}]]*/ 'default';
       let ad = /*[[${list}]]*/ 'default';
       let chch = /*[[${url}]]*/ 'default';
+      console.log(detail[0]);
       let url;
       let id;
       let i = 0;
@@ -164,12 +165,12 @@
                 <img id = 'profile' src="" alt="" width = "150px" height = "150px"><br>
                 채널 명 : <span th:text = "${detail.ch_name}"></span><br>
                 가입 날짜 : <span th:text = "${detail.regdate}"></span><br>
-                누적 조회수 : <span th:text = "${detail.totview}"></span><br>
+                누적 조회수 : <div><strong th:text = "${totview}"></strong></div>
                 팬클럽 유무 : <span th:text = "${detail.fan}"></span><br>
                 한달 업로드 수 : <span th:text = "${detail.upload}"></span><br>
                 인스타 태그 수 : <span th:text = "${detail.insta}"></span><br>
                 카테고리 : <span th:text = "${detail.category}"></span><br>
-                평균 광고 조회수 : <span th:text = "${detail.adavgview}"></span><br>
+                평균 광고 조회수 : <span th:text = "${#numbers.formatInteger(detail.adavgview,0,'COMMA')}"></span><br>
                 광고 수 : <span th:text = "${detail.adcount}"></span><br>
                 연락처 : <span th:text = "${detail.contact}"></span>
                 </td>
