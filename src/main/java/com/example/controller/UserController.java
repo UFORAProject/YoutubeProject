@@ -364,7 +364,10 @@ public class UserController {
         adVO avo = new adVO();
         System.out.println("광고동영상 url : " +url);
         model.addAttribute("list", userService.DetailADvideo(url, avo));
-        model.addAttribute("wordcloud", userService.wordCloud(url));
+        String str = userService.wordCloud(url);
+        
+        
+        model.addAttribute("bigword", str);
 
         return "DetailADvideoPage";
     }

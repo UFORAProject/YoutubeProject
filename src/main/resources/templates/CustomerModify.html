@@ -107,6 +107,9 @@
     }
 
   /* footer style */
+  button.btnlogout{
+    border : none;
+  }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -228,20 +231,24 @@
     <br>
 
     <!-- Main -->
-    <table id = "table" border="0" cellpadding="1" cellspacing="1" style="height:600px; width:1024px" align=center>
+    <table id = "table" border="0" cellpadding="0" cellspacing="0" style="height:600px; width:1024px" align=center>
         <tbody>
             <tr>
                 <td style="width:255px" valign=top bgcolor="#ececec"  class = 'category' >&nbsp;
                     <br>
                     <p align=Center size=9><img src="https://i.ibb.co/tXftLwj/Mypage.png"></p>
                     <br>
-                    &nbsp;&nbsp;&nbsp;<a href="/myPage">찜 목록</a>
+                    &nbsp;&nbsp;&nbsp;<a href="/myPage"><img src="https://i.ibb.co/YTsdB8X/mypage-Dib.png" alt=""></a>
                     <br>
                     <br>
-                    &nbsp;&nbsp;&nbsp;<strong>>> 개인 정보 수정 </strong>
+                    &nbsp;&nbsp;&nbsp;<strong><img src="https://i.ibb.co/YksGNH7/mypage-Modify.png" alt=""></strong>
                     <br>
                     <br>
-                    &nbsp;&nbsp;&nbsp;<button type="button" id="logout"> 로그아웃 </button>
+                    &nbsp;&nbsp;&nbsp;<button type="button" class = "btnlogout" id="logout">
+                        <img src="https://i.ibb.co/R4L8nsD/mypage-Logout.png" 
+                      onmouseover="this.src='https://i.ibb.co/MRqXYjL/mypage-Logout.png'" 
+                      onmouseout="this.src='https://i.ibb.co/R4L8nsD/mypage-Logout.png'"> 
+                    </button>
       
                 </td>
                 <td class="content" style="width:755px" align="center"  valign=top>

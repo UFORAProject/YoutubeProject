@@ -170,7 +170,7 @@ zoom: 1.65;
   <br>
   <br>
   <br>
-  <table id = "table" border="0" cellpadding="1" cellspacing="1" width="1024px" align=center>
+  <table id = "table" border="0" cellpadding="0" cellspacing="0" width="1024px" align=center>
     <tr>
       <td align="right">
         <strong>데이터 : 2021년 8월 29일 기준</strong>
@@ -178,7 +178,7 @@ zoom: 1.65;
     </tr>
   </table>
   <!-- main -->
-  <table id = "table" border="0" cellpadding="1" cellspacing="1" style="height:600px; width:1024px" align=center>
+  <table id = "table" border="0" cellpadding="0" cellspacing="0" style="height:600px; width:1024px" align=center>
     <tbody>
       <tr>
 
@@ -274,24 +274,24 @@ zoom: 1.65;
         <!--   출력 내용 -->
         <table class="table table-bordered">
           <tr height="50px">
-              <th> 채널 url </th>
-              <th width="10px"></th>
-              <th> 채널 이름 </th>
-              <th width="10px"></th>
-              <th> 구독자 수 </th>
-              <th width="10px"></th>
-              <th> 카테고리 </th>
-              <th width="10px"></th>
-              <th> 광고 수 </th>
-              <th width="10px"></th>
-              <th> 찜 </th>
+              <th width = "130px"> 썸네일 </th>
+              <th width="10px"> &nbsp; </th>
+              <th width = "10px" align="center"> 채널 이름 </th>
+              <th width="10px"> &nbsp; </th>
+              <th width = "100px" align="center"> 구독자 수 </th>
+              <th width="10px"> &nbsp; </th>
+              <th width = "100px" align="center"> 카테고리 </th>
+              <th width="10px"> &nbsp; </th>
+              <th width = "100px" align="center"> 광고 수 </th>
+              <th width="10px"> &nbsp; </th>
+              <th width = "50px" align="center"> 찜 </th>
           </tr>
           <tr th:each="channel,i : ${list}">
               <td><a th:href="@{/detailPage(ch_url=${channel.ch_url})}"><img th:id = "${i.index}" src='' alt=""></a></td>
               <td></td>
               <td align="center"><span th:text="${channel.ch_name}">채널 이름 </span></td>
               <td></td>
-              <td align="center"><span th:text="${channel.sub}"> 구독자 수 </span></td>
+              <td align="center"><span th:text="${#numbers.formatInteger(channel.sub,0,'COMMA')}"> 구독자 수 </span></td>
               <td></td>
               <td align="center"><span th:text="${channel.category}"> 카테고리 </span></td>
               <td></td>
@@ -299,13 +299,13 @@ zoom: 1.65;
               <td></td>
               <td align="center">
                 <button type="button" class = "btn" th:id="${i.index}" name = "delete" th:value = "${channel.ch_url}">
-                  <center border="0"><img src="https://i.ibb.co/THssXXW/heart-button.png" border="0">
+                  <center border="0"><img src="https://i.ibb.co/qjp9cCV/removebg-preview.png" border="0">
                     <center/>
                 </button>
                 <button type="button" class = "btn" th:id="${i.index}" name = "insert" th:value = "${channel.ch_url}">
-                  <center border="0"><img src="https://i.ibb.co/FwHHDTx/heart-button.png" 
-                    onmouseover="this.src='https://i.ibb.co/THssXXW/heart-button.png'" 
-                    onmouseout="this.src='https://i.ibb.co/FwHHDTx/heart-button.png'" border="0"> 
+                  <center border="0"><img src="https://i.ibb.co/GRkW0dR/removebg-preview.png" 
+                    onmouseover="this.src='https://i.ibb.co/qjp9cCV/removebg-preview.png'" 
+                    onmouseout="this.src='https://i.ibb.co/GRkW0dR/removebg-preview.png'" border="0"> 
                   <center/>
                 </button>
               </td>
@@ -335,7 +335,6 @@ zoom: 1.65;
             let aaa = "button[id='"+j+"'][name='insert']";
             let bbb = "button[id='"+j+"'][name='delete']";
             $(aaa).click(function(){
-              if (confirm("찜 목록에 추가하시겠습니까?")) {
                 var html = "";
                 var uri = '/filterInsertGgim'
                 let redirect = window.location.href;
@@ -346,10 +345,9 @@ zoom: 1.65;
                 console.log('추가완료');
                 $("body").append(html);
                 document.dataForm.submit();
-              }
+              
             });
             $(bbb).click(function(){
-              if (confirm("찜 목록에서 제거하시겠습니까?")) {
                 var html = "";
                 var uri = '/filterDeleteGgim'
                 let redirect = window.location.href;
@@ -360,7 +358,7 @@ zoom: 1.65;
                 console.log('제거완료');
                 $("body").append(html);
                 document.dataForm.submit();
-              }
+              
             });
           }
         </script>

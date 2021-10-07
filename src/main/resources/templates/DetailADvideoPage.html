@@ -113,20 +113,28 @@
     #graph{
       vertical-align : middle;
     }
+
+    #wordCloud {
+      width:500px;
+      height: 500px;
+    }
   </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/plugins/wordCloud.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
 <script th:inline = "javascript">
     /*
       <![CDATA[*/
-        let word = /*[[${wordcloud}]]*/ 'default';
+        let bigword = /*[[${bigword}]]*/ 'default';
+        
         let list = /*[[${list}]]*/ 'default';
         var korean = 1-list[0].foreign;
         var foreign = list[0].foreign;
         var like = list[0].likecnt;
         var dislike = list[0].dislike;
-        const word_list = word.split(' ');
-        console.log(word_list);
       /*]]>
     */
 </script>
@@ -140,7 +148,7 @@
 <br>
 
   <!---- main ----->
-  <table id = "table" border="0" cellpadding="1" cellspacing="1" style="height:600px; width:1024px" align=center>
+  <table id = "table" border="0" cellpadding="0" cellspacing="0" style="height:600px; width:1024px" align=center>
 	  <tbody>
 		  <tr>
 
@@ -158,11 +166,11 @@
                         이름 : <span th:text = "${a.name}"></span><br>
                         업로드 날짜 : <span th:text = "${a.upday}"></span><br>
                         카테고리 : <span th:text = "${a.category}"></span><br>
-                        좋아요 수 : <span th:text = "${a.likecnt}"></span><br>
-                        싫어요 수 : <span th:text = "${a.dislike}"></span><br>
+                        좋아요 수 : <span th:text = "${#numbers.formatInteger(a.likecnt,0,'COMMA')}"></span><br>
+                        싫어요 수 : <span th:text = "${#numbers.formatInteger(a.dislike,0,'COMMA')}"></span><br>
                         좋아요 비율 : <span th:text = "${a.ratio}"></span><br>
-                        조회수 : <span th:text = "${a.click}"></span><br>
-                        댓글 수 : <span th:text = "${a.comment}"></span><br>
+                        조회수 : <span th:text = "${#numbers.formatInteger(a.click,0,'COMMA')}"></span><br>
+                        댓글 수 : <span th:text = "${#numbers.formatInteger(a.comment,0,'COMMA')}"></span><br>
                         해시태그 : <span th:text = "${a.hashtag}"></span><br>
                     </td>
                 </tr>
@@ -177,21 +185,58 @@
         <!---- 내용 ---->
         <td class="content" style="width:755px" align="center"  valign=top>
           <br>
-          <br>
+          <table align=center border="0">
+            <tr>
+              <td align="center">
+                <iframe id="iframe" width="736" height="414" src="" 
+                    title="YouTube video player" frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                </iframe>
+                <script>
+                  let adurl = 'https://www.youtube.com/embed/' + list[0].ad_url;
+                  $('#iframe').attr('src',adurl);
+                </script>
+              </td>
+            </tr>
+          </table>
           <br>
           <table align=center border="0">
-              <tr>
-                  <td id="graph">
-                    <div>
-                      <canvas id="foreignRatio"></canvas>
-                    </div>
-                  </td>
-                  <td>
-                    <div>
-                      <canvas id="likeRatio"></canvas>
-                    </div>
-                  </td>
-              </tr>
+            <tr>
+              <td align="center"><h2><strong>[ 댓글 외국인 분포도 ]</strong></h2></td>
+              <td width = "30px"></td>
+              <td align="center"><h2><strong>[ 좋아요 싫어요 ]</strong></h2></td>
+            </tr>
+            <tr height = "15px">
+              <td>
+
+              </td>
+            </tr>
+            <tr>
+              <td id="graph">
+                <div>
+                  <canvas id="foreignRatio"></canvas>
+                </div>
+              </td>
+              <td width = "30px"></td>
+              <td>
+                <div>
+                  <canvas id="likeRatio"></canvas>
+                </div>
+              </td>
+          </tr>
+          </table>
+          <br>
+          <table align="center" border="0">
+            <tr>
+              <td align="center">
+                <h2><strong>[ 워드 클라우드 ]</strong></h2>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div id="wordCloud" ></div>
+              </td>
+            </tr>
           </table>
           <br>
         </td>
@@ -213,7 +258,31 @@
     <div th:replace = "footer.html"></div>
     <!--footer-->
 </body>
+<script>
+  am4core.ready(function() {
+
+  // Themes begin
+  am4core.useTheme(am4themes_animated);
+  // Themes end
+
+  var chart = am4core.create("wordCloud", am4plugins_wordCloud.WordCloud);
+  var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
+
+  series.accuracy = 4;
+  series.step = 15;
+  series.rotationThreshold = 0.7;
+  series.maxCount = 200;
+  series.minWordLength = 2;
+  series.labels.template.tooltipText = "{word}: {value}";
+  series.fontFamily = "Courier New";
+  series.maxFontSize = am4core.percent(30);
+
+  series.text = bigword;
+  });
+</script>
 <script type="text/javascript">
+  
+
   var context = document.getElementById('foreignRatio').getContext('2d');
   var myChart = new Chart(context, {
       type: 'pie', // 차트의 형태
@@ -291,5 +360,9 @@
           ]
       }
   });
+  $('#wordCloud').jQCloud(bigword,{
+    width : 500, height : 350
+  });
 </script>
+
 </html>

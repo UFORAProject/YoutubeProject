@@ -121,6 +121,10 @@
     }
 
   /* footer style */
+
+  button.logbtn{
+    border : none;
+  }
 </style>
 <body>
     <!-- header -->
@@ -131,7 +135,7 @@
     <br>
     <br>
     <!-- Main -->
-    <table id = "table" border="0" cellpadding="1" cellspacing="1" style="height:600px; width:1024px" align=center>
+    <table id = "table" border="0" cellpadding="0" cellspacing="0" style="height:600px; width:1024px" align=center>
         <tbody>
             <tr>
                 <td style="width:255px" valign=top bgcolor="#ececec"  class = 'category' >&nbsp;
@@ -141,13 +145,17 @@
                     &nbsp;&nbsp;&nbsp;<b th:text = "${CustomID}"></b>님 안녕하세요!
                     <br>
                     <br>
-                    &nbsp;&nbsp;&nbsp;<strong>>> 찜 목록</strong>
+                    &nbsp;&nbsp;&nbsp;<strong><img src="https://i.ibb.co/sRwHmqV/mypage-Dib.png" alt=""></strong>
                     <br>
                     <br>
-                    &nbsp;&nbsp;&nbsp;<a href="/modify">개인 정보 수정</a>
+                    &nbsp;&nbsp;&nbsp;<a href="/modify"><img src="https://i.ibb.co/HxVSGZS/mypage-Modify.png" alt=""></a>
                     <br>
                     <br>
-                    &nbsp;&nbsp;&nbsp;<button type = "button" id="logout"> 로그아웃 </button>
+                    &nbsp;&nbsp;&nbsp;<button type = "button" class = "logbtn" id="logout">
+                      <img src="https://i.ibb.co/R4L8nsD/mypage-Logout.png" 
+                      onmouseover="this.src='https://i.ibb.co/MRqXYjL/mypage-Logout.png'" 
+                      onmouseout="this.src='https://i.ibb.co/R4L8nsD/mypage-Logout.png'"> 
+                    </button>
       
                 </td>
                 <td class="content" style="width:755px" align="center"  valign=top>
@@ -160,7 +168,7 @@
                     <tr th:unless="${ggimList.empty}" height="50px">
                       <th width = "130px"> 썸네일 </th>
                       <th width = "10px">&nbsp;</th>
-                      <th width = "10px" align="center"> 채널 이름 </th>
+                      <th width = "100px" align="center"> 채널 이름 </th>
                       <th width = "10px">&nbsp;</th>
                       <th width = "100px" align="center"> 구독자 수 </th>
                       <th width = "10px">&nbsp;</th>
@@ -175,11 +183,11 @@
                       <td>&nbsp;</td>
                       <td align="center"><span th:text="${ggim.ch_name}"> 채널 이름 </span></td>
                       <td>&nbsp;</td>
-                      <td align="center"><span th:text="${ggim.sub}"> 구독자 수 </span></td>
+                      <td align="center"><span th:text="${#numbers.formatInteger(ggim.sub,0,'COMMA')}"> 구독자 수 </span></td>
                       <td>&nbsp;</td>
                       <td align="center"><span th:text="${ggim.category}"> 카테고리 </span></td>
                       <td>&nbsp;</td>
-                      <td align="center"><a th:href="@{/detailPage(ch_url=${ggim.ch_url})}"><span th:text="${ggim.adcount}"> 광고 개수 </span></a></td>
+                      <td align="center"><a th:href="@{/detailPage(ch_url=${ggim.ch_url})}"><span th:text="${#numbers.formatInteger(ggim.adcount,0,'COMMA')}"> 광고 개수 </span></a></td>
                       <td></td>
                       <td align="center"><button type="button" class="btn btn-light" th:id="${i.index}" th:value = "${ggim.ch_url}"> 제거 </button></td>
                       <script>

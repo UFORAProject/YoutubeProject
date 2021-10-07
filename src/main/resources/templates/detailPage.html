@@ -146,7 +146,7 @@
     </tr>
   </table>
   <!---- main ----->
-  <table id = "table" border="0" cellpadding="1" cellspacing="1" style="height:600px; width:1024px" align=center>
+  <table id = "table" border="0" cellpadding="0" cellspacing="0" style="height:600px; width:1024px" align=center>
 	  <tbody>
 		  <tr>
 
@@ -165,13 +165,13 @@
                 <img id = 'profile' src="" alt="" width = "150px" height = "150px"><br>
                 채널 명 : <span th:text = "${detail.ch_name}"></span><br>
                 가입 날짜 : <span th:text = "${detail.regdate}"></span><br>
-                누적 조회수 : <div><strong th:text = "${totview}"></strong></div>
+                누적 조회수 : <div><strong th:text = "${#numbers.formatInteger(totview,0,'COMMA')}"></strong></div>
                 팬클럽 유무 : <span th:text = "${detail.fan}"></span><br>
-                한달 업로드 수 : <span th:text = "${detail.upload}"></span><br>
-                인스타 태그 수 : <span th:text = "${detail.insta}"></span><br>
+                한달 업로드 수 : <span th:text = "${#numbers.formatInteger(detail.upload,0,'COMMA')}"></span><br>
+                인스타 태그 수 : <span th:text = "${#numbers.formatInteger(detail.insta,0,'COMMA')}"></span><br>
                 카테고리 : <span th:text = "${detail.category}"></span><br>
                 평균 광고 조회수 : <span th:text = "${#numbers.formatInteger(detail.adavgview,0,'COMMA')}"></span><br>
-                광고 수 : <span th:text = "${detail.adcount}"></span><br>
+                광고 수 : <span th:text = "${#numbers.formatInteger(detail.adcount,0,'COMMA')}"></span><br>
                 연락처 : <span th:text = "${detail.contact}"></span>
                 </td>
                 <script>
@@ -182,12 +182,14 @@
 
             <br>
             <span th:if = "${ggim} == 0">
-                <button type="button" class="btn btn-light" id="insert"><img src="https://i.ibb.co/g6MZYqm/calldibs-button.png" 
-                  onmouseover="this.src='https://i.ibb.co/YDRmjrG/calldibs-button.png'" 
-                  onmouseout="this.src='https://i.ibb.co/g6MZYqm/calldibs-button.png'"></button>
+                <button type="button" class="btn btn-light" id="insert"><img src="https://i.ibb.co/GRkW0dR/removebg-preview.png" 
+                  onmouseover="this.src='https://i.ibb.co/qjp9cCV/removebg-preview.png'" 
+                  onmouseout="this.src='https://i.ibb.co/GRkW0dR/removebg-preview.png'"></button>
             </span>
             <span th:unless="${ggim} == 0">
-                <button type="button" class="btn" id="delete"><img src="https://i.ibb.co/CJr1zpV/calldibs-button2.png"></button>
+                <button type="button" class="btn" id="delete">
+                  <img src="https://i.ibb.co/qjp9cCV/removebg-preview.png">
+                </button>
             </span>
             <script>
               $('#insert').click(function(){
@@ -256,7 +258,7 @@
                 <td></td>
                 <td><a th:href="@{/DetailADvideo(adurl=${ad.ad_url})}"><span th:text="${ad.upday}"> 채널 이름 </span></a></td>
                 <td></td>
-                <td><span th:text="${ad.likecnt}"> 좋아요 수 </span></td>
+                <td><span th:text="${#numbers.formatInteger(ad.likecnt,0,'COMMA')}"> 좋아요 수 </span></td>
             </tr>
           </table>
           <!-- 게시판 하단의 페이징 버튼 -->

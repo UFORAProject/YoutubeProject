@@ -79,12 +79,6 @@
         where ad_url = #{url}
     </select>
 
-    <select id="wordCloud" parameterType="String" resultType="String">
-        select comment
-        from adcomment
-        where url = #{url}
-    </select>
-
     <select id = "idCheck" parameterType="com.example.vo.CustomerVO" resultType="int">
         select count(*)
         from customer
@@ -153,6 +147,13 @@
         )
         ORDER BY adavgview DESC
         limit 0,5;
+    </select>
+
+
+    <select id="wordCloud" parameterType="String" resultType="String">
+        select comment
+        from adcomment
+        where url = #{url}
     </select>
 
 </mapper>

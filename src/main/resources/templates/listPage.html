@@ -162,7 +162,7 @@
   <br>
   <br>
   <br>
-  <table id = "table" border="0" cellpadding="1" cellspacing="1" width="1024px" align=center>
+  <table id = "table" border="0" cellpadding="0" cellspacing="0" width="1024px" align=center>
     <tr>
       <td align="right">
         <strong>데이터 : 2021년 8월 29일 기준</strong>
@@ -170,7 +170,7 @@
     </tr>
   </table>
   <!-- main -->
-  <table id = "table" border="0" cellpadding="1" cellspacing="1" style="height:600px; width:1024px" align=center>
+  <table id = "table" border="0" cellpadding="0" cellspacing="0" style="height:600px; width:1024px" align=center>
     <tbody>
       <!---- 필터 ---->
 			<td style="width:255px" valign=top bgcolor="#ececec"  class = 'category'>&nbsp;
@@ -264,7 +264,7 @@
                   <td>&nbsp;</td>
                   <td align="center"><span th:text="${channel.ch_name}"> 채널 이름 </span></td>
                   <td>&nbsp;</td>
-                  <td align="center"><span th:text="${channel.sub}"> 구독자 수 </span></td>
+                  <td align="center"><span th:text="${#numbers.formatInteger(channel.sub,0,'COMMA')}"> 구독자 수 </span></td>
                   <td>&nbsp;</td>
                   <td align="center"><span th:text="${channel.category}"> 카테고리 </span></td>
                   <td>&nbsp;</td>
@@ -273,15 +273,15 @@
                   <td th:id="${i.index}">
                     <!-- 찜 완료 버튼 --><!----------------------------------------------------------------------------------------------------->
                     <button type="button" th:id="${i.index}" class="btn" name = "delete" th:value = "${channel.ch_url}">
-                      <img src="https://i.ibb.co/tBVdpm3/off.png">
+                      <img src="https://i.ibb.co/qjp9cCV/removebg-preview.png" width="90%" height="90%">
                     </button>
                     <!-- 찜 완료 버튼 --><!----------------------------------------------------------------------------------------------------->
 
                     <!-- 찜 하기 버튼 --><!----------------------------------------------------------------------------------------------------->
                     <button type="button" th:id="${i.index}" class="btn" name = "insert" th:value = "${channel.ch_url}">
-                      <center border="0"><img src="https://i.ibb.co/FwHHDTx/heart-button.png" 
-                        onmouseover="this.src='https://i.ibb.co/tBVdpm3/off.png'" 
-                        onmouseout="this.src='https://i.ibb.co/FwHHDTx/heart-button.png'" border="0"> 
+                      <center border="0"><img src="https://i.ibb.co/GRkW0dR/removebg-preview.png" 
+                        onmouseover="this.src='https://i.ibb.co/qjp9cCV/removebg-preview.png'" 
+                        onmouseout="this.src='https://i.ibb.co/GRkW0dR/removebg-preview.png'" width="90%" height="90%" border="0"> 
                       <center/>
                     </button>
                     <!-- 찜 하기 버튼 --><!----------------------------------------------------------------------------------------------------->
@@ -312,7 +312,6 @@
                 let aaa = "button[id='"+j+"'][name='insert']";
                 let bbb = "button[id='"+j+"'][name='delete']";
                 $(aaa).click(function(){
-                  if (confirm("찜 목록에 추가하시겠습니까?")) {
                     var html = "";
                     var uri = '/listInsertGgim'
                     let redirect = window.location.href;
@@ -323,10 +322,9 @@
                     console.log('추가완료');
                     $("body").append(html);
                     document.dataForm.submit();
-                  }
+                  
                 });
                 $(bbb).click(function(){
-                  if (confirm("찜 목록에서 제거하시겠습니까?")) {
                     var html = "";
                     var uri = '/listDeleteGgim'
                     let redirect = window.location.href;
@@ -337,7 +335,7 @@
                     console.log('제거완료');
                     $("body").append(html);
                     document.dataForm.submit();
-                  }
+                  
                 });
               }
             </script>
