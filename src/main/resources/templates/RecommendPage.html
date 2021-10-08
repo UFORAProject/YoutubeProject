@@ -118,8 +118,6 @@
     <![CDATA[*/
     let ordin = /*[[${general}]]*/ 'default';
     let recom = /*[[${list}]]*/ 'default';
-    let i = 0;
-    let id;
     /*]]>
     */
 </script>
@@ -154,31 +152,6 @@
                         </form>
                 </td>
                 <td class="content" style="width:755px" align="center"  valign=top>
-                    <br>
-                    <h2> 키워드들을 광고한 채널들 </h2>
-                    <br>
-                    <table class="ordinary" border="0">
-                        <tr>   
-                            <th width = "200px"> 채널 </th>
-                            <th width = "30px"></th>
-                            <th width = "200px"> 이름 </th>
-                            <th width = "30px"></th>
-                            <th width = "200px"> 평균 조회수 </th>
-                        </tr>
-                        <tr th:each = "ordin,i : ${general}">
-                            <td align="center"><a th:href="@{/detailPage(ch_url=${ordin.ch_url})}"><img th:id = "${i.index}" src="" alt=""></a></td>
-                            <td></td>
-                            <td align="center"><a th:href="@{/detailPage(ch_url=${ordin.ch_url})}"><span th:text = "${ordin.ch_name}" > 이름 </span></a></td>
-                            <td></td>
-                            <td align="center"> <span th:text = "${#numbers.formatInteger(ordin.adavgview,0,'COMMA')}" > 평균 조회수 </span></td>
-                            <script>
-                                id = '#';
-                                id = id + i;
-                                $(id).attr('src',ordin[i].img);
-                                i = i + 1;
-                            </script>
-                        </tr>
-                    </table>
 
                     <br>
                     <h2> 입력한 키워드들을 코사인 유사도를 통해서 추천한 채널들 </h2>
@@ -201,7 +174,6 @@
                     </table>
                     <br>
                     <br>
-
                     <script>
                         let maria;
                         for(var k = 0; k < recom.length; k++){
@@ -209,6 +181,37 @@
                             $(maria).attr('src',recom[k].img);
                         }
                     </script>
+
+
+                    <br>
+                    <h2> 키워드들을 광고한 채널들 </h2>
+                    <br>
+                    <table class="ordinary" border="0">
+                        <tr>   
+                            <th width = "200px"> 채널 </th>
+                            <th width = "30px"></th>
+                            <th width = "200px"> 이름 </th>
+                            <th width = "30px"></th>
+                            <th width = "200px"> 평균 조회수 </th>
+                        </tr>
+                        <tr th:each = "ordin,i : ${general}">
+                            <td align="center"><a th:href="@{/detailPage(ch_url=${ordin.ch_url})}"><img th:id = "${i.index}" name = "advideo" src="" alt=""></a></td>
+                            <td></td>
+                            <td align="center"><a th:href="@{/detailPage(ch_url=${ordin.ch_url})}"><span th:text = "${ordin.ch_name}" > 이름 </span></a></td>
+                            <td></td>
+                            <td align="center"> <span th:text = "${#numbers.formatInteger(ordin.adavgview,0,'COMMA')}" > 평균 조회수 </span></td>
+                        </tr>
+                    </table>
+                    <script>
+                        let gogo;
+                        for(var k = 0; k < ordin.length; k++){
+                            gogo = "img[id='"+k+"'][name='advideo']";
+                            $(gogo).attr('src',ordin[k].img);
+                        }
+                    </script>
+
+
+                
 
 
                 </td>

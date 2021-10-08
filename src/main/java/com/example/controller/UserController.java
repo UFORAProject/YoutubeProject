@@ -8,10 +8,11 @@ import com.example.vo.Criteria;
 import com.example.vo.CustomerVO;
 import com.example.vo.DetailMaker;
 import com.example.vo.FilterMaker;
-import com.example.vo.PageMaker;
+import com.example.vo.PageMaker; 
 import com.example.vo.RecommendVO;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 
@@ -481,7 +482,12 @@ public class UserController {
 
         before = System.currentTimeMillis();
         Runtime r = Runtime.getRuntime();
-		Process p = r.exec("python src\\main\\java\\com\\example\\controller\\sim.py " +rec);
+
+        File file = new File(".") ;
+        System.out.println ("현재 경로 " +  file.getAbsolutePath()  );
+		
+            
+        Process p = r.exec("python ..\\src\\main\\java\\com\\example\\controller\\sim.py " +rec);
         //python + sim.py 파일이 존재하는 곳의 경로                                       //키워드를 입력받고자 함 
 
         BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
@@ -505,9 +511,13 @@ public class UserController {
         answer = answer.replaceAll("\\]", "");
         answer = answer.replaceAll("'", "");
         String[] aaa = answer.split(",");
+        System.out.println("길이 : "+aaa.length);
+        for(int i = 0; i < aaa.length; i++){
+            System.out.println(aaa[i]);
+        }
         List<RecommendVO> rvo = new ArrayList<>();
         int j = 0;
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < aaa.length/4; i++){
             RecommendVO temp = new RecommendVO();
             temp.setCh_url(aaa[j]);
             j += 1;
