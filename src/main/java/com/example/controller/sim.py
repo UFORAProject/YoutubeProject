@@ -5,7 +5,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 
-conn = pymysql.connect(host="ec2-15-164-48-78.ap-northeast-2.compute.amazonaws.com", 
+conn = pymysql.connect(host="ec2-3-36-62-144.ap-northeast-2.compute.amazonaws.com", 
                        user = "root", password = "park19960826", 
                        db = "project", charset = "utf8")
 cur = conn.cursor()

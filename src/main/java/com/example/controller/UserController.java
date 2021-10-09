@@ -486,8 +486,8 @@ public class UserController {
         File file = new File(".") ;
         System.out.println ("현재 경로 " +  file.getAbsolutePath()  );
 		
-            
-        Process p = r.exec("python ..\\src\\main\\java\\com\\example\\controller\\sim.py " +rec);
+        
+        Process p = r.exec("python src\\main\\java\\com\\example\\controller\\sim.py " +rec);
         //python + sim.py 파일이 존재하는 곳의 경로                                       //키워드를 입력받고자 함 
 
         BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
