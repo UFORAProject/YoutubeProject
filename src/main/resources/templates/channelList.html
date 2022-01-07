@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+</head>
+    <table border="1">
+        <tr>
+            <th> 채널 url </th>
+            <th> 채널 이름 </th>
+            <th> 구독자 수 </th>
+            <th> 카테고리 </th>
+        </tr>
+        <tr th:each="channel : ${channelList}">
+            <td><span th:text="${channel.ch_url}"> 채널 url </span></td>
+            <td><span th:text="${channel.ch_name}"> 채널 이름 </span></td>
+            <td><span th:text="${channel.sub}"> 구독자 수 </span></td>
+            <td><span th:text="${channel.category}"> 카테고리 </span></td>
+        </tr>
+    </table>
+</body>
+</html>

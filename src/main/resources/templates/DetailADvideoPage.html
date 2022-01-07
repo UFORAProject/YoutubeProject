@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html   lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+      padding: 0px;
+      margin: 0px;
+    }
+    /* header style */
+    
+      ul li img {
+          vertical-align: middle;
+      } /* ul, li, img 정렬 전부 적용하기 */
+  
+      
+      ul li {
+          height: 55px;
+          line-height: 50px;
+      } /* ul, li 바, 텍스트 위치 사이즈 */
+  
+      #header{
+      background-color: #313132;
+      
+      text-size-adjust: 100%;
+      vertical-align: middle;
+    }
+      ul{
+          text-align: center;
+          background-color: #ffff;
+          vertical-align: middle;
+      } /* ul 글자 위치, 그림자, 배경색, 수직 정렬 지정 */
+  
+      li{
+          /*margin: 3px;*/
+          display: inline-block;
+          color:  white;
+          vertical-align: middle;
+      text-align: left;
+      }
+  
+    /* header style */
+  
+    #table{
+      margin: auto;
+    }
+  
+    /* category style*/
+    .category{
+      background-color: 5px solid #ececec;
+      border-top: 5px solid #ececec;
+      border-right: 5px solid #ececec;
+      border-left: 5px solid #ececec;
+      border-bottom: 5px solid #ececec;
+    }
+    /* category style*/
+  
+    /* content style */
+    .content{
+      background-color: 5px solid #ececec;
+      border-top: 5px solid #ececec;
+      border-right: 5px solid #ececec;
+      border-left: 5px solid #ececec;
+      border-bottom: 5px solid #ececec;
+    }
+    /* content style */
+  
+    /* footer style */
+      footer {
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          padding: 0;
+          text-align: center;
+          color: white;
+          background: #f5f5f7;  
+          bottom: 0;
+  
+  
+          background:url('https://farm9.staticflickr.com/8760/17195790401_ceeeafcddb_o.jpg');
+          background-size:cover;
+          font-family: 'Cabin Condensed', sans-serif;
+          display:flex;
+          flex-direction:column;
+          justify-content:center;
+          align-items:center;
+      }
+  
+  
+              
+      svg{
+          font-weight:bold;max-width:600px;height:auto;
+      }
+  
+      .table_2{
+          border-spacing: 10px;	  
+          width: 100%;
+          color: black;
+          border-top : 2px solid white;
+          border-right : none;
+          border-left : none;
+          border-bottom : none;
+      }
+  
+    /* footer style */
+
+    #graph{
+      vertical-align : middle;
+    }
+
+    #wordCloud {
+      width:500px;
+      height: 500px;
+    }
+  </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/plugins/wordCloud.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+<script th:inline = "javascript">
+    /*
+      <![CDATA[*/
+        let bigword = /*[[${bigword}]]*/ 'default';
+        
+        let list = /*[[${list}]]*/ 'default';
+        var korean = 1-list[0].foreign;
+        var foreign = list[0].foreign;
+        var like = list[0].likecnt;
+        var dislike = list[0].dislike;
+      /*]]>
+    */
+</script>
+<body>
+    <!-- header -->
+    <div th:replace="header.html"></div>
+    <!-- header -->
+
+    <br>
+<br>
+<br>
+
+  <!---- main ----->
+  <table id = "table" border="0" cellpadding="0" cellspacing="0" style="height:600px; width:1024px" align=center>
+	  <tbody>
+		  <tr>
+
+
+        <!---- 필터 ---->
+		<td style="width:255px" valign=top bgcolor="#ececec"  class = 'category' >&nbsp;
+          <br>
+          <p align=Center size=9><img src="https://i.ibb.co/TYG3bpM/Search.png"></p>
+          <br>
+          &nbsp;&nbsp;<strong> 광고동영상 세부 정보 </strong>
+          <div align="center">
+            <table border="0" width = "90%">
+                <tr th:each = "a : ${list}">
+                    <td>
+                        이름 : <span th:text = "${a.name}"></span><br>
+                        업로드 날짜 : <span th:text = "${a.upday}"></span><br>
+                        카테고리 : <span th:text = "${a.category}"></span><br>
+                        좋아요 수 : <span th:text = "${#numbers.formatInteger(a.likecnt,0,'COMMA')}"></span><br>
+                        싫어요 수 : <span th:text = "${#numbers.formatInteger(a.dislike,0,'COMMA')}"></span><br>
+                        좋아요 비율 : <span th:text = "${a.ratio}"></span><br>
+                        조회수 : <span th:text = "${#numbers.formatInteger(a.click,0,'COMMA')}"></span><br>
+                        댓글 수 : <span th:text = "${#numbers.formatInteger(a.comment,0,'COMMA')}"></span><br>
+                        해시태그 : <span th:text = "${a.hashtag}"></span><br>
+                    </td>
+                </tr>
+            </table>
+
+            <br>
+          </div>
+		</td>
+        <!---- 필터 ---->
+
+
+        <!---- 내용 ---->
+        <td class="content" style="width:755px" align="center"  valign=top>
+          <br>
+          <table align=center border="0">
+            <tr>
+              <td align="center">
+                <iframe id="iframe" width="736" height="414" src="" 
+                    title="YouTube video player" frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                </iframe>
+                <script>
+                  let adurl = 'https://www.youtube.com/embed/' + list[0].ad_url;
+                  $('#iframe').attr('src',adurl);
+                </script>
+              </td>
+            </tr>
+          </table>
+          <br>
+          <table align=center border="0">
+            <tr>
+              <td align="center"><h2><strong>[ 댓글 외국인 분포도 ]</strong></h2></td>
+              <td width = "30px"></td>
+              <td align="center"><h2><strong>[ 좋아요 싫어요 ]</strong></h2></td>
+            </tr>
+            <tr height = "15px">
+              <td>
+
+              </td>
+            </tr>
+            <tr>
+              <td id="graph">
+                <div>
+                  <canvas id="foreignRatio"></canvas>
+                </div>
+              </td>
+              <td width = "30px"></td>
+              <td>
+                <div>
+                  <canvas id="likeRatio"></canvas>
+                </div>
+              </td>
+          </tr>
+          </table>
+          <br>
+          <table align="center" border="0">
+            <tr>
+              <td align="center">
+                <h2><strong>[ 워드 클라우드 ]</strong></h2>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div id="wordCloud" ></div>
+              </td>
+            </tr>
+          </table>
+          <br>
+        </td>
+        <!---- 내용 ---->
+
+
+
+      </tr>
+    </tbody>
+  </table>
+  <!---- main ----->
+
+    <br>
+    <br>
+    <br>
+
+
+    <!--footer-->
+    <div th:replace = "footer.html"></div>
+    <!--footer-->
+</body>
+<script>
+  am4core.ready(function() {
+
+  // Themes begin
+  am4core.useTheme(am4themes_animated);
+  // Themes end
+
+  var chart = am4core.create("wordCloud", am4plugins_wordCloud.WordCloud);
+  var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
+
+  series.accuracy = 4;
+  series.step = 15;
+  series.rotationThreshold = 0.7;
+  series.maxCount = 200;
+  series.minWordLength = 2;
+  series.labels.template.tooltipText = "{word}: {value}";
+  series.fontFamily = "Courier New";
+  series.maxFontSize = am4core.percent(30);
+
+  series.text = bigword;
+  });
+</script>
+<script type="text/javascript">
+  
+
+  var context = document.getElementById('foreignRatio').getContext('2d');
+  var myChart = new Chart(context, {
+      type: 'pie', // 차트의 형태
+      data: { // 차트에 들어갈 데이터
+          labels: [
+              //x 축
+              '한국인','외국인'
+          ],
+          datasets: [
+              { //데이터
+                  label: 'test1', //차트 제목
+                  fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+                  data: [
+                      korean,foreign //x축 label에 대응되는 데이터 값
+                  ],
+                  backgroundColor: [
+                      //색상
+                      'rgba(255, 99, 132, 0.2)',
+                      'rgba(54, 162, 235, 0.2)'/*,                                          
+                      'rgba(255, 206, 86, 0.2)',
+                      'rgba(75, 192, 192, 0.2)',
+                      'rgba(153, 102, 255, 0.2)',
+                      'rgba(255, 159, 64, 0.2)'*/
+                  ],
+                  borderColor: [
+                      //경계선 색상
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)'/*,
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)',
+                      'rgba(153, 102, 255, 1)',
+                      'rgba(255, 159, 64, 1)'*/
+                  ],
+                  borderWidth: 1 //경계선 굵기
+              }
+          ]
+      }
+  });
+
+  var context1 = document.getElementById('likeRatio').getContext('2d');
+  var myChart = new Chart(context1, {
+      type: 'bar', // 차트의 형태
+      data: { // 차트에 들어갈 데이터
+          labels: [
+              //x 축
+              '싫어요','좋아요'
+          ],
+          datasets: [
+              { //데이터
+                  label: '좋아요 싫어요', //차트 제목
+                  fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+                  data: [
+                      dislike,like //x축 label에 대응되는 데이터 값
+                  ],
+                  backgroundColor: [
+                      //색상
+                      'rgba(255, 99, 132, 0.2)',
+                      'rgba(54, 162, 235, 0.2)'/*,                                          
+                      'rgba(255, 206, 86, 0.2)',
+                      'rgba(75, 192, 192, 0.2)',
+                      'rgba(153, 102, 255, 0.2)',
+                      'rgba(255, 159, 64, 0.2)'*/
+                  ],
+                  borderColor: [
+                      //경계선 색상
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)'/*,
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)',
+                      'rgba(153, 102, 255, 1)',
+                      'rgba(255, 159, 64, 1)'*/
+                  ],
+                  borderWidth: 1 //경계선 굵기
+              }
+          ]
+      }
+  });
+  $('#wordCloud').jQCloud(bigword,{
+    width : 500, height : 350
+  });
+</script>
+
+</html>

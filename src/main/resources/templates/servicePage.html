@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+      padding: 0px;
+      margin: 0px;
+    }
+    /* header style */
+    
+      ul li img {
+          vertical-align: middle;
+      } /* ul, li, img 정렬 전부 적용하기 */
+  
+      
+      ul li {
+          height: 55px;
+          line-height: 50px;
+      } /* ul, li 바, 텍스트 위치 사이즈 */
+  
+      #header{
+      background-color: #313132;
+      
+      text-size-adjust: 100%;
+      vertical-align: middle;
+    }
+      ul{
+          text-align: center;
+          background-color: #ffff;
+          vertical-align: middle;
+      } /* ul 글자 위치, 그림자, 배경색, 수직 정렬 지정 */
+  
+      li{
+          /*margin: 3px;*/
+          display: inline-block;
+          color:  white;
+          vertical-align: middle;
+      text-align: left;
+      }
+  
+    /* header style */
+  
+    #table{
+      margin: auto;
+    }
+  
+    /* category style*/
+    .category{
+      background-color: 5px solid #ececec;
+      border-top: 5px solid #ececec;
+      border-right: 5px solid #ececec;
+      border-left: 5px solid #ececec;
+      border-bottom: 5px solid #ececec;
+    }
+    /* category style*/
+  
+    /* content style */
+    .content{
+      background-color: 5px solid #ececec;
+      border-top: 5px solid #ececec;
+      border-right: 5px solid #ececec;
+      border-left: 5px solid #ececec;
+      border-bottom: 5px solid #ececec;
+    }
+    /* content style */
+  
+    /* footer style */
+      footer {
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          padding: 0;
+          text-align: center;
+          color: white;
+          background: #f5f5f7;  
+          bottom: 0;
+  
+  
+          background:url('https://farm9.staticflickr.com/8760/17195790401_ceeeafcddb_o.jpg');
+          background-size:cover;
+          font-family: 'Cabin Condensed', sans-serif;
+          display:flex;
+          flex-direction:column;
+          justify-content:center;
+          align-items:center;
+      }
+  
+  
+              
+      svg{
+          font-weight:bold;max-width:600px;height:auto;
+      }
+  
+      .table_2{
+          border-spacing: 10px;	  
+          width: 100%;
+          color: black;
+          border-top : 2px solid white;
+          border-right : none;
+          border-left : none;
+          border-bottom : none;
+      }
+  
+    /* footer style */
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<body>
+    <!-- header -->
+    <div th:replace="header.html"></div>
+    <!-- header -->
+
+    <br>
+    <br>
+    <br>
+    <!-- Main -->
+    <table id = "table" border="0" cellpadding="1" cellspacing="1" style="height:600px; width:1024px" align=center>
+        <tbody>
+            <!-- 대표 소개-->
+            <tr>
+                <td align=center>
+                    <img src="https://i.ibb.co/zPRtrRq/1.png" alt="">
+                </td>
+            </tr>
+            <!-- 대표 소개-->
+
+            <!-- 분석 알고리즘 소개-->
+            <tr>
+                <td align=center>
+                    <img src="https://i.ibb.co/WcGn9KS/2.png" alt="">
+                </td>
+            </tr>
+            <tr>
+                <td align=center>
+                    <img src="https://i.ibb.co/mGp7q3x/3.png" alt="">
+                </td>
+            </tr>
+            <tr>
+                <td align=center>
+                    <img src="https://i.ibb.co/wS3GQ1C/4.png" alt="">
+                </td>
+            </tr>
+            <tr>
+                <td align=center>
+                    <img src="https://i.ibb.co/WcCX27J/5.png" alt="">
+                </td>
+            </tr>
+            <!-- 분석 알고리즘 소개-->
+        </tbody>
+    </table>
+    <!-- Main -->
+
+    <br>
+    <br>
+    <br>
+
+    <!--footer-->
+    <div th:replace = "footer.html"></div>
+    <!--footer-->
+</body>
+</html>

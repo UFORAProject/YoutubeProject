@@ -1,0 +1,159 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-
+//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace ="com.example.mapper.UserMapper">
+
+    <select id="getChannelList" resultType="com.example.vo.ChannelVO">
+        select ch_url, ch_name, sub, category from channel;
+    </select>
+
+    <select id="listCountCriteria" resultType="int">
+        
+            select
+                count(*)
+            from
+                channel
+        
+    </select>
+
+    <select id="listCriteria" resultType="com.example.vo.ChannelVO">
+        select ch_url, img, ch_name, sub, category, adcount from channel order by sub desc limit #{pageStart}, #{perPageNum}
+    </select>
+
+    <select id="listGgim" parameterType = "com.example.vo.ggimVO" resultType = "int">
+        select count(*) from ggim where id=#{id} and ch_url = #{ch_url}
+    </select>
+
+    <select id="filterPage" resultType="com.example.vo.ChannelVO">
+      
+        select ch_url, ch_name, sub, category, img, adcount
+        from channel
+        where 
+        category = #{category}
+        <choose>
+            <when test = "sub == 100000">and sub between 0 and 100000</when>
+            <when test = "sub == 1000000">and sub between 100000 and 1000000</when>
+            <when test = "sub == 10000000">and sub between 1000000 and 10000000</when>
+            <when test = "sub == 100000000">and sub between 10000000 and 1000000000</when>
+        </choose>
+        limit #{pageStart}, #{perPageNum}
+      
+    </select>
+
+    <select id="filterPageCount" resultType="int">
+        
+        select
+            count(*)
+        from
+            channel
+        where 
+        category = #{category}
+        <choose>
+            <when test = "sub == 100000">and sub between 0 and 100000</when>
+            <when test = "sub == 1000000">and sub between 100000 and 1000000</when>
+            <when test = "sub == 10000000">and sub between 1000000 and 10000000</when>
+            <when test = "sub == 100000000">and sub between 10000000 and 1000000000</when>
+        </choose>
+    </select>
+    
+    <select id="detailPage" resultType="com.example.vo.adVO">
+        select upday,name,likecnt,ad_url
+        from advideo
+        where ch_url = #{ch_url}
+        limit #{pageStart}, #{perPageNum}
+    </select>
+
+    <select id="detailPageCount" resultType="int">
+        select count(*)
+        from advideo
+        where ch_url = #{ch_url}
+    </select>
+
+    <select id="detailChannel" parameterType="String" resultType="com.example.vo.ChannelVO">
+        select * from channel where ch_url=#{url}
+    </select>
+
+    <select id="DetailADvideo" parameterType="String" resultType="com.example.vo.adVO">
+        select * 
+        from advideo
+        where ad_url = #{url}
+    </select>
+
+    <select id = "idCheck" parameterType="com.example.vo.CustomerVO" resultType="int">
+        select count(*)
+        from customer
+        where id = #{id}
+    </select>
+
+    <select id = "regnumCheck" parameterType="com.example.vo.CustomerVO" resultType = "int">
+        select count(*)
+        from customer
+        where regnum = #{regnum}
+    </select>
+
+    <insert id="createCustomer">
+        insert into customer values(#{id},#{pw},#{ceo},#{email},#{phone},#{regnum},#{address})
+    </insert>
+
+    <select id="showCustomer" parameterType="String" resultType="com.example.vo.CustomerVO">
+        select *
+        from customer
+        where id = #{id};
+    </select>
+
+    <update id="modifyCustomer" parameterType="com.example.vo.CustomerVO">
+        UPDATE customer 
+        SET pw = #{pw}, ceo = #{ceo}, email = #{email}, phone = #{phone}, address = #{address}
+        WHERE id = #{id};
+    </update>
+
+    <select id = "isRightCustomer" resultType="int">
+        select count(*) from customer where id = #{id} and pw = #{pw}
+    </select>
+
+    <select id = "isGgim" resultType = "int">
+        select count(*) from ggim where id = #{id} and ch_url = #{ch_url}
+    </select>
+
+    <insert id="insertGgim">
+        insert into ggim values(#{id},#{ch_url})
+    </insert>
+
+    <delete id="deleteGgim">
+        delete from ggim where id = #{id} and ch_url = #{ch_url}
+    </delete>
+
+    <select id="showGgim" parameterType = "String" resultType="com.example.vo.ChannelVO">
+        SELECT ch_url,ch_name,img,sub,category,adcount
+        FROM channel
+        WHERE ch_url IN (
+            SELECT ch_url 
+            FROM ggim 
+            WHERE id = #{id}
+        )
+    </select>
+
+    <select id= "firstStage" parameterType="hashmap" resultType = "com.example.vo.ChannelVO">
+        SELECT ch_url, ch_NAME, adavgview, img
+        FROM channel
+        WHERE ch_name IN (
+            SELECT NAME
+            FROM advideo 
+            WHERE
+            <foreach collection="hm.a" item = "arr"  separator = "or"  open="(" close=")">
+                hashtag like #{arr} or descript like #{arr}
+            </foreach>
+            GROUP BY NAME
+        )
+        ORDER BY adavgview DESC
+        limit 0,5;
+    </select>
+
+
+    <select id="wordCloud" parameterType="String" resultType="String">
+        select comment
+        from adcomment
+        where url = #{url}
+    </select>
+
+</mapper>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html   lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /* 위에 bar style 시작 */
+    *{
+        padding: 0px;
+        margin: 0px;
+        overflow: auto;
+    }
+
+        
+    table, FORM {
+        border-spacing:20px;
+        border-top : 5px solid rgb(163, 163, 163);
+        border-right : 5px solid #444444; 
+        border-left : 5px solid #444444; 
+        border-bottom : 5px solid rgb(163, 163, 163);
+    }
+
+    .home {
+		float: right;
+		line-height: 20px;          
+		vertical-align: middle;
+		text-align:center;
+	}
+
+    ul{
+            text-align: center;
+            background-color: #313132;
+    }
+    li{
+        margin: 7px;
+        display: inline-block;
+        color:  white;
+        vertical-align: middle;
+    }
+
+    #signbutton{
+        text-decoration: none;
+        color: black;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    /* footer style */
+    footer {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 0;
+    text-align: center;
+    color: white;
+    background: #f5f5f7;  
+    bottom: 0;
+
+
+    background:url('https://farm9.staticflickr.com/8760/17195790401_ceeeafcddb_o.jpg');
+    background-size:cover;
+    font-family: 'Cabin Condensed', sans-serif;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    }
+
+
+    
+    svg{
+        font-weight:bold;max-width:600px;height:auto;
+    }
+
+    .table_2{
+        border-spacing: 10px;	  
+        width: 100%;
+        color: black;
+        border-top : 2px solid white;
+        border-right : none;
+        border-left : none;
+        border-bottom : none;
+    }
+
+    /* footer style */
+
+    /* 로그인 버튼 이미지 삽입*/
+    #loginGO{
+        background-image: url('https://i.ibb.co/fDdVrCR/login-box1.png');
+        background-repeat: no-repeat;
+        width: 66px;
+        height: 90px;
+        border: 0px;
+        cursor:pointer;
+        outline: 0;
+    }
+    #loginGO:hover{
+        background-image: url('https://i.ibb.co/PWnCFgB/login-box2.png');
+    }
+    /* 로그인 버튼 이미지 삽입*/
+</style>
+<body>
+    <!-- header -->
+    <ul>
+        <li><img src="https://i.ibb.co/VBw2P70/logo.png" width="30" height="40"></li>
+        <li class="home">
+            <a href="index.html">
+                <img src="https://i.ibb.co/jyxvDW1/home.png" onmouseover="this.src='https://i.ibb.co/tLkFjpw/home2.png'" onmouseout="this.src='https://i.ibb.co/jyxvDW1/home.png'" width="42" height="40">
+            </a>
+        </li>
+    </ul>
+    <!-- header -->
+
+
+	<div style="width:100vw; height: 70vh; display: flex; align-items: center; text-align:center;">
+		<div style="text-align:center; vertical-align: middle; margin: 0 auto;">
+			  <center><img src="https://i.ibb.co/pRyJDTd/login-title.gif"></center>
+			  <table align=center border="0">
+				 <FORM action="/listPage" method="get">
+						<tr>
+							<td align=left valign=bottom>ID :</td>
+							<td align=left valign=bottom>
+                                <input type = "text" name = "id" placeholder="아이디"/>
+                            </td>
+                            <td rowspan="2"> <input type="submit" id = "loginGO" value=""> </td>
+						</tr>
+						<tr>
+							<td align=left valign=top>PW :</td>
+							<td align=left valign=top>
+                                <input type = "password" name = "pw" placeholder="비밀번호"/>
+                            </td>
+						</tr>
+				 </FORM>
+			  </table>
+              <br>
+              <a href ="/signPage" id='signbutton'>처음 오셨나요 ? 회원가입</a>
+		</div>
+	</div>
+
+    <!--footer-->
+    <div th:replace = "footer.html"></div>
+    <!--footer-->
+</body>
+</html>
