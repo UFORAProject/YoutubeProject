@@ -489,25 +489,36 @@ public class UserController {
 		
         
         Process p = r.exec("python sim.py " +rec);
+
         //python + sim.py 파일이 존재하는 곳의 경로                                       //키워드를 입력받고자 함 
+        System.out.println("p가 되긴 하는건가?! 씨팔! : " +p);
+
 
         BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+        System.out.println("br이 되긴 하는건가?! .......... "+br);
+
+
         String answer = "";
 
 		try {
 			p.waitFor();
 			String line = "";
+            System.out.println(br.ready());
 			while (br.ready()) {
 				line = br.readLine();
                 answer = line;
+                System.out.println("갔다오긴 하냐?");
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+
+
         after = System.currentTimeMillis();
         System.out.println("파이썬 갔다 왔음 , 걸린 시간 : " + (after-before)/1000);
 
         before = System.currentTimeMillis();
+        System.out.println("그 값들이오~~!!! : "+answer);
         answer = answer.replaceAll("\\[", "");
         answer = answer.replaceAll("\\]", "");
         answer = answer.replaceAll("'", "");
@@ -530,7 +541,11 @@ public class UserController {
             temp.setSimilarity(Double.parseDouble(aaa[j]));
             j+= 1;
             rvo.add(temp);
+            
         }
+
+
+
         model.addAttribute("list", rvo);
         after = System.currentTimeMillis();
         System.out.println("마이 베티스로 갔다 왔음 , 걸린 시간 : " + (after-before)/1000);
