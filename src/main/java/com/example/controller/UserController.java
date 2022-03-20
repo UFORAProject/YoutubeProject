@@ -457,6 +457,7 @@ public class UserController {
     ///////////////////추천 기능
     @RequestMapping(value = "/recommend" , method = RequestMethod.POST)
     public String Recommend(@RequestParam("keyword") String rec, Model model,HttpSession session) throws Exception {
+
         if(session.getAttribute("id") == null){
             return "alert";
         }
